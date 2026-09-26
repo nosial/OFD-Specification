@@ -63,12 +63,13 @@ jobs:
       - name: Build specification
         run: |
           make BIKESHED=bikeshed spec OUTPUT=out/index.html
+          cp -r assets out/
 
       - name: Upload documentation
         uses: actions/upload-artifact@v4
         with:
           name: documentation
-          path: out/index.html
+          path: out/
 
   # Deploy the built specification to GitHub Pages on release
   pages-deploy:
@@ -126,6 +127,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            documentation/*
+            documentation/index.html
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
