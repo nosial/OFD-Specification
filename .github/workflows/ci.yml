@@ -1,0 +1,131 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  # Check for the specification source
+  check-spec:
+    runs-on: ubuntu-latest
+    outputs:
+      spec-exists: ${{ steps.check.outputs.spec-exists }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check for index.bs
+        id: check
+        run: |
+          if [ -f index.bs ]; then
+            echo "spec-exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "spec-exists=false" >> $GITHUB_OUTPUT
+          fi
+
+  # Validate the specification source with Bikeshed
+  validate:
+    needs: check-spec
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.12
+    if: needs.check-spec.outputs.spec-exists == 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Bikeshed
+        run: pip install bikeshed
+
+      - name: Validate specification
+        run: |
+          make BIKESHED=bikeshed check
+
+  # Build the specification into a standalone HTML document
+  build-docs:
+    needs: [check-spec, validate]
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.12
+    if: needs.check-spec.outputs.spec-exists == 'true'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Bikeshed
+        run: pip install bikeshed
+
+      - name: Build specification
+        run: |
+          make BIKESHED=bikeshed spec OUTPUT=out/index.html
+
+      - name: Upload documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: documentation
+          path: out/index.html
+
+  # Deploy the built specification to GitHub Pages on release
+  pages-deploy:
+    needs: build-docs
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    if: github.event_name == 'release'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download documentation artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: documentation
+          path: docs
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+  # Attach the built specification to the release
+  release-docs:
+    needs: build-docs
+    permissions: write-all
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download documentation artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: documentation
+          path: documentation
+
+      - name: Upload documentation to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            documentation/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

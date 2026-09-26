@@ -1,0 +1,40 @@
+name: Build Specification
+
+on:
+  push:
+    branches: [master, dev]
+  pull_request:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build specification
+        run: make check OUTPUT=out/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ofd-spec
+          path: out/index.html
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: out
+          publish_branch: gh-pages
+          force_orphan: true
+          enable_jekyll: false
