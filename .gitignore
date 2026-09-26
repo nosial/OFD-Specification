@@ -1,0 +1,15 @@
+# Build artifacts (generated at the repository root)
+/index.html
+
+# Bikeshed
+*.bak
+
+# GitHub Pages worktree used by `make deploy`
+.gh-pages-worktree/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
