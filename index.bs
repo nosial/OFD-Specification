@@ -679,20 +679,25 @@ segments are defined:
 * **entity identifier segments**, matching an [=entity identifier=], address
     [=records=] of the [=entity registry=].
 
-In an entity identifier segment, the [=entity address=] form is available only
-for a named entity address (<code>local-part@entity-host</code>) whose entity
-host is a DNS name. A host entity, or a named entity whose entity host is an IP
-address, is addressed in a path by its SHA-256 identifier or its UUID. This
-keeps a bare host name from being confused with a literal sub-path such as
-`search` or `top-threats`. The restriction applies only to path segments;
-request members that carry an [=entity identifier=], such as
-<code>entity_identifier</code>, are not restricted by it.
+An entity identifier segment accepts every [=entity identifier=] form: the
+UUID, the SHA-256 identifier, or the [=entity address=]. The entity address
+may be a named entity address (<code>local-part@entity-host</code>) or a host
+entity address (the entity host alone), and its entity host may be a DNS name,
+an IPv4 address, or an IPv6 address. An entity address in a path segment MUST
+be in canonical form, as specified in [[#entity-address-canonicalization]]; a
+host MUST reject a path segment that is not a valid entity identifier with
+HTTP 400. For example, `GET /entities/example.com`,
+`GET /entities/john@example.com`, and `GET /entities/2001:db8::1` each address
+an entity by its entity address.
 
 Literal paths take precedence over route patterns that contain dynamic
 segments. For example, the path `/entities/search` is served by the search
 method of the entities domain, never by a pattern that would match
 `/entities/{identifier}`. A host MUST NOT match a dynamic segment to a string
-that satisfies a literal sub-path of the same domain.
+that satisfies a literal sub-path of the same domain, whatever the request
+method. An entity whose entity address equals such a literal sub-path, such as
+a host entity named `search` or `top-threats`, is therefore addressed in a path
+by its SHA-256 identifier or its UUID.
 
 <h4 id="route-conventions">Route Conventions</h4>
 
