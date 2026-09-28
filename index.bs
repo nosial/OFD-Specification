@@ -152,7 +152,7 @@ openly.
 
 The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT,
 RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL in this document are to be
-interpreted as described in BCP 14 [[RFC2119]] [[RFC8174]] when, and only when,
+interpreted as described in BCP 14 [[!RFC2119]] [[!RFC8174]] when, and only when,
 they appear in all capitals, as shown here.
 
 All text of this specification is normative except sections explicitly marked
@@ -180,7 +180,7 @@ for downstream consumers.
 :   <dfn export>access token</dfn>
 ::  An opaque, 32-character string that authenticates an [=operator=]. A
     request presents it in the `Authorization` header using the `Bearer`
-    scheme.
+    scheme [[!RFC6750]].
 
 :   <dfn export id="dfn-authentication">authentication</dfn>
 ::  The process by which a [=host=] verifies the identity of an [=operator=]
@@ -581,25 +581,25 @@ imply equal reputation, evidence, or authority.
 
 <h3 id="entity-address-canonicalization">Entity Address Canonicalization</h3>
 
-For a named entity, the canonical entity address is the UTF-8 string
+For a named entity, the canonical entity address is the UTF-8 [[!RFC3629]] string
 <code>local-part@entity-host</code>. The local part is case-sensitive and MUST
 contain only ASCII letters, digits, <code>.</code>, <code>_</code>,
 <code>%</code>, <code>+</code>, or <code>-</code>.
 
 The entity host MUST NOT contain whitespace, a port, a path, a query, a fragment,
-or a trailing dot. A DNS entity host MUST use lowercase ASCII labels. An IPv4
+or a trailing dot. A DNS [[!RFC1034]] entity host MUST use lowercase ASCII labels. An IPv4
 entity host MUST use four decimal octets separated by dots, with no leading zero
 except for the value zero. An IPv6 entity host MUST use its lowercase compressed
-textual representation. A host entity uses the canonical entity host string
+textual representation [[!RFC5952]]. A host entity uses the canonical entity host string
 alone. A host MUST reject an entity address that is not already in canonical
 form with HTTP 400.
 
 <h3 id="identifier-hash">Identifier Hash</h3>
 
-The SHA-256 identifier is the SHA-256 digest of the UTF-8 bytes of the
-[=canonical entity address=], serialized as a 64-character lowercase hexadecimal
-string. It is a deterministic cryptographic identifier, not an anonymity or
-confidentiality mechanism. [[RFC6234]]
+The SHA-256 identifier is the SHA-256 digest [[!FIPS-180-4]] [[RFC6234]] of the
+UTF-8 [[!RFC3629]] bytes of the [=canonical entity address=], serialized as a
+64-character lowercase hexadecimal string. It is a deterministic cryptographic
+identifier, not an anonymity or confidentiality mechanism.
 
 <h3 id="identifier-use">Use of Identifiers</h3>
 
@@ -616,10 +616,10 @@ are defined.
 
 <h3 id="http">HTTP and Transport</h3>
 
-The OFD interface is carried over HTTP [[RFC9110]]. The term HTTP includes
-HTTP over TLS (HTTPS) as defined in [[RFC9110]]; a [=host=] MAY serve its
+The OFD interface is carried over HTTP [[!RFC9110]]. The term HTTP includes
+HTTP over TLS (HTTPS) as defined in [[!RFC9110]]; a [=host=] MAY serve its
 interface over HTTPS and SHOULD do so when authentication or confidential data
-is involved. A host MUST support HTTP/1.1 [[RFC9112]], and MAY support any newer
+is involved. A host MUST support HTTP/1.1 [[!RFC9112]], and MAY support any newer
 version of HTTP.
 
 Every path defined in this specification is relative to the [=base URL=] of
@@ -733,13 +733,13 @@ the following table:
 </table>
 
 <h3 id="data-formats">Data Formats</h3>
-The OFD interface exchanges JSON documents [[RFC8259]]. Records and JSON request
+The OFD interface exchanges JSON documents [[!RFC8259]]. Records and JSON request
 bodies are objects whose member names are lowercase and use underscores to
 separate words, such as `text_content` and `file_name`.
 Points in time are transmitted as Unix timestamps: the number of seconds since
 the epoch, in UTC, as a JSON integer. Record identifiers are transmitted as
 36-character lowercase strings in the canonical 8-4-4-4-12 hyphenated form
-of RFC 9562 [[RFC9562]], and [=hosts=] generate UUIDs of version 7 so that
+of UUIDs [[!RFC9562]], and [=hosts=] generate UUIDs of version 7 so that
 records are ordered by their time of creation. Booleans are transmitted as
 JSON true or false in JSON request bodies, and as the strings `true` or
 `false` in query strings and form bodies. Text is transmitted as JSON strings,
@@ -769,9 +769,9 @@ object.
 
 <h4 id="parameter-sources">Parameter Sources</h4>
 
-Parameters are read from the query string of the request URI, from a
+Parameters are read from the query string of the request URI [[!RFC3986]], from a
 form-encoded request body for requests with the media type
-`application/x-www-form-urlencoded`, or from a JSON request body for requests
+`application/x-www-form-urlencoded` [[!URL]], or from a JSON request body for requests
 with the media type `application/json; charset=utf-8`. A host resolves a
 parameter deterministically; where the same parameter appears in several
 sources, a form-encoded body takes precedence over the query string, and the
@@ -801,7 +801,7 @@ Content-Type: application/json; charset=utf-8
 <h4 id="file-uploads">File Uploads</h4>
 
 The upload of a [=file attachment=] is a request with the media type
-`multipart/form-data` [[RFC7578]]. The uploaded file is carried in a part named
+`multipart/form-data` [[!RFC7578]]. The uploaded file is carried in a part named
 `file`. A client MUST NOT submit a file attachment through any other
 parameter.
 
@@ -898,7 +898,7 @@ Content-Type: application/json; charset=utf-8
 <h4 id="response-headers">Response Headers</h4>
 
 Responses are transmitted with the Content-Type `application/json; charset=utf-8`
-header and with cross-origin resource sharing (CORS) headers. The
+header and with cross-origin resource sharing (CORS) headers [[!FETCH]]. The
 Access-Control-Allow-Origin header permits a cross-origin request from an
 origin whose hostname equals the hostname of the configured [=base URL=] of
 the host; when the Origin header of the request matches, the host echoes it
@@ -918,7 +918,7 @@ such a method on behalf of an unauthenticated requester.
 <h4 id="access-tokens">Access Tokens</h4>
 
 An [=access token=] authenticates an [=operator=]. Requests present the access
-token in the Authorization header using the Bearer scheme:
+token in the Authorization header using the Bearer scheme [[!RFC6750]]:
 
 <pre class="example">Authorization: Bearer &lt;token&gt;</pre>
 
@@ -1081,7 +1081,7 @@ permission error (HTTP 403).
   </tbody>
 </table>
 
-<p class="note">A cell marked "Configurable" is public when the [=host=] exposes the
+<p class="note" role="note"><span class="marker">Note:</span> A cell marked "Configurable" is public when the [=host=] exposes the
     domain, and requires an authenticated operator when the host does not. The
     "Manage operators" row covers creating, deleting, enabling, disabling, and
     renaming operator accounts, modifying their [=permission group=]s, and
@@ -1173,7 +1173,7 @@ The request is:
 
 A successful response is a [=success response=] with HTTP 200 OK and a body
 that is a JSON <dfn export lt="ServerInformation">ServerInformation</dfn> object. The
-members of a ServerInformation object are:
+members of a [=ServerInformation=] object are:
 
 <table class="data">
   <thead>
@@ -1242,14 +1242,14 @@ The request body MUST be a JSON object containing the members below:
   </thead>
   <tbody>
     <tr><td><code>author</code></td><td>string</td><td>No</td><td>An [=entity identifier=] for the author of the content.</td></tr>
-    <tr><td><code>evidence</code></td><td>ContentInput or array of ContentInput</td><td>Yes</td><td>One non-empty ContentInput object or a non-empty array of non-empty ContentInput objects to scan.</td></tr>
+    <tr><td><code>evidence</code></td><td>[=ContentInput=] or array of [=ContentInput=]</td><td>Yes</td><td>One non-empty [=ContentInput=] object or a non-empty array of non-empty [=ContentInput=] objects to scan.</td></tr>
     <tr><td><code>top_k</code></td><td>integer</td><td>No</td><td>An advisory maximum number of candidate classifications for a host to consider. Its effect on host analysis is not specified.</td></tr>
     <tr><td><code>threshold</code></td><td>number</td><td>No</td><td>An advisory confidence threshold for host analysis. Its effect on host analysis is not specified.</td></tr>
   </tbody>
 </table>
 
 A host MUST reject a request whose <code>evidence</code> member is absent,
-empty, not a non-empty ContentInput object or array of non-empty ContentInput
+empty, not a non-empty [=ContentInput=] object or array of non-empty [=ContentInput=]
 objects, or does not contain at least one non-empty <code>text_content</code>
 member with a client error (HTTP 400).
 
@@ -1264,7 +1264,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 A successful response to the Scan Content method is a [=success response=] with
 HTTP 200 OK and a body that is a JSON <dfn export lt="ScannedContent">ScannedContent</dfn>
-object. The members of a ScannedContent object are:
+object. The members of a [=ScannedContent=] object are:
 
 <table class="data">
   <thead>
@@ -1273,7 +1273,7 @@ object. The members of a ScannedContent object are:
   <tbody>
     <tr><td><code>author_entity</code></td><td>[=ResolvedEntity=] or null</td><td>The resolved author entity, if an author identifier was provided and resolved.</td></tr>
     <tr><td><code>resolved_entities</code></td><td>array of [=ResolvedEntity=]</td><td>The entities extracted from the content and resolved against the registry.</td></tr>
-    <tr><td><code>classification</code></td><td>ContentClassification or null</td><td>A host-derived classification of the submitted text content, if the host provides one.</td></tr>
+    <tr><td><code>classification</code></td><td>[=ContentClassification=] or null</td><td>A host-derived classification of the submitted text content, if the host provides one.</td></tr>
     <tr><td><code>suggested_action</code></td><td>string or null</td><td>A host recommendation, using one of the values defined in [[#suggested-action-type]], or null.</td></tr>
     <tr><td><code>suggested_lift_timestamp</code></td><td>integer or null</td><td>The Unix timestamp at which the host recommends lifting a temporary action, when applicable.</td></tr>
     <tr><td><code>scan_results</code></td><td>object</td><td>Host-defined information about the factors contributing to the result. Clients MUST NOT rely on particular member names or values.</td></tr>
@@ -1306,9 +1306,9 @@ active [=blacklist records=] and its optional parent entity. Its members are:
     <tr><th>Member</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>entity</code></td><td>EntityRecord</td><td>The entity record.</td></tr>
+    <tr><td><code>entity</code></td><td>[=EntityRecord=]</td><td>The entity record.</td></tr>
     <tr><td><code>entity_position</code></td><td>ResolvedEntityPosition or null</td><td>The position of the entity mention in the content.</td></tr>
-    <tr><td><code>active_blacklists</code></td><td>array of BlacklistRecord</td><td>The active blacklist records associated with the entity.</td></tr>
+    <tr><td><code>active_blacklists</code></td><td>array of [=BlacklistRecord=]</td><td>The active blacklist records associated with the entity.</td></tr>
     <tr><td><code>parent_entity</code></td><td>[=ResolvedEntity=] or null</td><td>The resolved parent entity, if a relationship is defined.</td></tr>
   </tbody>
 </table>
@@ -1437,7 +1437,7 @@ error (HTTP 400).
 A successful response is a [=success response=] with HTTP 200 OK and a body
 that is a JSON array of <dfn export lt="SearchResult">SearchResult</dfn> objects,
 grouped by record type. A
-SearchResult object has the members:
+[=SearchResult=] object has the members:
 
 <table class="data">
   <thead>
@@ -1782,7 +1782,7 @@ The query parameters are:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of OperatorRecord objects.
+is a JSON array of [=OperatorRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -1819,7 +1819,7 @@ The query parameters are:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of OperatorRecord objects.
+is a JSON array of [=OperatorRecord=] objects.
 
 A host MUST reject a request whose <code>q</code> parameter is absent, empty, or
 shorter than two non-whitespace characters with a client error (HTTP 400). A
@@ -1859,7 +1859,7 @@ The request is:
 <pre class="example">GET /operators/self HTTP/1.1</pre>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON OperatorRecord object.
+is a JSON [=OperatorRecord=] object.
 
 A host MUST respond with an [=error response=] for HTTP 401 if the request is
 not authenticated.
@@ -2463,7 +2463,7 @@ A <dfn export lt="EntityRecord">EntityRecord</dfn> object represents a single
 </table>
 
 
-A host MUST set the <code>metadata</code> member of an EntityRecord object to null
+A host MUST set the <code>metadata</code> member of an [=EntityRecord=] object to null
 when the requester is not permitted to read entity metadata, as specified in
 [[#visibility-rules]]. A consumer therefore cannot distinguish redacted metadata
 from absent metadata, and MUST NOT infer that an entity has no metadata from a
@@ -2509,7 +2509,7 @@ The value of the <code>order</code> parameter is one of the following strings:
 
 An [=entity relationship=] is a pointer stored on an [=entity=] record that
 declares how that entity relates to another entity in the [=entity registry=].
-The <code>relationship_entity</code> member of the EntityRecord object carries
+The <code>relationship_entity</code> member of the [=EntityRecord=] object carries
 the UUID of the related entity, and the <code>relationship_type</code> member
 carries the type of the connection. Any number of entities MAY point at the same
 related entity, each declaring its own relationship type.
@@ -2579,7 +2579,7 @@ The query parameters are:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of EntityRecord objects, with metadata redacted as described in
+is a JSON array of [=EntityRecord=] objects, with metadata redacted as described in
 [[#entity-record-object]].
 
 A host MUST respond with an [=error response=] for the following conditions:
@@ -2621,7 +2621,7 @@ A host MUST reject a request whose <code>q</code> parameter is absent, empty,
 or shorter than two non-whitespace characters with a client error (HTTP 400).
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of EntityRecord objects, with metadata redacted as described in
+is a JSON array of [=EntityRecord=] objects, with metadata redacted as described in
 [[#entity-record-object]].
 
 A host MUST respond with an [=error response=] for the following conditions:
@@ -2655,7 +2655,7 @@ The query parameter is:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of EntityRecord objects, with metadata redacted as described in
+is a JSON array of [=EntityRecord=] objects, with metadata redacted as described in
 [[#entity-record-object]].
 
 A host MUST respond with an [=error response=] for the following conditions:
@@ -2687,7 +2687,7 @@ The path parameter is:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON EntityRecord object, with metadata redacted as described in
+is a JSON [=EntityRecord=] object, with metadata redacted as described in
 [[#entity-record-object]].
 
 A host MUST respond with an [=error response=] for the following conditions:
@@ -2730,9 +2730,9 @@ object:
     <tr><th>Member</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>entity_record</code></td><td>EntityRecord</td><td>The queried entity.</td></tr>
-    <tr><td><code>related_entities</code></td><td>array of EntityRecord</td><td>Other entities in the queried entity's relationship group.</td></tr>
-    <tr><td><code>active_blacklists</code></td><td>array of BlacklistRecord</td><td>The active blacklist records associated with the queried entity and its relationship group.</td></tr>
+    <tr><td><code>entity_record</code></td><td>[=EntityRecord=]</td><td>The queried entity.</td></tr>
+    <tr><td><code>related_entities</code></td><td>array of [=EntityRecord=]</td><td>Other entities in the queried entity's relationship group.</td></tr>
+    <tr><td><code>active_blacklists</code></td><td>array of [=BlacklistRecord=]</td><td>The active blacklist records associated with the queried entity and its relationship group.</td></tr>
     <tr><td><code>suggested_action</code></td><td>string or null</td><td>A host recommendation based on the active blacklist records: <code>PERMANENTLY_BLOCK_ENTITY</code>, <code>TEMPORARILY_BLOCK_ENTITY</code>, or null.</td></tr>
     <tr><td><code>suggested_lift_timestamp</code></td><td>integer or null</td><td>The Unix timestamp at which the host recommends lifting a temporary action, when applicable.</td></tr>
   </tbody>
@@ -3207,7 +3207,7 @@ members:
 </table>
 
 The object MUST NOT contain members other than those defined above. A host
-MUST reject a ContentInput object that violates any of these constraints with a
+MUST reject a [=ContentInput=] object that violates any of these constraints with a
 client error (HTTP 400).
 
 <h5 id="evidence-tags">Evidence tags</h5>
@@ -3331,7 +3331,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Submit Evidence method creates a new [=evidence=] record for a known
 [=entity=]. The request MUST be authenticated as an operator with [=client
-permissions=]. Its body combines a ContentInput object with the members below:
+permissions=]. Its body combines a [=ContentInput=] object with the members below:
 
 <table class="data">
   <thead>
@@ -3462,7 +3462,7 @@ The path parameter is:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of FileAttachmentRecord objects.
+is a JSON array of [=FileAttachmentRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3661,7 +3661,7 @@ A <dfn export lt="BlacklistRecord">BlacklistRecord</dfn> object represents a sin
 
 <h5 id="incident-type-values">Incident type values</h5>
 
-The value of the <code>type</code> member of a BlacklistRecord object, and of the
+The value of the <code>type</code> member of a [=BlacklistRecord=] object, and of the
 <code>type</code> parameter of the create blacklist record method, is one of the
 following uppercase strings:
 
@@ -4036,7 +4036,7 @@ The request body MUST be a JSON object containing:
   </thead>
   <tbody>
     <tr><td><code>reporting_entity</code></td><td>string</td><td>Yes</td><td>The [=entity identifier=] of the entity being reported.</td></tr>
-    <tr><td><code>evidence</code></td><td>ContentInput or array of ContentInput</td><td>Yes</td><td>One non-empty ContentInput object or a non-empty array of non-empty ContentInput objects from which to create evidence records.</td></tr>
+    <tr><td><code>evidence</code></td><td>[=ContentInput=] or array of [=ContentInput=]</td><td>Yes</td><td>One non-empty [=ContentInput=] object or a non-empty array of non-empty [=ContentInput=] objects from which to create evidence records.</td></tr>
     <tr><td><code>incident_type</code></td><td>string</td><td>Yes</td><td>The incident type, one of the values defined in [[#incident-type-values]].</td></tr>
     <tr><td><code>report_message</code></td><td>string</td><td>No</td><td>An optional message for the report.</td></tr>
   </tbody>
@@ -4044,20 +4044,20 @@ The request body MUST be a JSON object containing:
 
 A host MUST reject a request whose <code>reporting_entity</code> or
 <code>evidence</code> member is missing or empty, whose evidence input is not a
-non-empty ContentInput object or array of non-empty ContentInput objects, or
+non-empty [=ContentInput=] object or array of non-empty [=ContentInput=] objects, or
 whose incident type is invalid with a client error (HTTP 400).
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is a JSON <dfn export lt="ReportSubmission">ReportSubmission</dfn> object. The
-members of a ReportSubmission object are:
+members of a [=ReportSubmission=] object are:
 
 <table class="data">
   <thead>
     <tr><th>Member</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>report</code></td><td>ReportRecord</td><td>The report that was created.</td></tr>
-    <tr><td><code>evidence</code></td><td>array of EvidenceRecord</td><td>The evidence records created with the report.</td></tr>
+    <tr><td><code>report</code></td><td>[=ReportRecord=]</td><td>The report that was created.</td></tr>
+    <tr><td><code>evidence</code></td><td>array of [=EvidenceRecord=]</td><td>The evidence records created with the report.</td></tr>
   </tbody>
 </table>
 
@@ -4203,7 +4203,7 @@ The query parameters are:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of EvidenceRecord objects.
+is a JSON array of [=EvidenceRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4575,7 +4575,7 @@ components and control characters, and MAY replace other characters and
 shorten the name. When no usable file name remains, the host assigns one.
 
 A successful response is a [=success response=] with HTTP 201 Created and a body
-that is a JSON UploadResult object.
+that is a JSON [=UploadResult=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4614,11 +4614,11 @@ A successful response is HTTP 200 OK whose body is the file itself, not a JSON
 document. The response carries the following headers:
 
 * `Content-Type`, set to the media type the host recorded for the file;
-* `Content-Disposition`, set to `attachment` with a `filename` parameter carrying
+* `Content-Disposition` [[!RFC6266]], set to `attachment` with a `filename` parameter carrying
     the recorded file name, so that user agents save the file instead of
     rendering it;
 * `Content-Length`, set to the size of the file in bytes;
-* `Cache-Control`, set so that the response is not cached, for example
+* `Cache-Control` [[!RFC9111]], set so that the response is not cached, for example
     `no-cache, no-store, must-revalidate`.
 
 A host MUST respond with an [=error response=] for the following conditions:
@@ -4655,7 +4655,7 @@ The path parameter is:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON FileAttachmentRecord object.
+is a JSON [=FileAttachmentRecord=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4773,7 +4773,7 @@ user-chosen secrets, an unsalted cryptographic hash is sufficient. A host MUST
 NOT expose a token in responses other than those defined to return it, nor in
 logs or error messages, and SHOULD compare a presented [=root access token=] in
 constant time. A client MUST store tokens securely and SHOULD transmit them only
-over a confidential channel such as TLS. If a token is compromised, it can be
+over a confidential channel such as TLS [[RFC9846]]. If a token is compromised, it can be
 replaced through the Generate Access Token or Generate Operator Access Token
 methods, which invalidate the previous token.
 
@@ -4793,7 +4793,7 @@ full administrative control and SHOULD be granted sparingly.
 Confidential [=evidence=] is visible only to operators with [=management
 permissions=]. A host MUST enforce this restriction on read, list, and search
 operations, including the cross-collection Search method. A host MUST NOT expose
-a confidential EvidenceRecord, any of its members, or its attachments to an
+a confidential [=EvidenceRecord=], any of its members, or its attachments to an
 unauthorized requester. Another record MAY contain the confidential evidence
 UUID as an opaque reference; that reference MUST NOT grant access to the
 evidence record.
