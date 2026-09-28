@@ -7,7 +7,7 @@ ED: https://nosial.github.io/OFD-Specification/
 Editor: Netkas, Nosial, netkas@nosial.net, https://github.com/netkas
 Repository: nosial/OFD-Specification
 Abstract: The Open Federated Database (OFD) protocol lets independent network services share observations about the entities that contact them, so that services can detect and mitigate spam, malicious content, and other abuse. A service may participate by operating a host, or by acting as a client or downstream consumer of a host operated by another provider. This document defines the architecture, data model, identification, transport, authentication, authorization, and methods of an OFD host.
-Date: 2026-09-26
+Date: 2026-09-28
 Boilerplate: conformance no
 Markup Shorthands: markdown on
 Default Ref Status: current
