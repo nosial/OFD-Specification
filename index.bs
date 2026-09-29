@@ -7,7 +7,7 @@ ED: https://nosial.github.io/OFD-Specification/
 Editor: Netkas, Nosial, netkas@nosial.net, https://github.com/netkas
 Repository: nosial/OFD-Specification
 Abstract: The Open Federated Database (OFD) protocol lets independent network services share observations about the entities that contact them, so that services can detect and mitigate spam, malicious content, and other abuse. A service may participate by operating a host, or by acting as a client or downstream consumer of a host operated by another provider. This document defines the architecture, data model, identification, transport, authentication, authorization, and methods of an OFD host.
-Date: 2026-09-28
+Date: 2026-09-29
 Boilerplate: conformance no
 Markup Shorthands: markdown on
 Default Ref Status: current
@@ -1008,13 +1008,17 @@ member given in parentheses:
 * the cross-collection [[#search|Search]] method (<code>public_search</code>).
 
 The dedicated search method of each domain, such as Search Entities, follows
-the accessibility of its domain; the record types for which such a method is
+the accessibility of its domain, and Search Operators is always public; the record types for which such a method is
 enabled and public are published as <code>search_types</code> and
 <code>public_search_types</code>. A [=downstream consumer=] can therefore
 determine from the server information alone what is available without
 authentication.
 
-The server information method is always public.
+The server information method is always public. [=Operator=] records are
+public information: the List Operators, Get Operator, and Search Operators
+methods, and
+[=operator=] records in the results of the [[#search|Search]] method, are
+available to unauthenticated requests, whatever the host configuration.
 
 <h4 id="permission-matrix">Permission Matrix</h4>
 
@@ -1052,9 +1056,10 @@ permission error (HTTP 403).
     <tr><th scope="row">Scan content</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">Search</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">Read entity metadata</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><th scope="row">Read operator accounts</th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   </tbody>
   <tbody>
-    <tr><th scope="row">Read operator accounts, including one's own</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><th scope="row">Read one's own operator account</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">Generate one's own access token</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">List one's own opened reports</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   </tbody>
@@ -1074,7 +1079,6 @@ permission error (HTTP 403).
     <tr><th scope="row">Access confidential evidence</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
   </tbody>
   <tbody>
-    <tr><th scope="row">List operators</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
     <tr><th scope="row">Manage operators</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
     <tr><th scope="row">Manage operator permission groups and access tokens</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
     <tr><th scope="row">Manage entity relationships and tags</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
@@ -1087,12 +1091,12 @@ permission error (HTTP 403).
     renaming operator accounts, modifying their [=permission group=]s, and
     managing the <code>auto_assign</code> flag. "Manage entity relationships and
     tags" covers setting and clearing [=entity relationships=] and updating
-    evidence tags. "Read operator accounts" covers Get Operator, Get Self
-    Operator, and Search Operators; listing every operator account requires
-    [=operator permissions=]. Reading a "Configurable" domain, reading operator
-    accounts, generating one's own access token, and listing one's own opened
-    reports require only an [=authenticated operator=], whatever [=permission
-    groups=] it holds.</p>
+    evidence tags. "Read operator accounts" covers List Operators, Get
+    Operator, and Search Operators, and "Read one's own operator account"
+    covers Get Self Operator. Reading
+    a "Configurable" domain, reading one's own operator account, generating
+    one's own access token, and listing one's own opened reports require only
+    an [=authenticated operator=], whatever [=permission groups=] it holds.</p>
 
 <h4 id="visibility-rules">Visibility Rules</h4>
 
@@ -1115,9 +1119,8 @@ operator without [=management permissions=] is rejected with HTTP 403.
 A report is closed by an operator with [=management permissions=] who is also
 the operator to which the report is assigned, and reports that are already
 closed MUST NOT be closed again. An authenticated operator that scans content
-MUST hold [=client permissions=], even when content scanning is public. Search
-over operator accounts requires an authenticated operator, and the Search
-Attachments method requires [=management permissions=].
+MUST hold [=client permissions=], even when content scanning is public. The
+Search Attachments method requires [=management permissions=].
 
 <h3 id="request-processing">Request Processing</h3>
 
@@ -1403,8 +1406,8 @@ valid [=access token=].
 
 A host includes a record type in the results only when the dedicated search
 method of that type is enabled, and only to a requester permitted to read that
-type: [=operator=] records only to an [=authenticated operator=], and records of
-every other type according to the accessibility of their domain. The host MUST
+type: [=operator=] records to every requester, and records of every other type
+according to the accessibility of their domain. The host MUST
 apply the visibility rules of [[#visibility-rules]] to the results: confidential
 evidence, and the attachments of confidential evidence, are included only for an
 operator with [=management permissions=], and [=audit log=] entries returned to
@@ -1686,8 +1689,11 @@ A host MUST respond with an [=error response=] for the following conditions:
 <h3 id="operators-methods">Operators</h3>
 
 The operators methods manage the [=operator=] accounts of a [=host=] and expose
-sub-resources of an operator. All operator management methods require an
-[=authenticated operator=] with [=operator permissions=], except where noted.
+sub-resources of an operator. [=Operator=] records are public information: the
+List Operators, Get Operator, and Search Operators methods do not require
+authentication. All
+operator management methods require an [=authenticated operator=] with
+[=operator permissions=], except where noted.
 
 <h4 id="operator-record-object">OperatorRecord object</h4>
 
@@ -1760,7 +1766,7 @@ Its members are:
 <em>Method name:</em> <code>listOperators</code>
 
 The List Operators method returns a paginated list of all [=operator=] accounts.
-The request MUST be authenticated as an operator with [=operator permissions=].
+The method is public; a host MUST NOT require the request to be authenticated.
 
 The request is:
 
@@ -1786,8 +1792,6 @@ is a JSON array of [=OperatorRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=operator permissions=].
 * HTTP 500 if the host fails to retrieve the operators.
 
 <h4 id="search-operators">Search Operators</h4>
@@ -1795,8 +1799,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 <em>Method name:</em> <code>searchOperators</code>
 
 The Search Operators method searches [=operator=] accounts by UUID or name. The
-request MUST be authenticated. Search over operators is available only when the
-host has search enabled and has operator search enabled.
+method is public; a host MUST NOT require the request to be authenticated.
+Search over operators is available only when the host has search enabled and
+has operator search enabled.
 
 The request is:
 
@@ -1825,7 +1830,6 @@ A host MUST reject a request whose <code>q</code> parameter is absent, empty, or
 shorter than two non-whitespace characters with a client error (HTTP 400). A
 host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 401 if the request is not authenticated.
 * HTTP 404 if search is disabled on the host or if operator search is disabled.
 * HTTP 500 if the host fails to perform the search.
 
@@ -1834,16 +1838,18 @@ host MUST respond with an [=error response=] for the following conditions:
 <em>Method name:</em> <code>getOperator</code>
 
 The Get Operator method returns a single [=operator=] account by UUID. The
-request MUST be authenticated.
+method is public; a host MUST NOT require the request to be authenticated.
 
 The request is:
 
 <pre class="example">GET /operators/{uuid} HTTP/1.1</pre>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON [=OperatorRecord=] object.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
-* HTTP 401 if the request is not authenticated.
 * HTTP 404 if the operator does not exist.
 * HTTP 500 if the host fails to retrieve the operator.
 
@@ -4850,6 +4856,14 @@ relevant, and SHOULD remove expired records under that policy. Entity metadata
 and evidence metadata can carry arbitrary attributes about the people behind an
 entity; a host SHOULD keep entity metadata private, which is the case unless it
 publishes <code>public_entity_metadata</code> as true.
+
+<h3 id="priv-operator-records">Operator Records</h3>
+
+[=Operator=] records are public: any requester can read an operator's name,
+permission groups, and account state through the List Operators, Get Operator,
+and Search Operators methods. A host SHOULD NOT use an operator name that discloses
+personal information the operator has not agreed to make public. Operator
+records never include an [=access token=] or its hash.
 
 <h3 id="priv-content-scanning">Content Scanning</h3>
 
