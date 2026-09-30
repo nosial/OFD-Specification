@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [1.0-R3] - 2026-09-30
+
+This update introduces safeguards into the specification
+
+### Added
+ - Added the `allow_illegal_content` member to the ServerInformation object. A host MAY decline to handle illegal
+   content; such a host publishes `allow_illegal_content` as false and MUST reject Submit Report requests with the
+   `ILLEGAL_CONTENT` incident type with HTTP 403.
+
+### Changed
+ - Evidence created by Submit Report with the `ILLEGAL_CONTENT` incident type, or linked to such a report by Add
+   Evidence to Report, MUST be marked as confidential regardless of the submitted `confidential` value. The
+   Confidential Evidence security consideration was extended accordingly.
+ - Close Report now permits a host to also adjust the reputation of existing entities mentioned in the report's
+   evidence, identified with the same named entity extraction as Scan Content, at most once per entity per report.
+
+
+
 ## [1.0-R2] - 2026-09-29
 
 This update introduces a change in the specification where operators are no longer kept behind authentication, rather
