@@ -594,6 +594,24 @@ textual representation [[!RFC5952]]. A host entity uses the canonical entity hos
 alone. A host MUST reject an entity address that is not already in canonical
 form with HTTP 400.
 
+The <dfn>registrable domain</dfn> of a DNS entity host is its public suffix, as
+determined by the <a href="https://publicsuffix.org/">Public Suffix List</a>, plus
+the one label that precedes it; for example, the registrable domain of both
+<code>sub.example.com</code> and <code>example.com</code> is
+<code>example.com</code>, and that of <code>a.b.example.co.uk</code> is
+<code>example.co.uk</code>. A host that is itself a public suffix, and an IPv4 or
+IPv6 entity host, has no registrable domain.
+
+As the one exception to that rejection, a DNS entity host whose first label is
+<code>www</code> denotes the same entity as the host without that label, provided
+the remainder still has a [=registrable domain=]. A host MUST remove the leading
+<code>www.</code> label, rather than reject the address, before storing the entity
+address or deriving its SHA-256 identifier, so that <code>www.example.com</code>
+and <code>example.com</code> address the same entity. The label MUST NOT be
+removed when the remainder has no registrable domain, as in <code>www.com</code>
+or <code>www.co.uk</code>. Any other subdomain, such as
+<code>sub.example.com</code>, is a distinct entity.
+
 <h3 id="identifier-hash">Identifier Hash</h3>
 
 The SHA-256 identifier is the SHA-256 digest [[!FIPS-180-4]] [[RFC6234]] of the
@@ -1193,6 +1211,7 @@ members of a [=ServerInformation=] object are:
     <tr><td><code>public_entity_metadata</code></td><td>boolean</td><td>Whether entity metadata is included in entity records returned to unauthenticated requests.</td></tr>
     <tr><td><code>public_scan_content</code></td><td>boolean</td><td>Whether the Scan Content method is publicly accessible.</td></tr>
     <tr><td><code>public_query_entity</code></td><td>boolean</td><td>Whether the Query Entity method is publicly accessible.</td></tr>
+    <tr><td><code>allow_illegal_content</code></td><td>boolean</td><td>Whether the host accepts reports with the <code>ILLEGAL_CONTENT</code> incident type, as specified in [[#submit-report]].</td></tr>
     <tr><td><code>search_enabled</code></td><td>boolean</td><td>Whether search is enabled on the host. When false, every search method responds with HTTP 404.</td></tr>
     <tr><td><code>public_search</code></td><td>boolean</td><td>Whether the cross-collection Search method is publicly accessible.</td></tr>
     <tr><td><code>search_types</code></td><td>array of strings</td><td>The record types, as defined in [[#record-type-values]], whose dedicated search method is enabled. Empty when search is disabled.</td></tr>
@@ -4053,6 +4072,15 @@ A host MUST reject a request whose <code>reporting_entity</code> or
 non-empty [=ContentInput=] object or array of non-empty [=ContentInput=] objects, or
 whose incident type is invalid with a client error (HTTP 400).
 
+When the incident type is <code>ILLEGAL_CONTENT</code>, the host MUST mark every
+evidence record it creates for the report as confidential, regardless of the
+<code>confidential</code> member of the submitted [=ContentInput=] objects.
+
+A host MAY decline to handle illegal content. A host that does so MUST publish
+<code>allow_illegal_content</code> as false in its [=ServerInformation=] object
+and MUST reject every request whose incident type is <code>ILLEGAL_CONTENT</code>
+with HTTP 403 Forbidden, without creating a report or any evidence.
+
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is a JSON <dfn export lt="ReportSubmission">ReportSubmission</dfn> object. The
 members of a [=ReportSubmission=] object are:
@@ -4071,7 +4099,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the request body is missing a required member, the entity identifier is malformed, the evidence input is invalid, or the incident type is not defined in [[#incident-type-values]].
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=client permissions=].
+* HTTP 403 if the authenticated operator does not hold [=client permissions=], or if the incident type is <code>ILLEGAL_CONTENT</code> and the host does not accept illegal content.
 * HTTP 404 if the reporting entity does not exist.
 * HTTP 500 if the host fails to create the report or evidence.
 
@@ -4228,6 +4256,15 @@ authenticated as an operator with [=management permissions=]. The report MUST be
 assigned to the authenticated operator. A host MAY also create a [=blacklist
 record=] for the reported entity and MAY update the entity's [=reputation=]
 according to the classification flag.
+
+When a host updates reputation on closing a report, it MAY also update the
+[=reputation=] of existing entities mentioned in the text content of the
+report's [=evidence=], identified by the same named entity extraction used by
+the Scan Content method. A host that does so SHOULD adjust each entity at most
+once per report, and SHOULD NOT apply the adjustment for mentions to the
+reported entity a second time. Every positive adjustment, whether to the
+reported entity or to a mentioned entity, is subject to the incremental limit
+of [[#entity-reputation]]. The size of each adjustment is host policy.
 
 The request is:
 
@@ -4396,6 +4433,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 The Add Evidence to Report method links an existing [=evidence=] record to a
 [=report=], replacing any report the evidence was previously linked to. The
 request MUST be authenticated as an operator with [=management permissions=].
+When the report's incident type is <code>ILLEGAL_CONTENT</code>, the host MUST
+mark the linked evidence record as confidential.
 
 The request is:
 
@@ -4803,6 +4842,15 @@ a confidential [=EvidenceRecord=], any of its members, or its attachments to an
 unauthorized requester. Another record MAY contain the confidential evidence
 UUID as an opaque reference; that reference MUST NOT grant access to the
 evidence record.
+
+Evidence supporting a report of illegal content is itself likely to be illegal
+to distribute. A host therefore MUST mark evidence as confidential when it is
+created with, or linked to, a report whose incident type is
+<code>ILLEGAL_CONTENT</code>, as specified in [[#submit-report]] and
+[[#add-evidence-to-report]]. A host whose operator does not wish to store such
+content MAY refuse <code>ILLEGAL_CONTENT</code> reports entirely and advertises
+this through the <code>allow_illegal_content</code> member of its
+[=ServerInformation=] object.
 
 <h3 id="sec-uploaded-files">Uploaded Files</h3>
 
