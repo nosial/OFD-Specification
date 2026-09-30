@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [1.0-R4] - Ongoing
+
+This is an ongoing draft.
+
+
+
+
 ## [1.0-R3] - 2026-09-30
 
 This update introduces safeguards into the specification
