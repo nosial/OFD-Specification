@@ -607,9 +607,11 @@ As the one exception to that rejection, a DNS entity host whose first label is
 the remainder still has a [=registrable domain=]. A host MUST remove the leading
 <code>www.</code> label, rather than reject the address, before storing the entity
 address or deriving its SHA-256 identifier, so that <code>www.example.com</code>
-and <code>example.com</code> address the same entity. The label MUST NOT be
-removed when the remainder has no registrable domain, as in <code>www.com</code>
-or <code>www.co.uk</code>. Any other subdomain, such as
+and <code>example.com</code> address the same entity. The removal is repeated
+while the host still begins with a <code>www</code> label that can be removed,
+so that <code>www.www.example.com</code> also becomes <code>example.com</code>.
+The label MUST NOT be removed when the remainder has no registrable domain, as
+in <code>www.com</code> or <code>www.co.uk</code>. Any other subdomain, such as
 <code>sub.example.com</code>, is a distinct entity.
 
 <h3 id="identifier-hash">Identifier Hash</h3>
@@ -2453,6 +2455,15 @@ A host SHOULD apply a decrease immediately when it observes behavior that
 warrants one, and SHOULD apply increases gradually for sustained normal
 behavior. For an incremental positive adjustment, a host SHOULD add from 1
 through 10 points and SHOULD NOT add more than 10 points in one increment.
+
+When a host creates a [=blacklist record=], whether through the Blacklist Entity
+method or when closing a [=report=], it MAY decrease the reputation of the
+blacklisted entity. It MAY also decrease the reputation of the entities directly
+related to the blacklisted entity through an entity relationship: the entity the
+blacklisted entity references as its relationship target, and the entities that
+reference the blacklisted entity as theirs. A host that does so SHOULD adjust
+each related entity at most once per blacklist record. The size of each
+adjustment is host policy.
 
 The Clear Entity Reputation method is the only manual reputation operation. It
 resets reputation to 0; it MUST NOT accept a replacement value. Evidence,
