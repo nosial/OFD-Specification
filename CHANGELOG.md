@@ -4,13 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-## [1.0-R4] - Ongoing
+## [1.0-R4] - 2026-10-01
 
-This is an ongoing draft.
+This update introduces changes to the specification
 
 ### Changed
+ - Set Entity Relationship and Clear Entity Relationship now require client permissions instead of operator
+   permissions, so management permissions, which inherit client permissions, cover them too. Operator permissions no
+   longer authorize them. The "Manage entity relationships and tags" row of the permission matrix is split into
+   "Manage entity relationships" (client and manager) and "Update evidence tags" (operator manager, unchanged).
  - Removing the leading `www.` label from a DNS entity host is now repeated while another removable `www` label
    leads the host, so `www.www.example.com` canonicalizes to `example.com`.
+
+### Added
+ - Abuse of the Database security consideration for clients relating a legitimate entity to one about to be
+   blacklisted, where a host propagates reputation through entity relationships.
 
 
 
