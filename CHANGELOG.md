@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 This is an ongoing draft.
 
+### Changed
+ - Removing the leading `www.` label from a DNS entity host is now repeated while another removable `www` label
+   leads the host, so `www.www.example.com` canonicalizes to `example.com`.
 
 
 
