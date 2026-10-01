@@ -220,8 +220,8 @@ for downstream consumers.
 :   <dfn export>client permissions</dfn>
 ::  The [=permission group=] that authorizes an operator to submit information
     to the [=federated database=]: registering and updating [=entities=],
-    submitting [=evidence=] and [=reports=], uploading [=file attachments=],
-    and scanning content.
+    setting and clearing [=entity relationships=], submitting [=evidence=] and
+    [=reports=], uploading [=file attachments=], and scanning content.
 
 :   <dfn export>collection</dfn>
 ::  A [=resource=] of a [=host=] that groups the [=records=] of one kind:
@@ -324,8 +324,8 @@ for downstream consumers.
     [=operators=] of the [=host=]: creating, deleting, enabling, and disabling
     operator accounts, modifying their names and [=permission group=]s,
     generating [=access tokens=], managing the <code>auto_assign</code> flag,
-    and managing [=entity relationships=] and tags. Operator permissions do not
-    inherit client permissions or management permissions.
+    and updating evidence tags. Operator permissions do not inherit client
+    permissions or management permissions.
 
 :   <dfn export>permission group</dfn>
 ::  A set of privileges granted to an [=operator=]. This specification defines
@@ -985,9 +985,9 @@ regardless of the groups it holds.
 <h4 id="permission-groups">Permission Groups</h4>
 
 [=client permissions=] authorize an operator to submit information to the
-[=federated database=]: registering and updating [=entities=], submitting
-[=evidence=] and [=reports=], uploading [=file attachments=], and scanning
-content.
+[=federated database=]: registering and updating [=entities=], setting and
+clearing [=entity relationships=], submitting [=evidence=] and [=reports=],
+uploading [=file attachments=], and scanning content.
 
 [=management permissions=] authorize an operator to manage the [=records=] of
 the [=federated database=]. Management permissions inherit all client
@@ -999,8 +999,8 @@ closure of [=reports=].
 [=operator permissions=] authorize an operator to manage the [=operators=] of
 the [=host=]: creating, deleting, enabling, and disabling operator accounts,
 modifying their names and [=permission group=]s, generating [=access tokens=],
-and managing [=entity relationships=] and tags. Operator permissions do not
-inherit client permissions or management permissions.
+and updating evidence tags. Operator permissions do not inherit client
+permissions or management permissions.
 
 <h4 id="public-accessibility">Public Accessibility</h4>
 
@@ -1088,6 +1088,7 @@ permission error (HTTP 403).
     <tr><th scope="row">Submit evidence</th><td>No</td><td>Yes</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">Submit reports</th><td>No</td><td>Yes</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">Upload attachments</th><td>No</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+    <tr><th scope="row">Manage entity relationships</th><td>No</td><td>Yes</td><td>Yes</td><td>No</td></tr>
   </tbody>
   <tbody>
     <tr><th scope="row">Delete entities, evidence, or reports</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
@@ -1101,7 +1102,7 @@ permission error (HTTP 403).
   <tbody>
     <tr><th scope="row">Manage operators</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
     <tr><th scope="row">Manage operator permission groups and access tokens</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
-    <tr><th scope="row">Manage entity relationships and tags</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
+    <tr><th scope="row">Update evidence tags</th><td>No</td><td>No</td><td>No</td><td>Yes</td></tr>
   </tbody>
 </table>
 
@@ -1109,9 +1110,9 @@ permission error (HTTP 403).
     domain, and requires an authenticated operator when the host does not. The
     "Manage operators" row covers creating, deleting, enabling, disabling, and
     renaming operator accounts, modifying their [=permission group=]s, and
-    managing the <code>auto_assign</code> flag. "Manage entity relationships and
-    tags" covers setting and clearing [=entity relationships=] and updating
-    evidence tags. "Read operator accounts" covers List Operators, Get
+    managing the <code>auto_assign</code> flag. "Manage entity relationships"
+    covers Set Entity Relationship and Clear Entity Relationship, and "Update
+    evidence tags" covers Update Evidence Tag. "Read operator accounts" covers List Operators, Get
     Operator, and Search Operators, and "Read one's own operator account"
     covers Get Self Operator. Reading
     a "Configurable" domain, reading one's own operator account, generating
@@ -2910,7 +2911,7 @@ identified by the path and a related entity. The relationship is directional: th
 points to the related entity (`target_identifier`). Multiple sources MAY
 reference the same related entity. An entity has at most one relationship;
 setting a relationship replaces any existing relationship of the source entity.
-The request MUST be authenticated as an operator with [=operator
+The request MUST be authenticated as an operator with [=client
 permissions=].
 
 The request is:
@@ -2947,7 +2948,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=], the request body is missing a required member, the related entity identifier is malformed, or the relationship type is not defined in this section.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=operator permissions=].
+* HTTP 403 if the authenticated operator does not hold [=client permissions=].
 * HTTP 404 if the source entity or the related entity does not exist.
 * HTTP 500 if the host fails to set the relationship.
 
@@ -2957,7 +2958,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Clear Entity Relationship method removes the relationship of the entity
 identified by the path. The request MUST be authenticated as an operator with
-[=operator permissions=].
+[=client permissions=].
 
 The request is:
 
@@ -2978,7 +2979,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=].
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=operator permissions=].
+* HTTP 403 if the authenticated operator does not hold [=client permissions=].
 * HTTP 404 if the entity does not exist.
 * HTTP 500 if the host fails to clear the relationship.
 
@@ -4881,8 +4882,14 @@ themselves are a target. An attacker who controls an operator account can
 blacklist or damage the [=reputation=] of legitimate entities. A host SHOULD
 limit the operators that hold [=management permissions=], and a consumer
 SHOULD weigh the records of a host according to its trust in that host's
-operators and policies, as described in [[#host-policy]]. The [=audit log=]
-allows such abuse to be detected and traced after the fact.
+operators and policies, as described in [[#host-policy]]. Because operators
+holding [=client permissions=] can set [=entity relationships=], and a host MAY
+decrease the reputation of entities related to a blacklisted entity, an
+attacker with client permissions can attempt to damage the reputation of a
+legitimate entity by relating it to an entity that is about to be blacklisted.
+A host that propagates reputation through entity relationships SHOULD take into
+account who set a relationship and when. The [=audit log=] allows such abuse to
+be detected and traced after the fact.
 
 <h3 id="sec-cross-origin">Cross-Origin Requests</h3>
 
