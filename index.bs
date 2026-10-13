@@ -5377,6 +5377,17 @@ A host that propagates reputation through entity relationships SHOULD take into
 account who set a relationship and when. The [=audit log=] allows such abuse to
 be detected and traced after the fact.
 
+<h3 id="sec-resource-exhaustion">Resource Exhaustion</h3>
+
+Content scanning, search, and URL uploads make a host perform work that is
+expensive relative to the request, and a host can expose the first two to
+unauthenticated requests. An attacker can use them to exhaust the resources of
+a host. A host SHOULD limit the rate of requests it accepts from each requester,
+SHOULD bound the size of request bodies and the work performed for a single
+request, and MAY reject a request that exceeds its limits with HTTP 429 Too Many
+Requests [[RFC6585]]. A client determines the class of such an error from its
+status code, as specified in [[#error-responses]].
+
 <h3 id="sec-cross-origin">Cross-Origin Requests</h3>
 
 A host permits cross-origin requests only from origins whose host name equals
