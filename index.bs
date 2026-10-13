@@ -784,6 +784,19 @@ method. An entity whose entity address equals such a literal sub-path, such as
 a host entity named `search` or `top-threats`, is therefore addressed in a path
 by its SHA-256 identifier or its UUID.
 
+A host percent-decodes [[!RFC3986]] each path segment exactly once before
+matching it against a route pattern and validating it. A client MUST
+percent-encode a `%` that occurs in an [=entity address=], and any other
+character that is not permitted unencoded in a path segment.
+
+A host determines the form of an entity identifier, whether it is carried in a
+path segment or in a request parameter, as follows: a value that is a UUID in
+the form defined in [[#data-formats]] is resolved as a UUID; otherwise, a value
+of 64 lowercase hexadecimal characters is resolved as a SHA-256 identifier;
+otherwise, the value is resolved as an [=entity address=]. A host entity whose
+address has the form of a UUID is therefore addressed by its SHA-256
+identifier.
+
 <h4 id="route-conventions">Route Conventions</h4>
 
 The [=methods=] of the interface follow a uniform route convention.
