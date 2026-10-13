@@ -1691,7 +1691,7 @@ public; otherwise the request MUST present a valid [=access token=].
 
 The request is:
 
-<pre class="example">GET /audit HTTP/1.1</pre>
+<pre class="example">GET / HTTP/1.1</pre>
 
 The query parameters are:
 
