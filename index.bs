@@ -3874,7 +3874,7 @@ A <dfn export lt="BlacklistRecord">BlacklistRecord</dfn> object represents a sin
 <h5 id="incident-type-values">Incident type values</h5>
 
 The value of the <code>type</code> member of a [=BlacklistRecord=] object, and of the
-<code>type</code> parameter of the create blacklist record method, is one of the
+<code>type</code> parameter of the Blacklist Entity method, is one of the
 following uppercase strings:
 
 :   <code>SPAM</code>
