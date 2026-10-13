@@ -1716,6 +1716,9 @@ When the request is public, a host MUST return only entries whose <code>type</co
 is included in the host's public audit log visibility list, as published in the
 server information response.
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=AuditLog=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if the audit log is not public and the request is not authenticated.
@@ -1745,6 +1748,9 @@ The path parameter is:
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the audit log entry.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON [=AuditLog=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -1785,6 +1791,9 @@ The query parameters are:
 
 A host MUST reject a request whose <code>q</code> parameter is absent, empty,
 or shorter than two non-whitespace characters with a client error (HTTP 400).
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=AuditLog=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -2039,6 +2048,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the name is missing, empty, or too long.
@@ -2061,6 +2073,9 @@ The request is:
 
 <pre class="example">PATCH /operators/{uuid}/enable HTTP/1.1</pre>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, the target is the authenticated operator itself, or the operator is already enabled.
@@ -2082,6 +2097,9 @@ The request is:
 
 <pre class="example">PATCH /operators/{uuid}/disable HTTP/1.1</pre>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, the target is the authenticated operator itself, or the operator is already disabled.
@@ -2101,6 +2119,9 @@ request MUST be authenticated as an operator with [=operator permissions=]. The
 The request is:
 
 <pre class="example">DELETE /operators/{uuid} HTTP/1.1</pre>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -2188,6 +2209,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the <code>enabled</code> member is missing or not a boolean.
@@ -2223,6 +2247,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the <code>enabled</code> member is missing or not a boolean.
@@ -2257,6 +2284,9 @@ The request body MUST be a JSON object containing:
     <tr><td><code>enabled</code></td><td>boolean</td><td>Yes</td><td>Whether operator permissions are enabled for the operator.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -2334,6 +2364,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=AuditLog=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
@@ -2368,6 +2401,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=ReportRecord=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
@@ -2388,6 +2424,9 @@ The request is:
 <pre class="example">GET /operators/{uuid}/reports/assigned HTTP/1.1</pre>
 
 The query parameters are the same as those defined in [[#list-operator-reports]].
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=ReportRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -2438,6 +2477,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=BlacklistRecord=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
@@ -2472,6 +2514,9 @@ The query parameters are:
     <tr><td><code>include_confidential</code></td><td>No</td><td>boolean</td><td>Whether to include confidential evidence records. Defaults to false.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=EvidenceRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -2947,6 +2992,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=], or the request body is missing the <code>metadata</code> member or it is not a JSON object.
@@ -3059,6 +3107,9 @@ The path parameter is:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=].
@@ -3089,6 +3140,9 @@ The path parameter is:
     <tr><td><code>identifier</code></td><td>string</td><td>The [=entity identifier=] of the entity.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3136,6 +3190,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=], or the request body is missing the <code>whitelisted</code> member or it is not a boolean.
@@ -3176,6 +3233,9 @@ When the request is public, a host MUST return only entries whose <code>type</co
 is included in the host's public audit log visibility list, as published in the
 server information response.
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=AuditLog=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=].
@@ -3209,6 +3269,9 @@ The query parameters are:
     <tr><td><code>include_lifted</code></td><td>No</td><td>boolean</td><td>Whether to include lifted blacklist records. Defaults to false.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=BlacklistRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3245,6 +3308,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=EvidenceRecord=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=].
@@ -3278,6 +3344,9 @@ The query parameters are:
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by report category, one of the values defined in [[#report-category-values]].</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=ReportRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3441,6 +3510,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=EvidenceRecord=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if evidence is not public and the request is not authenticated, or if <code>include_confidential</code> is true and the request is not authenticated.
@@ -3550,6 +3622,9 @@ The path parameter is:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON [=EvidenceRecord=] object.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
@@ -3631,6 +3706,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the request body is missing the <code>confidential</code> member or it is not a boolean.
@@ -3675,6 +3753,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the request body is missing the <code>tag</code> member or it is not a valid tag.
@@ -3704,6 +3785,9 @@ The path parameter is:
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the evidence record.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3746,6 +3830,9 @@ The query parameters are:
 
 A host MUST reject a request whose <code>q</code> parameter is absent, empty, or
 shorter than two non-whitespace characters with a client error (HTTP 400).
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=EvidenceRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3862,6 +3949,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=BlacklistRecord=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if the blacklist is not public and the request is not authenticated.
@@ -3933,6 +4023,9 @@ The path parameter is:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON [=BlacklistRecord=] object.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
@@ -3961,6 +4054,9 @@ The path parameter is:
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the blacklist record.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3992,6 +4088,9 @@ The path parameter is:
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the blacklist record.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4038,6 +4137,9 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID, the UUID is malformed, the request body is missing the <code>seconds</code> member, it is not a positive integer, the blacklist record is permanent, or the blacklist record is already lifted.
@@ -4078,6 +4180,9 @@ The query parameters are:
 
 A host MUST reject a request whose <code>q</code> parameter is absent, empty, or
 shorter than two non-whitespace characters with a client error (HTTP 400).
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=BlacklistRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4227,6 +4332,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=ReportRecord=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if reports are not public and the request is not authenticated.
@@ -4257,6 +4365,9 @@ The query parameters are:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=ReportRecord=] objects.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if the request is not authenticated.
@@ -4284,6 +4395,9 @@ The path parameter is:
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the report.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON [=ReportRecord=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4429,6 +4543,9 @@ The path parameter is:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
@@ -4469,6 +4586,9 @@ The query parameters are:
 
 A host MUST reject a request whose <code>q</code> parameter is absent, empty, or
 shorter than two non-whitespace characters with a client error (HTTP 400).
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=ReportRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4514,6 +4634,9 @@ The request body MUST be a JSON object containing:
     <tr><td><code>operator</code></td><td>string</td><td>No</td><td>The UUID of the operator to assign. Defaults to the authenticated operator.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4561,6 +4684,9 @@ The request body MUST be a JSON object containing:
     <tr><td><code>report_uuid</code></td><td>string</td><td>Yes</td><td>The UUID of the report to link the evidence to.</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4667,6 +4793,9 @@ The query parameters are:
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#attachment-order-values]].</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=FileAttachmentRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -4881,6 +5010,9 @@ The path parameter is:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
@@ -4920,6 +5052,9 @@ The query parameters are:
 
 A host MUST reject a request whose <code>q</code> parameter is absent, empty, or
 shorter than two non-whitespace characters with a client error (HTTP 400).
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON array of [=FileAttachmentRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
