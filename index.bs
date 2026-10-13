@@ -2367,7 +2367,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
 * HTTP 401 if the audit log is not public and the request is not authenticated.
-* HTTP 403 if an authenticated operator without [=operator permissions=] attempts to view another operator's audit log entries.
+* HTTP 403 if the audit log is not public and an authenticated operator without [=operator permissions=] attempts to view another operator's audit log entries.
 * HTTP 404 if the target operator does not exist.
 * HTTP 500 if the host fails to retrieve the audit log.
 
