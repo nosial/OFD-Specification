@@ -408,7 +408,7 @@ the records before deciding how to treat an [=entity=].
 
 The OFD interface exposed by a host comprises three surfaces. The
 <dfn export>information surface</dfn> describes the host itself—its identity,
-the version of the protocol it implements, the public-accessibility information
+the [=interface version=] it implements, the public-accessibility information
 it publishes, and how many records its [=federated database=] holds—and is
 always public.
 The <dfn export>data surface</dfn> is the [=federated database=] itself: the
@@ -1269,7 +1269,7 @@ members of a [=ServerInformation=] object are:
   </thead>
   <tbody>
     <tr><td><code>name</code></td><td>string</td><td>The name of the host.</td></tr>
-    <tr><td><code>api_version</code></td><td>string</td><td>The version of the OFD interface implemented by the host. A host implementing this version of the specification reports <code>1.1</code>.</td></tr>
+    <tr><td><code>api_version</code></td><td>string</td><td>The [=interface version=] implemented by the host, as specified in [[#versioning]]. A host implementing this version of the specification reports <code>1.1</code>.</td></tr>
     <tr><td><code>public_audit_logs</code></td><td>boolean</td><td>Whether the audit log domain is publicly accessible.</td></tr>
     <tr><td><code>public_evidence</code></td><td>boolean</td><td>Whether the evidence domain is publicly accessible.</td></tr>
     <tr><td><code>public_blacklist</code></td><td>boolean</td><td>Whether the blacklist domain is publicly accessible.</td></tr>
