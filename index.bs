@@ -226,11 +226,6 @@ for downstream consumers.
     [=evidence=], [=reports=], and [=file attachments=], and MAY submit
     content for scanning and act on the results of the scan.
 
-:   <dfn export lt="downstream consumer|downstream consumers">downstream consumer</dfn>
-::  A [=service=] that queries the [=records=] and [=telemetry=] of a
-    [=host=] before deciding whether to block an [=entity=] or filter its
-    content.
-
 :   <dfn export>client permissions</dfn>
 ::  The [=permission group=] that authorizes an operator to submit information
     to the [=federated database=]: registering and updating [=entities=],
@@ -242,12 +237,10 @@ for downstream consumers.
     for example, the [=entity registry=], or the records of [=evidence=] or
     of [=reports=].
 
-:   <dfn export>blacklist record</dfn>
-::  A decision by an [=operator=] to block an [=entity=]. A blacklist record
-    has an incident type and is either temporary, expiring at a given time,
-    or permanent. It is active until an [=operator=] lifts it or its expiry
-    passes, MAY reference the [=report=] supporting the decision, and an entity
-    MAY have any number of blacklist records.
+:   <dfn export lt="downstream consumer|downstream consumers">downstream consumer</dfn>
+::  A [=service=] that queries the [=records=] and [=telemetry=] of a
+    [=host=] before deciding whether to block an [=entity=] or filter its
+    content.
 
 :   <dfn export>entity</dfn>
 ::  The identifier under which a [=service=] observes an [=actor=]. An entity
