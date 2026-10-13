@@ -7,7 +7,7 @@ ED: https://nosial.github.io/OFD-Specification/
 Editor: Netkas, Nosial, netkas@nosial.net, https://github.com/netkas
 Repository: nosial/OFD-Specification
 Abstract: The Open Federated Database (OFD) protocol lets independent network services share observations about the entities that contact them, so that services can detect and mitigate spam, malicious content, and other abuse. A service may participate by operating a host, or by acting as a client or downstream consumer of a host operated by another provider. This document defines the architecture, data model, identification, transport, authentication, authorization, and methods of an OFD host.
-Date: 2026-10-01
+Date: 2026-10-12
 Boilerplate: conformance no
 Markup Shorthands: markdown on
 Default Ref Status: current
@@ -1225,7 +1225,7 @@ members of a [=ServerInformation=] object are:
   </thead>
   <tbody>
     <tr><td><code>name</code></td><td>string</td><td>The name of the host.</td></tr>
-    <tr><td><code>api_version</code></td><td>string</td><td>The version of the OFD interface implemented by the host. A host implementing this version of the specification reports <code>1.0</code>.</td></tr>
+    <tr><td><code>api_version</code></td><td>string</td><td>The version of the OFD interface implemented by the host. A host implementing this version of the specification reports <code>1.1</code>.</td></tr>
     <tr><td><code>public_audit_logs</code></td><td>boolean</td><td>Whether the audit log domain is publicly accessible.</td></tr>
     <tr><td><code>public_evidence</code></td><td>boolean</td><td>Whether the evidence domain is publicly accessible.</td></tr>
     <tr><td><code>public_blacklist</code></td><td>boolean</td><td>Whether the blacklist domain is publicly accessible.</td></tr>
