@@ -2207,7 +2207,10 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Delete Operator method permanently deletes an [=operator=] account. The
 request MUST be authenticated as an operator with [=operator permissions=]. The
-[=root operator=] and [=system operator=] MUST NOT be deleted.
+[=root operator=] and [=system operator=] MUST NOT be deleted. An operator
+SHOULD NOT delete itself, since doing so can leave the host without an operator
+able to manage operators; a host MAY reject such a request with a client error
+(HTTP 400).
 
 The request is:
 
