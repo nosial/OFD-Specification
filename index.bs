@@ -1023,10 +1023,17 @@ header and with cross-origin resource sharing (CORS) headers [[!FETCH]]. The
 Access-Control-Allow-Origin header permits a cross-origin request from an
 origin whose hostname equals the hostname of the configured [=base URL=] of
 the host; when the Origin header of the request matches, the host echoes it
-and responds with the Vary: Origin header, otherwise it responds with its
-configured base URL. The Access-Control-Allow-Methods header is set to POST,
-PUT, GET, DELETE, and PATCH. The Access-Control-Allow-Headers header is set
-to Content-Type and Authorization.
+and responds with the Vary: Origin header, otherwise it responds with the
+origin of its configured base URL, which is the base URL without its path. The
+Access-Control-Allow-Methods header is set to POST, PUT, GET, DELETE, and
+PATCH. The Access-Control-Allow-Headers header is set to Content-Type and
+Authorization.
+
+A host MUST answer a CORS preflight request [[!FETCH]], an OPTIONS request to
+the path of any [=method=], with a successful status code, such as HTTP 204 No
+Content, and the headers above. A preflight request does not carry an
+[=access token=]; the host MUST NOT require authentication for it and does not
+process it as described in [[#request-processing]].
 
 <h3 id="authentication">Authentication</h3>
 
