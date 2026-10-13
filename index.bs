@@ -910,7 +910,7 @@ A [=file attachment=] is submitted in one of two ways:
 * A URL upload carries, in a parameter named `url`, an absolute HTTP or HTTPS
     URL [[!RFC3986]] from which the [=host=] retrieves the file itself. The
     parameter MAY be read from any of the sources described in
-    [[#parameter-sources]], or from a part of a `multipart/form-data` body.
+    [[#parameter-sources]].
 
 A client MUST NOT submit the content of a file attachment through any other
 parameter, and MUST NOT combine both ways in a single request. The rules that
