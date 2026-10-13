@@ -354,6 +354,11 @@ for downstream consumers.
     has a default reputation of 0. Lower values indicate that the host considers
     the entity more likely to be abusive; higher values indicate greater trust.
 
+:   <dfn export>resource</dfn>
+::  A distinct item of information exposed by a [=host=] at a path of its
+    [=base URL=]: a [=collection=], a single [=record=], or a derived view
+    such as a search result.
+
 :   <dfn export>risk score</dfn>
 ::  A numeric, content-specific score produced by a [=host=] while scanning.
     It starts at 50 before the host applies its own factors. Higher values
