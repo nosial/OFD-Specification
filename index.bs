@@ -1012,25 +1012,41 @@ token in the Authorization header using the Bearer scheme [[!RFC6750]]:
 
 <pre class="example">Authorization: Bearer &lt;token&gt;</pre>
 
-The validity of a presented access token is established as follows. A token
+The validity of a presented access token is established as follows; a request
+to a publicly accessible method is not rejected because of its token, as
+described below. A token
 that is not exactly 32 characters in length is malformed and is rejected as a
 client error (HTTP 400). A well-formed token that does not correspond to any
 operator is rejected as an authentication error (HTTP 401). A token that
 corresponds to a disabled operator is rejected as a permission error (HTTP 403).
 
 A request requires authentication when the method or domain it addresses is not
-publicly accessible, or when it asks for information that is returned only to
-an authenticated operator, such as confidential [=evidence=]. A token presented
-with a request that does not require authentication is ignored, in the same way
-as a parameter the method does not accept: the host does not validate it, the
-request is processed as an unauthenticated request, and the presence of the
-token is not an error.
+publicly accessible. A request to a publicly accessible method does not require
+authentication, but MAY present an access token to receive information that is
+returned only to an [=authenticated operator=], such as entity metadata or
+confidential [=evidence=]. For such a request:
+
+* A valid access token authenticates its operator, and the request is processed
+    as a request of that operator.
+* An access token that is not valid, because it is malformed, does not
+    correspond to any operator, or corresponds to a disabled operator, is
+    ignored in the same way as a parameter the method does not accept: the host
+    MUST NOT reject the request because of it, and processes the request as an
+    unauthenticated request.
+* Authenticating never reduces access. A host MUST NOT reject the request, or
+    return less information than it returns to an unauthenticated request,
+    because the authenticated operator does not hold a [=permission group=].
+
+When a request whose token is ignored asks for information that is returned
+only to an authenticated operator, such as confidential evidence, the host
+responds as the method specifies for an unauthenticated request.
 
 <h4 id="authenticated-operator-section">Authenticated Operator</h4>
 
 The <dfn>authenticated operator</dfn> of a request is the operator bound to
-the access token presented by the request. A request that presents no token
-has no authenticated operator; a method that requires authentication and
+the access token presented by the request. A request that presents no token,
+or whose token is ignored as specified in [[#access-tokens]], has no
+authenticated operator; a method that requires authentication and
 receives such a request responds with an authentication error (HTTP 401).
 
 Operators whose access token is unset and the [=system operator=] MUST NOT be
