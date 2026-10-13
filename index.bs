@@ -1129,8 +1129,9 @@ uploading [=file attachments=], and scanning content.
 the [=federated database=]. Management permissions inherit all client
 permissions. In addition, they authorize the deletion of [=records=], the
 management of [=blacklist records=] and of the whitelist, the clearing of
-[=reputation=], access to confidential [=evidence=], and the assignment and
-closure of [=reports=].
+[=reputation=], access to confidential [=evidence=], the classification of
+evidence and its linking to [=reports=], and the assignment and closure of
+[=reports=].
 
 [=operator permissions|Operator permissions=] authorize an operator to manage the [=operators=] of
 the [=host=]: creating, deleting, enabling, and disabling operator accounts,
