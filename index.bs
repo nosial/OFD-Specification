@@ -7,7 +7,7 @@ ED: https://nosial.github.io/OFD-Specification/
 Editor: Netkas, Nosial, netkas@nosial.net, https://github.com/netkas
 Repository: nosial/OFD-Specification
 Abstract: The Open Federated Database (OFD) protocol lets independent network services share observations about the entities that contact them, so that services can detect and mitigate spam, malicious content, and other abuse. A service may participate by operating a host, or by acting as a client or downstream consumer of a host operated by another provider. This document defines the architecture, data model, identification, transport, authentication, authorization, and methods of an OFD host.
-Date: 2026-10-12
+Date: 2026-10-13
 Boilerplate: conformance no
 Markup Shorthands: markdown on
 Default Ref Status: current
@@ -257,16 +257,6 @@ for downstream consumers.
     the service responsible for interpreting an entity's local part and is
     independent of the [=host=] that stores the entity record.
 
-:   <dfn export>entity address</dfn>
-::  The canonical, protocol-independent representation of an [=entity=].
-    A named entity address has the form <code>local-part@entity-host</code>; a
-    host entity address consists of the entity host alone.
-
-:   <dfn export>canonical entity address</dfn>
-::  An [=entity address=] after applying the canonicalization rules in
-    [[#entity-address-canonicalization]]. It is the input to the deterministic
-    SHA-256 identifier.
-
 :   <dfn export>entity identifier</dfn>
 ::  One of three forms that resolves an entity record: an [=entity address=],
     its deterministic SHA-256 identifier, or the UUID assigned by the
@@ -368,11 +358,6 @@ for downstream consumers.
 ::  A numeric, content-specific score produced by a [=host=] while scanning.
     It starts at 50 before the host applies its own factors. Higher values
     indicate greater risk; lower values indicate lower risk.
-
-:   <dfn export>resource</dfn>
-::  A distinct item of information exposed by a [=host=] at a path of its
-    [=base URL=]: a [=collection=], a single [=record=], or a derived view
-    such as a search result.
 
 :   <dfn export>root access token</dfn>
 ::  A server-level secret configured by a [=host=] that authenticates the
