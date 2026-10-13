@@ -1513,7 +1513,9 @@ are:
 <h5 id="suggested-action-type">Suggested action values</h5>
 
 The value of the <code>suggested_action</code> member is one of the following
-uppercase strings, or null when no action is suggested:
+uppercase strings, or null when no action is suggested. In a [=ScannedContent=]
+object, the values refer to the author entity; in an [=EntityQueryResult=]
+object, they refer to the queried entity and its [=relationship group=].
 
 :   <code>PERMANENTLY_BLOCK_ENTITY</code>
 ::  The author entity has one or more active permanent blacklist records.
