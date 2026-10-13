@@ -4216,16 +4216,16 @@ A <dfn export lt="ReportRecord">ReportRecord</dfn> object represents a single
 
 <h5 id="report-order-values">Report ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following strings:
+The value of the <code>by</code> parameter is one of the following uppercase strings:
 
-:   <code>incident_type</code>
+:   <code>INCIDENT_TYPE</code>
 ::  Order by the <code>incident_type</code> member.
-:   <code>created</code>
+:   <code>CREATED</code>
 ::  Order by the <code>created</code> member.
-:   <code>updated</code>
+:   <code>UPDATED</code>
 ::  Order by the <code>updated</code> member.
 
-The value of the <code>order</code> parameter is one of the following strings:
+The value of the <code>order</code> parameter is one of the following uppercase strings:
 
 :   <code>ASC</code>
 ::  Ascending order.
