@@ -1219,9 +1219,11 @@ whose token is ignored as specified in [[#access-tokens]], only
 when the host publishes <code>public_entity_metadata</code> as true; otherwise
 the <code>metadata</code> member of every [=EntityRecord=] returned to an
 unauthenticated request is null.
-An [=access token=] is disclosed only when an operator is created or when a token is
-explicitly generated; it is not included in operator records returned by the
-host.
+An [=access token=] is disclosed exactly once: in the response of the method
+that creates the operator or generates the token. A host persists only a hash
+of the token, so the token cannot be retrieved afterwards and the requester
+MUST retain it from that response. It is not included in operator records
+returned by the host, including the record of the authenticated operator.
 
 A host MUST NOT return a confidential [=evidence=] record, or any of its
 members, to a requester without [=management permissions=]. A record returned
@@ -2158,7 +2160,9 @@ The request is:
 <pre class="example">POST /operators/refresh HTTP/1.1</pre>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is the new access token string.
+is the new access token string. This response is the only disclosure of the new
+token, as specified in [[#visibility-rules]]; a host MUST NOT store the token in
+plaintext and MUST persist only a hash of the token.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -2184,7 +2188,9 @@ The request is:
 <pre class="example">POST /operators/{uuid}/refresh HTTP/1.1</pre>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is the new access token string.
+is the new access token string. This response is the only disclosure of the new
+token, as specified in [[#visibility-rules]]; a host MUST NOT store the token in
+plaintext and MUST persist only a hash of the token.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
