@@ -1017,8 +1017,14 @@ that is not exactly 32 characters in length is malformed and is rejected as a
 client error (HTTP 400). A well-formed token that does not correspond to any
 operator is rejected as an authentication error (HTTP 401). A token that
 corresponds to a disabled operator is rejected as a permission error (HTTP 403).
-A token presented with a request that does not require authentication is
-ignored.
+
+A request requires authentication when the method or domain it addresses is not
+publicly accessible, or when it asks for information that is returned only to
+an authenticated operator, such as confidential [=evidence=]. A token presented
+with a request that does not require authentication is ignored, in the same way
+as a parameter the method does not accept: the host does not validate it, the
+request is processed as an unauthenticated request, and the presence of the
+token is not an error.
 
 <h4 id="authenticated-operator-section">Authenticated Operator</h4>
 
