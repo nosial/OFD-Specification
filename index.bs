@@ -504,7 +504,7 @@ The following record kinds are defined by this specification.
 
 :   [=Reports=]
 ::  Records made against an entity documenting an incident: the type of the
-    incident, a description, the [=operator=] that submitted it, the entity
+    incident, a message, the [=operator=] that submitted it, the entity
     being reported, an optionally assigned operator, an opened flag, an
     automated flag, and timestamps. A host MAY create reports automatically
     under its own policy; such reports have their <code>automated</code> member
