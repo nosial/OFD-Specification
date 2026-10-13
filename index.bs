@@ -5353,10 +5353,13 @@ be detected and traced after the fact.
 <h3 id="sec-cross-origin">Cross-Origin Requests</h3>
 
 A host permits cross-origin requests only from origins whose host name equals
-that of its [=base URL=], as specified in [[#response-headers]]. This prevents a
-web page on an unrelated origin from reading the responses to requests that a
-user agent sends on an operator's behalf. It does not protect the access token
-itself, which a web application MUST NOT expose to untrusted scripts.
+that of its [=base URL=], as specified in [[#response-headers]]. Because only the
+host name is compared, a host that serves other content on the same host name,
+under another scheme or port, SHOULD consider that content trusted to the same
+degree as its own. This prevents a web page on an unrelated origin from reading
+the responses to requests that a user agent sends on an operator's behalf. It
+does not protect the access token itself, which a web application MUST NOT expose
+to untrusted scripts.
 
 <h2 id="privacy-considerations">Privacy Considerations</h2>
 
