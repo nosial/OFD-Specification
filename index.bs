@@ -1290,7 +1290,9 @@ method requires [=management permissions=].
 
 <h3 id="request-processing">Request Processing</h3>
 
-All requests of the OFD interface are processed in a fixed order. The
+All requests of the OFD interface, other than CORS preflight requests, which
+are answered as specified in [[#response-headers]], are processed in a fixed
+order. The
 [=host=] first resolves the request to a [=method=] by matching the path and
 the HTTP request method against the [=route patterns=] of the interface, and
 responds with a client error (HTTP 400) if no [=route pattern=] matches. It
