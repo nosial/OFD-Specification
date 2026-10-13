@@ -3997,7 +3997,7 @@ that is the UUID of the newly created blacklist record.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the request body is missing a required member, the entity identifier is malformed, the incident type is not defined in this section, the expires timestamp is in the past, or the report UUID is malformed.
+* HTTP 400 if the request body is missing a required member, the entity identifier is malformed, the incident type is not defined in [[#incident-type-values]], the expires timestamp is in the past, or the report UUID is malformed.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the entity or report does not exist, or the report does not reference the entity being blacklisted.
