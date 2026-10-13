@@ -1233,6 +1233,7 @@ permission error (HTTP 403).
     <tr><th scope="row">Manage blacklist records</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">Set the whitelist, clear reputation</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">Manage evidence confidentiality</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
+    <tr><th scope="row">Classify evidence or link it to reports</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">Close or assign reports</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">List and delete attachments</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
     <tr><th scope="row">Access confidential evidence</th><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
