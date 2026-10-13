@@ -1518,10 +1518,10 @@ object, the values refer to the author entity; in an [=EntityQueryResult=]
 object, they refer to the queried entity and its [=relationship group=].
 
 :   <code>PERMANENTLY_BLOCK_ENTITY</code>
-::  The author entity has one or more active permanent blacklist records.
+::  The entity has one or more active permanent blacklist records.
 :   <code>TEMPORARILY_BLOCK_ENTITY</code>
-::  The author entity has one or more active temporary blacklist records, and
-    no active permanent blacklist record.
+::  The entity has one or more active temporary blacklist records, and no
+    active permanent blacklist record.
 :   <code>BLOCK_CONTENT</code>
 ::  The risk score is high enough to treat the content as malicious.
 :   <code>CAUTION</code>
