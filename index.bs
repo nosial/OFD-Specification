@@ -983,7 +983,9 @@ authentication is required, or the presented [=access token=] is invalid.
 HTTP 403 means the [=authenticated operator=] is not authorized to perform the
 method: the operator is disabled or lacks the required permissions. HTTP 404
 means a referenced [=record=] does not exist, or the method is not available
-on the host, such as a search method on a host with search disabled. HTTP 500
+on the host, such as a search method on a host with search disabled. HTTP 409
+means the request conflicts with the current state of a [=record=], such as a
+name that is already in use or a classification that is already assigned. HTTP 500
 means an internal error occurred; a host MUST NOT disclose internal details in
 an error response, and uncaught errors are reported with the generic message
 "Internal Server Error".
