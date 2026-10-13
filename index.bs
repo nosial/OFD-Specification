@@ -1166,7 +1166,7 @@ permission error (HTTP 403).
     <tr><th scope="row">Read entities</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">Query entity relationships</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">Read reports</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
-    <tr><th scope="row">Scan content</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+    <tr><th scope="row">Scan content</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Configurable</td></tr>
     <tr><th scope="row">Search</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">Read entity metadata</th><td>Configurable</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">Read operator accounts</th><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
