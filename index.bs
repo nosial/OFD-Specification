@@ -1103,6 +1103,9 @@ administrator of the [=federated database=]. The root operator:
 * cannot be disabled;
 * is authoritative over the configuration of the host.
 
+A [=root access token=] has the same format as any other [=access token=], since
+a token of another length is rejected as malformed before it is compared.
+
 A host MUST NOT allow the [=root access token=] to be disclosed or revoked by
 any operator other than the [=root operator=].
 
