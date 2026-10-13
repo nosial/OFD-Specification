@@ -5335,10 +5335,10 @@ this through the <code>allow_illegal_content</code> member of its
 likely to include malware, phishing pages, and other hostile content. A host
 MUST NOT execute or interpret uploaded files, MUST store them outside any
 location from which they could be served other than through the Download
-Attachment method, and MUST serve them with `Content-Disposition: attachment`
-and a media type it determined itself, as specified in [[#upload-attachment]]
-and [[#download-attachment]]. A consumer that downloads an attachment SHOULD
-treat it as untrusted.
+Attachment method, and MUST serve them with `Content-Disposition: attachment`,
+`X-Content-Type-Options: nosniff`, and a media type it determined itself, as
+specified in [[#upload-attachment]] and [[#download-attachment]]. A consumer
+that downloads an attachment SHOULD treat it as untrusted.
 
 <h3 id="sec-remote-retrieval">Remote Retrieval of Attachments</h3>
 
