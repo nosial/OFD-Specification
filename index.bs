@@ -4672,7 +4672,7 @@ The request body MUST be a JSON object containing:
   <tbody>
     <tr><td><code>classification_flag</code></td><td>string</td><td>No</td><td>The classification flag to assign to each currently unclassified evidence record linked to the report, one of the values defined in [[#classification-flag-values]]. Existing classifications MUST NOT be replaced.</td></tr>
     <tr><td><code>blacklist_incident_type</code></td><td>string</td><td>No</td><td>An incident type, one of the values defined in [[#incident-type-values]], to create a blacklist record for the reported entity.</td></tr>
-    <tr><td><code>blacklist_expires</code></td><td>integer</td><td>No</td><td>The Unix timestamp at which the created blacklist record expires. If omitted, the blacklist record is permanent.</td></tr>
+    <tr><td><code>blacklist_expires</code></td><td>integer</td><td>No</td><td>The Unix timestamp at which the created blacklist record expires. If omitted, the blacklist record is permanent. Ignored when <code>blacklist_incident_type</code> is absent.</td></tr>
   </tbody>
 </table>
 
