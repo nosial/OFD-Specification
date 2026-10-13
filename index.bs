@@ -392,7 +392,11 @@ for downstream consumers.
 
 :   <dfn export>whitelist</dfn>
 ::  A trust mark that a [=host=] applies to an [=entity=] it considers
-    non-malicious.
+    non-malicious. A host MUST NOT adjust the [=reputation=] of a whitelisted
+    entity, whether the adjustment would result from a [=blacklist record=]
+    against the entity or an entity related to it, the classification of a
+    [=report=], or scanning activity. Whitelisting does not prevent an
+    [=operator=] from blacklisting the entity or clearing its reputation.
 
 <h2 id="architecture">Architecture</h2>
 
@@ -820,10 +824,18 @@ Content-Type: application/json; charset=utf-8
 
 <h4 id="file-uploads">File Uploads</h4>
 
-The upload of a [=file attachment=] is a request with the media type
-`multipart/form-data` [[!RFC7578]]. The uploaded file is carried in a part named
-`file`. A client MUST NOT submit a file attachment through any other
-parameter.
+A [=file attachment=] is submitted in one of two ways:
+
+* A direct upload is a request with the media type `multipart/form-data`
+    [[!RFC7578]]. The uploaded file is carried in a part named `file`.
+* A URL upload carries, in a parameter named `url`, an absolute HTTP or HTTPS
+    URL [[!RFC3986]] from which the [=host=] retrieves the file itself. The
+    parameter MAY be read from any of the sources described in
+    [[#parameter-sources]], or from a part of a `multipart/form-data` body.
+
+A client MUST NOT submit the content of a file attachment through any other
+parameter, and MUST NOT combine both ways in a single request. The rules that
+apply to each are specified in [[#upload-attachment]].
 
 <h4 id="pagination-and-ordering">Pagination, Filtering, and Ordering</h4>
 
@@ -856,6 +868,14 @@ trailing whitespace from the query and rejects the request with a client error
 shorter than two characters. A search matches records whose searchable members
 contain the query as a substring. The characters `%` and `_` in the query are
 matched literally.
+
+For a request authenticated as an [=operator=], a host MAY additionally match
+members beyond those listed for a search method, such as the metadata of an
+[=entity=], the note of [=evidence=], or the UUIDs of the operators and records
+that a record refers to. A host MUST NOT match a member that the requester is
+not permitted to read, and MUST NOT match additional members for an
+unauthenticated request, so that the results of an unauthenticated search
+depend only on the members listed for the method.
 
 <h3 id="responses">Responses</h3>
 
@@ -3020,7 +3040,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Set Entity Whitelist method sets or removes the whitelist status of an
 entity. The request MUST be authenticated as an operator with [=management
-permissions=].
+permissions=]. While an entity is whitelisted, the host MUST NOT adjust its
+[=reputation=], as described in the definition of the [=whitelist=].
 
 The request is:
 
@@ -4503,7 +4524,7 @@ represents a single [=file attachment=]. Its members are:
   <tbody>
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the file attachment.</td></tr>
     <tr><td><code>evidence</code></td><td>string or null</td><td>The UUID of the evidence record the file is attached to.</td></tr>
-    <tr><td><code>file_name</code></td><td>string</td><td>The file name of the attachment, as supplied by the client and reduced to a safe form as described in [[#upload-attachment]].</td></tr>
+    <tr><td><code>file_name</code></td><td>string</td><td>The file name of the attachment, as supplied by the client or derived from the URL it was retrieved from, and reduced to a safe form as described in [[#upload-attachment]].</td></tr>
     <tr><td><code>file_size</code></td><td>integer</td><td>The size of the file in bytes.</td></tr>
     <tr><td><code>file_mime</code></td><td>string</td><td>The media type of the file, as determined by the host from the file content.</td></tr>
     <tr><td><code>created</code></td><td>integer</td><td>The Unix timestamp at which the attachment was uploaded.</td></tr>
@@ -4593,50 +4614,99 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 <em>Method name:</em> <code>uploadAttachment</code>
 
-The Upload Attachment method uploads a file as a [=file attachment=] and associates
+The Upload Attachment method stores a file as a [=file attachment=] and associates
 it with an [=evidence=] record. The request MUST be authenticated as an operator
-with [=client permissions=]. The request body MUST be a
-<code>multipart/form-data</code> body.
+with [=client permissions=]. The file is either uploaded directly in the request
+body or retrieved by the host from a URL supplied by the client, as described in
+[[#file-uploads]].
 
-The request is:
+A direct upload is:
 
 <pre class="example">
 POST /attachments HTTP/1.1
 Content-Type: multipart/form-data; boundary=&lt;boundary&gt;
 </pre>
 
-A host MAY also accept the same request with the HTTP method PUT.
+A URL upload is, for example:
 
-The form parts are:
+<pre class="example">
+POST /attachments HTTP/1.1
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json; charset=utf-8
+
+{
+  "evidence_uuid": "0190f5a2-7c4e-7b1a-9d3f-2a6c8e4b1f07",
+  "url": "https://example.com/samples/phishing-page.html"
+}
+</pre>
+
+A host MAY also accept the same requests with the HTTP method PUT.
+
+The parameters are:
 
 <table class="data">
   <thead>
-    <tr><th>Part</th><th>Required</th><th>Type</th><th>Description</th></tr>
+    <tr><th>Parameter</th><th>Required</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>file</code></td><td>Yes</td><td>binary</td><td>The file to upload.</td></tr>
+    <tr><td><code>file</code></td><td>Conditional</td><td>binary</td><td>The file to upload, carried as a part of a <code>multipart/form-data</code> body. Required unless <code>url</code> is supplied.</td></tr>
+    <tr><td><code>url</code></td><td>Conditional</td><td>string</td><td>An absolute HTTP or HTTPS URL from which the host retrieves the file. Required unless <code>file</code> is supplied.</td></tr>
     <tr><td><code>evidence_uuid</code></td><td>Yes</td><td>string</td><td>The UUID of the evidence record to associate the attachment with.</td></tr>
   </tbody>
 </table>
 
-A host MUST reject a request whose <code>file</code> part is missing or carries
-more than one file, whose file size is zero or exceeds the host's configured
-maximum upload size, or whose <code>evidence_uuid</code> part is missing or
-malformed, with a client error (HTTP 400).
+A host MUST reject a request that supplies both <code>file</code> and
+<code>url</code>, or neither of them, and a request whose
+<code>evidence_uuid</code> is missing or malformed, with a client error (HTTP 400).
+
+For a direct upload, a host MUST reject a request whose <code>file</code> part
+carries more than one file, or whose file size is zero or exceeds the host's
+configured maximum upload size, with a client error (HTTP 400).
+
+For a URL upload, the host retrieves the file with an HTTP GET request to the
+supplied URL. A host MAY decline to support URL uploads, in which case it MUST
+reject every request that supplies <code>url</code> with a client error
+(HTTP 400). Otherwise:
+
+* A host MUST reject a URL that is not an absolute URL with the scheme `http` or
+    `https`, or that contains user information, with a client error (HTTP 400).
+    A host MAY enforce a maximum length for the URL.
+* A host MUST NOT retrieve a file from an address that is not publicly
+    routable, such as a loopback, private, link-local, or otherwise reserved
+    address, unless the host has been explicitly configured to permit such
+    addresses. The host MUST apply this check to the address it actually
+    connects to, so that a host name resolving to a different address at
+    connection time cannot bypass it, as described in
+    [[#sec-remote-retrieval]]. A URL that is not permitted is rejected with a
+    client error (HTTP 400).
+* A host MAY follow redirects. A host that follows a redirect MUST apply the
+    same checks to its target as to the supplied URL, and SHOULD limit the number
+    of redirects it follows.
+* A host SHOULD bound the time spent retrieving a file, and MUST stop
+    retrieving a file once its size exceeds the host's configured maximum
+    upload size.
+* A host MUST reject the request with a client error (HTTP 400) when the URL
+    cannot be resolved or connected to, when the retrieval times out, when the
+    final response does not have a 2xx status code, or when the retrieved file
+    is empty or exceeds the host's configured maximum upload size.
 
 The host determines the media type of the file from its content; it MUST NOT
-trust a media type declared by the client, since the recorded type is served back
-in the `Content-Type` header of downloads. The host records the file name
-supplied by the client after reducing it to a safe form: it removes any path
-components and control characters, and MAY replace other characters and
-shorten the name. When no usable file name remains, the host assigns one.
+trust a media type declared by the client or by the server from which a file is
+retrieved, since the recorded type is served back in the `Content-Type` header of
+downloads. The file name is the one supplied by the client for a direct upload.
+For a URL upload, it is the file name carried in the `Content-Disposition`
+header [[!RFC6266]] of the response when present, and otherwise the last segment
+of the path of the URL from which the file was retrieved. The host records the
+file name after reducing it to a safe form: it removes any path components and
+control characters, and MAY replace other characters and shorten the name. When
+no usable file name remains, the host assigns one.
 
 A successful response is a [=success response=] with HTTP 201 Created and a body
 that is a JSON [=UploadResult=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the request is missing a required part, the file is invalid, or the evidence UUID is malformed.
+* HTTP 400 if the request is missing a required parameter, supplies both a file and a URL, the file is invalid, the evidence UUID is malformed, or the URL is not permitted or the file could not be retrieved from it.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=client permissions=].
 * HTTP 404 if the evidence record does not exist.
@@ -4874,6 +4944,24 @@ Attachment method, and MUST serve them with `Content-Disposition: attachment`
 and a media type it determined itself, as specified in [[#upload-attachment]]
 and [[#download-attachment]]. A consumer that downloads an attachment SHOULD
 treat it as untrusted.
+
+<h3 id="sec-remote-retrieval">Remote Retrieval of Attachments</h3>
+
+A URL upload makes the [=host=] send a request to an address chosen by the
+client, which an attacker could use to reach services that are only accessible
+from the host's network, such as cloud metadata endpoints, databases, and
+administrative interfaces, and to learn about them from the errors and timing of
+the responses. A host that supports URL uploads therefore restricts retrieval
+to publicly routable addresses unless it has been explicitly configured
+otherwise, as specified in [[#upload-attachment]]. A host SHOULD resolve the
+host name of a URL once, validate every resolved address, and connect only to a
+validated address, since a host name that is resolved again at connection time
+may yield a different address. A host SHOULD NOT route retrieval through a
+proxy that would resolve the host name itself, and SHOULD normalize the URL it
+validated before using it, so that differences between URL parsers cannot cause
+it to connect to a different host. Error responses to a failed retrieval
+SHOULD NOT include the content of the remote response. A file retrieved from a
+URL is an uploaded file and is subject to [[#sec-uploaded-files]].
 
 <h3 id="sec-abuse-of-the-database">Abuse of the Database</h3>
 
