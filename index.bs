@@ -1209,7 +1209,10 @@ permission error (HTTP 403).
     covers Get Self Operator. Reading
     a "Configurable" domain, reading one's own operator account, generating
     one's own access token, and listing one's own opened reports require only
-    an [=authenticated operator=], whatever [=permission groups=] it holds.</p>
+    an [=authenticated operator=], whatever [=permission groups=] it holds.
+    Scanning content that the host does not expose requires [=client
+    permissions=], so an operator without them can scan content only when
+    content scanning is public.</p>
 
 <h4 id="visibility-rules">Visibility Rules</h4>
 
@@ -1439,7 +1442,8 @@ A ResolvedEntityPosition object contains the members <code>offset</code>
 (integer), <code>length</code> (integer), and <code>type</code> (string). The
 value of <code>type</code> is one of <code>domain</code>, <code>url</code>,
 <code>email</code>, <code>ipv4</code>, or <code>ipv6</code>, depending on how
-the entity was extracted from the content.
+the entity was extracted from the content. As an exception to
+[[#data-formats]], these values are lowercase.
 
 <h5 id="content-classification-object">ContentClassification object</h5>
 
