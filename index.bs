@@ -800,7 +800,7 @@ the following table:
     <tr><th scope="row">POST</th><td>Create a record.</td><td><code>POST /evidence</code>, <code>POST /operators</code></td></tr>
     <tr><th scope="row">PATCH</th><td>Update a record or transition its state.</td><td><code>PATCH /entities/{identifier}</code>, <code>PATCH /reports/{uuid}/close</code></td></tr>
     <tr><th scope="row">DELETE</th><td>Remove a record.</td><td><code>DELETE /evidence/{uuid}</code></td></tr>
-    <tr><th scope="row">PUT</th><td>Upload a file to the attachments domain.</td><td><code>PUT /attachments</code></td></tr>
+    <tr><th scope="row">PUT</th><td>An alternative to POST for uploading a file to the attachments domain, where the host accepts it.</td><td><code>PUT /attachments</code></td></tr>
   </tbody>
 </table>
 
