@@ -1595,7 +1595,7 @@ The value of the <code>type</code> member, and of each value in the
 ::  An [=audit log=] entry.
 :   <code>OPERATOR</code>
 ::  An [=operator=] record.
-Authorization: Bearer
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters, or the <code>type</code> parameter contains a value that is not a record type.
@@ -2402,7 +2402,7 @@ The request is:
 
 <pre class="example">GET /operators/{uuid}/audit HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
@@ -2441,7 +2441,7 @@ The request is:
 
 <pre class="example">GET /operators/{uuid}/reports HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
@@ -2477,7 +2477,7 @@ The request is:
 
 <pre class="example">GET /operators/{uuid}/reports/assigned HTTP/1.1</pre>
 
-The query parameters are the same as those defined in [[#list-operator-reports]].
+The parameters are the same as those defined in [[#list-operator-reports]].
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is a JSON array of [=ReportRecord=] objects.
@@ -2501,7 +2501,7 @@ The request is:
 
 <pre class="example">GET /operators/{uuid}/blacklist HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
@@ -2539,7 +2539,7 @@ The request is:
 
 <pre class="example">GET /operators/{uuid}/evidence HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
@@ -3271,7 +3271,7 @@ The request is:
 
 <pre class="example">GET /entities/{identifier}/audit HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
@@ -3314,7 +3314,7 @@ The request is:
 
 <pre class="example">GET /entities/{identifier}/blacklist HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
@@ -3352,7 +3352,7 @@ The request is:
 
 <pre class="example">GET /entities/{identifier}/evidence HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
@@ -3389,7 +3389,7 @@ The request is:
 
 <pre class="example">GET /entities/{identifier}/reports HTTP/1.1</pre>
 
-The query parameters are:
+The parameters are:
 
 <table class="data">
   <thead>
