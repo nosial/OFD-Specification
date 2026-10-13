@@ -2489,22 +2489,6 @@ A host MUST respond with an [=error response=] for the following conditions:
 * HTTP 404 if the target operator does not exist.
 * HTTP 500 if the host fails to retrieve the reports.
 
-<h5 id="report-category-values">Report category values</h5>
-
-The value of the <code>category</code> parameter for the methods that list or
-search [=reports=] is one of the following uppercase strings:
-
-:   <code>OPENED</code>
-::  Reports that are open.
-:   <code>CLOSED</code>
-::  Reports that are closed.
-:   <code>AUTOMATED</code>
-::  Reports that were generated automatically.
-:   <code>UNASSIGNED</code>
-::  Reports that have no assigned operator.
-:   <code>ASSIGNED</code>
-::  Reports that have an assigned operator.
-
 <h4 id="list-operator-blacklist">List Operator Blacklist</h4>
 
 <em>Method name:</em> <code>listOperatorBlacklist</code>
@@ -4314,6 +4298,22 @@ A <dfn export lt="ReportRecord">ReportRecord</dfn> object represents a single
     <tr><td><code>updated</code></td><td>integer or null</td><td>The Unix timestamp at which the report was last updated.</td></tr>
   </tbody>
 </table>
+
+<h5 id="report-category-values">Report category values</h5>
+
+The value of the <code>category</code> parameter for the methods that list or
+search [=reports=] is one of the following uppercase strings:
+
+:   <code>OPENED</code>
+::  Reports that are open.
+:   <code>CLOSED</code>
+::  Reports that are closed.
+:   <code>AUTOMATED</code>
+::  Reports that were generated automatically.
+:   <code>UNASSIGNED</code>
+::  Reports that have no assigned operator.
+:   <code>ASSIGNED</code>
+::  Reports that have an assigned operator.
 
 <h5 id="report-order-values">Report ordering values</h5>
 
