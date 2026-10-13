@@ -3026,8 +3026,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 The Push Entity method registers a new [=entity=] in the [=entity registry=],
 or merges supplied metadata into an existing entity. The request MUST be
 authenticated as an operator with [=client permissions=]. A host MUST treat
-concurrent registrations of the same entity as idempotent: it returns the UUID
-of the existing entity after merging the supplied metadata.
+the registration of an entity that already exists, including concurrent
+registrations of the same entity, as idempotent: it returns the UUID of the
+existing entity after merging the supplied metadata.
 
 The request is:
 
