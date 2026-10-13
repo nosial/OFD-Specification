@@ -1050,6 +1050,9 @@ token in the Authorization header using the Bearer scheme [[!RFC6750]]:
 
 <pre class="example">Authorization: Bearer &lt;token&gt;</pre>
 
+An access token consists only of characters permitted by the `b64token`
+syntax of [[!RFC6750]], so that it can be carried in the Authorization header.
+
 The validity of a presented access token is established as follows; a request
 to a publicly accessible method is not rejected because of its token, as
 described below. A token
