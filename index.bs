@@ -436,7 +436,7 @@ the <code>api_version</code> member of its [=ServerInformation=] object, as
 specified in [[#get-server-information]].
 
 A minor version is backward compatible with every earlier minor version of the
-same major version. A minor version MAY add [=methods=], optional parameters,
+same major version. A minor version can add [=methods=], optional parameters,
 members of objects returned in responses, and optional capabilities of a host;
 it does not remove or rename existing methods, parameters, or members, change
 their types or meaning, or make an optional parameter required. A [=conforming
