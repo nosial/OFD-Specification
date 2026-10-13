@@ -2040,7 +2040,7 @@ The request body MUST be a JSON object containing:
     <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>name</code></td><td>string</td><td>Yes</td><td>The new display name. It MUST be unique, MUST NOT exceed 32 characters, and MUST NOT be <code>root</code> or <code>system</code>.</td></tr>
+    <tr><td><code>name</code></td><td>string</td><td>Yes</td><td>The new display name. It MUST be unique, MUST NOT exceed 32 characters, and MUST NOT be <code>root</code> or <code>system</code>, compared case-insensitively.</td></tr>
   </tbody>
 </table>
 
