@@ -4824,6 +4824,7 @@ A direct upload is:
 
 <pre class="example">
 POST /attachments HTTP/1.1
+Authorization: Bearer &lt;token&gt;
 Content-Type: multipart/form-data; boundary=&lt;boundary&gt;
 </pre>
 
