@@ -32,9 +32,11 @@ Default Ref Status: current
   identifies the current revision. It is not a W3C Recommendation and has not
   been endorsed by the W3C or by any other standards body.</p>
 
-  <p>This revision defines the architecture, identification, data model,
-  protocol fundamentals, interface methods, telemetry, and security and privacy
-  considerations of the Open Federated Database. It is aligned with FederationLib,
+  <p>This revision defines version 1.1 of the OFD interface, which is backward
+  compatible with version 1.0, as described in [[#versioning]]. It defines the
+  architecture, identification, data model, protocol fundamentals, interface
+  methods, telemetry, and security and privacy considerations of the Open
+  Federated Database. It is aligned with FederationLib,
   the reference implementation of this specification.</p>
 
   <p>Feedback and comments on this specification are welcome and can be filed as
