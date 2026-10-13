@@ -2700,7 +2700,7 @@ real-world actor. A downstream consumer MAY consider the assertion when applying
 its own policy and SHOULD evaluate the records supporting it where available.
 
 The value of the <code>relationship_type</code> member, and of the
-<code>relationship_type</code> parameter for the set relationship method, is one of
+<code>relationship_type</code> parameter of the Set Entity Relationship method, is one of
 the following uppercase strings:
 
 :   <code>ALTERNATIVE</code>
