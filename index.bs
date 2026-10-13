@@ -4750,18 +4750,18 @@ is one of the following uppercase strings:
 
 <h5 id="attachment-order-values">Attachment ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following strings:
+The value of the <code>by</code> parameter is one of the following uppercase strings:
 
-:   <code>file_name</code>
+:   <code>FILE_NAME</code>
 ::  Order by the <code>file_name</code> member.
-:   <code>file_mime</code>
+:   <code>FILE_MIME</code>
 ::  Order by the <code>file_mime</code> member.
-:   <code>file_size</code>
+:   <code>FILE_SIZE</code>
 ::  Order by the <code>file_size</code> member.
-:   <code>created</code>
+:   <code>CREATED</code>
 ::  Order by the <code>created</code> member.
 
-The value of the <code>order</code> parameter is one of the following strings:
+The value of the <code>order</code> parameter is one of the following uppercase strings:
 
 :   <code>ASC</code>
 ::  Ascending order.
