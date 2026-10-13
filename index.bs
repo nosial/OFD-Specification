@@ -697,10 +697,10 @@ the host: a request to a host whose base URL is `https://db.example.org` and
 whose resource path is `/entities` is made to the URL
 `https://db.example.org/entities`.
 
-The protocol is stateless. Each request is self-contained: it identifies the
-operation to perform, carries its own parameters, and, when authentication is
-required, presents its own [=access token=]. A host MUST NOT rely on session
-state established by earlier requests.
+As specified in [[#architecture]], the protocol is stateless. Each request is
+self-contained: it identifies the operation to perform, carries its own
+parameters, and, when authentication is required, presents its own [=access
+token=].
 
 Responses are transmitted with the media type `application/json; charset=utf-8`
 unless a method specifies otherwise, as for file downloads. Requests carry
