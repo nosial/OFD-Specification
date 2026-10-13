@@ -1849,7 +1849,7 @@ The value of the <code>by</code> parameter is one of the following uppercase str
 :   <code>UPDATED</code>
 ::  Order by the <code>updated</code> member.
 
-The value of the <code>order</code> parameter is one of the following strings:
+The value of the <code>order</code> parameter is one of the following uppercase strings:
 
 :   <code>ASC</code>
 ::  Ascending order.
