@@ -3026,6 +3026,9 @@ The path parameter is:
   </tbody>
 </table>
 
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=].
@@ -3075,6 +3078,9 @@ The request body MUST be a JSON object containing:
     <tr><td><code>relationship_type</code></td><td>string</td><td>Yes</td><td>The type of the relationship, one of the values defined in [[#entity-relationship-values]].</td></tr>
   </tbody>
 </table>
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
