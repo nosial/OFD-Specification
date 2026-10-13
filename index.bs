@@ -1214,8 +1214,8 @@ permission error (HTTP 403).
 
 The following rules restrict the information exposed by the operations above.
 Entity metadata is returned to every request that has an [=authenticated
-operator=]. It is returned to unauthenticated requests, including requests to a
-public method whose token is ignored as specified in [[#access-tokens]], only
+operator=]. It is returned to unauthenticated requests, including requests
+whose token is ignored as specified in [[#access-tokens]], only
 when the host publishes <code>public_entity_metadata</code> as true; otherwise
 the <code>metadata</code> member of every [=EntityRecord=] returned to an
 unauthenticated request is null.
