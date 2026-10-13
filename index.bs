@@ -1182,8 +1182,7 @@ permission error (HTTP 403).
   </tbody>
 </table>
 
-<p class="note" role="note"><span class="marker">Note:</span> A cell marked "Configurable" is public when the [=host=] exposes the
-    domain, and requires an authenticated operator when the host does not. The
+<p class="note" role="note"><span class="marker">Note:</span> The
     "Manage operators" row covers creating, deleting, enabling, disabling, and
     renaming operator accounts, modifying their [=permission group=]s, and
     managing the <code>auto_assign</code> flag. "Manage entity relationships"
