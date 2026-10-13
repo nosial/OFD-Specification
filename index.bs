@@ -5124,7 +5124,9 @@ document. The response carries the following headers:
     rendering it;
 * `Content-Length`, set to the size of the file in bytes;
 * `Cache-Control` [[!RFC9111]], set so that the response is not cached, for example
-    `no-cache, no-store, must-revalidate`.
+    `no-cache, no-store, must-revalidate`;
+* `X-Content-Type-Options` [[!FETCH]], set to `nosniff`, so that user agents do
+    not infer a different media type from the content of the file.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
