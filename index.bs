@@ -538,6 +538,17 @@ records change or are removed. A [=host=] publishes telemetry about its
 information it chooses to expose, through the information surface. A
 [=downstream consumer=] can use this information to determine what is available.
 
+<h3 id="record-deletion">Deletion of Records</h3>
+
+Deleting a [=record=] does not by itself define what happens to the records
+that refer to it. When a record is deleted, a [=host=] MAY also delete the
+records that depend on it, such as the [=evidence=] of a deleted [=entity=], or
+MAY retain them; a retained record keeps the UUID of the deleted record, or, in
+a member whose definition permits null, MAY have that member set to null. A
+[=client=] or [=downstream consumer=] MUST therefore expect that following a
+reference to a record yields a not-found error (HTTP 404). The [=audit log=]
+retains its entries for the deleted record.
+
 <h3 id="population">Population of the Database</h3>
 
 [=Clients=] build the data of a [=federated database=]. They monitor activity,
