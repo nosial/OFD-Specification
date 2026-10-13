@@ -5286,7 +5286,9 @@ same policy or classification criteria.
 
 Access tokens are the only credential an [=operator=] presents to a [=host=].
 A host MUST generate access tokens from a cryptographically secure random
-source. A host MUST NOT store tokens in plaintext; it MUST store only a one-way
+source, and SHOULD generate them so that each carries at least 128 bits of
+entropy, for example by drawing every character from the ASCII letters and
+digits. A host MUST NOT store tokens in plaintext; it MUST store only a one-way
 representation of each token, such as its SHA-256 digest, from which the token
 cannot be recovered. Because tokens are long random strings rather than
 user-chosen secrets, an unsalted cryptographic hash is sufficient. A host MUST
