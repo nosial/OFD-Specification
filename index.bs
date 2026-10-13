@@ -649,8 +649,8 @@ determined by the <a href="https://publicsuffix.org/">Public Suffix List</a>, pl
 the one label that precedes it; for example, the registrable domain of both
 <code>sub.example.com</code> and <code>example.com</code> is
 <code>example.com</code>, and that of <code>a.b.example.co.uk</code> is
-<code>example.co.uk</code>. A host that is itself a public suffix, and an IPv4 or
-IPv6 entity host, has no registrable domain.
+<code>example.co.uk</code>. An entity host that is itself a public suffix, and an
+IPv4 or IPv6 entity host, has no registrable domain.
 
 As the one exception to that rejection, a DNS entity host whose first label is
 <code>www</code> denotes the same entity as the host without that label, provided
