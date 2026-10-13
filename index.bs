@@ -1611,7 +1611,7 @@ audit log as specified in [[#request-processing]].
 
 <h4 id="audit-log-object">AuditLog object</h4>
 
-A <dfn export lt="AuditLog">AuditLog</dfn> object is a single entry in the
+An <dfn export lt="AuditLog">AuditLog</dfn> object is a single entry in the
 [=audit log=]. Its members are:
 
 <table class="data">
@@ -1833,7 +1833,7 @@ operator management methods require an [=authenticated operator=] with
 
 <h4 id="operator-record-object">OperatorRecord object</h4>
 
-A <dfn export lt="OperatorRecord">OperatorRecord</dfn> object represents an
+An <dfn export lt="OperatorRecord">OperatorRecord</dfn> object represents an
 [=operator=] account. Its members are:
 
 <table class="data">
@@ -2659,7 +2659,7 @@ threshold.
 
 <h4 id="entity-record-object">EntityRecord object</h4>
 
-A <dfn export lt="EntityRecord">EntityRecord</dfn> object represents a single
+An <dfn export lt="EntityRecord">EntityRecord</dfn> object represents a single
 [=entity=] in the [=entity registry=]. Its members are:
 
 <table class="data">
@@ -3485,7 +3485,7 @@ Spaces are not permitted; `_` is conventionally used in their place.
 
 <h4 id="evidence-record-object">EvidenceRecord object</h4>
 
-A <dfn export lt="EvidenceRecord">EvidenceRecord</dfn> object represents a single
+An <dfn export lt="EvidenceRecord">EvidenceRecord</dfn> object represents a single
 [=evidence=] record. Its members are:
 
 <table class="data">
@@ -4830,7 +4830,7 @@ represents a single [=file attachment=]. Its members are:
 
 <h4 id="upload-result-object">UploadResult object</h4>
 
-A <dfn export lt="UploadResult">UploadResult</dfn> object is returned when a file
+An <dfn export lt="UploadResult">UploadResult</dfn> object is returned when a file
 is uploaded. Its members are:
 
 <table class="data">
