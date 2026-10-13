@@ -3080,7 +3080,7 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a valid [=entity identifier=], the request body is missing a required member, the related entity identifier is malformed, or the relationship type is not defined in this section.
+* HTTP 400 if the path does not contain a valid [=entity identifier=], the request body is missing a required member, the related entity identifier is malformed, or the relationship type is not defined in [[#entity-relationship-values]].
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=client permissions=].
 * HTTP 404 if the source entity or the related entity does not exist.
