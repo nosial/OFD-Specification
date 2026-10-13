@@ -4512,9 +4512,13 @@ The request body MUST be a JSON object containing:
 </table>
 
 A host MUST reject a request whose <code>blacklist_expires</code> member is in the
-past, or whose <code>classification_flag</code> or <code>blacklist_incident_type</code>
-member is not one of the values defined in this section, with a client error
-(HTTP 400).
+past, whose <code>classification_flag</code> member is not one of the values
+defined in [[#classification-flag-values]], or whose
+<code>blacklist_incident_type</code> member is not one of the values defined in
+[[#incident-type-values]], with a client error (HTTP 400).
+
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
