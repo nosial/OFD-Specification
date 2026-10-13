@@ -3473,8 +3473,8 @@ The value of the <code>order</code> parameter is one of the following uppercase 
 <h5 id="classification-flag-values">Classification flag values</h5>
 
 The value of a <code>classification</code> or <code>classification_flag</code>
-member, and of the <code>classification_flag</code> parameter of the close
-report method, is one of the following uppercase strings:
+member, and of the <code>classification_flag</code> parameter of the Close
+Report method, is one of the following uppercase strings:
 
 :   <code>NORMAL</code>
 ::  The content is considered normal.
