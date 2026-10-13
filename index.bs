@@ -1580,12 +1580,17 @@ valid [=access token=].
 
 A host includes a record type in the results only when the dedicated search
 method of that type is enabled, and only to a requester permitted to read that
-type: [=operator=] records to every requester, and records of every other type
-according to the accessibility of their domain. The host MUST
+type: [=operator=] records to every requester, [=file attachment=] records only
+to an operator with [=management permissions=], as for the Search Attachments
+method, and records of every other type according to the accessibility of
+their domain. The host MUST
 apply the visibility rules of [[#visibility-rules]] to the results: confidential
 evidence, and the attachments of confidential evidence, are included only for an
 operator with [=management permissions=], and [=audit log=] entries returned to
 an unauthenticated request are limited to the publicly visible entry types.
+For each record type, a host matches the query against the members listed for
+the dedicated search method of that type, as specified in
+[[#pagination-and-ordering]].
 
 The request is:
 
