@@ -2422,8 +2422,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 <h5 id="report-category-values">Report category values</h5>
 
-The value of the <code>category</code> parameter for the operator report methods
-is one of the following uppercase strings:
+The value of the <code>category</code> parameter for the methods that list or
+search [=reports=] is one of the following uppercase strings:
 
 :   <code>OPENED</code>
 ::  Reports that are open.
