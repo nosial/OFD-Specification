@@ -184,10 +184,6 @@ for downstream consumers.
     request presents it in the `Authorization` header using the `Bearer`
     scheme [[!RFC6750]].
 
-:   <dfn export id="dfn-authentication">authentication</dfn>
-::  The process by which a [=host=] verifies the identity of an [=operator=]
-    from the [=access token=] presented in a request.
-
 :   <dfn export>actor</dfn>
 ::  An individual, service, or automated program that interacts with a
     [=service=]. An [=entity=] is the identifier under which a service observes
@@ -241,6 +237,11 @@ for downstream consumers.
 ::  The identifier under which a [=service=] observes an [=actor=]. An entity
     record contains the entity's [=entity address=], host-local UUID,
     deterministic SHA-256 identifier, metadata, reputation, and relationships.
+
+:   <dfn export>entity address</dfn>
+::  The canonical, protocol-independent representation of an [=entity=].
+    A named entity address has the form <code>local-part@entity-host</code>; a
+    host entity address consists of the entity host alone.
 
 :   <dfn export>entity host</dfn>
 ::  The namespace or service component of an [=entity address=]. It identifies
