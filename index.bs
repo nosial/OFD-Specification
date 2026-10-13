@@ -423,6 +423,50 @@ The protocol is stateless. A host MUST NOT require a client to maintain a
 session, and MUST treat every request as independent, authenticated on its own
 merits as described in [[#authentication]].
 
+<h3 id="versioning">Versioning</h3>
+
+The OFD interface is identified by an <dfn export>interface version</dfn> of the
+form <code>MAJOR.MINOR</code>, where <code>MAJOR</code> is the major version and
+<code>MINOR</code> is the minor version, each a non-negative decimal integer
+without leading zeros. This specification defines interface version
+<code>1.1</code>. A [=host=] publishes the interface version it implements in
+the <code>api_version</code> member of its [=ServerInformation=] object, as
+specified in [[#get-server-information]].
+
+A minor version is backward compatible with every earlier minor version of the
+same major version. A minor version MAY add [=methods=], optional parameters,
+members of objects returned in responses, and optional capabilities of a host;
+it does not remove or rename existing methods, parameters, or members, change
+their types or meaning, or make an optional parameter required. A [=conforming
+host=] that implements a given interface version therefore also serves
+[=conforming clients=] and [=conforming downstream consumers=] written for any
+earlier minor version of the same major version.
+
+A change that cannot be made in a backward compatible way increments the major
+version and resets the minor version to zero. Implementations of different major
+versions are not expected to interoperate.
+
+Two interface versions are compared by their major versions and then by their
+minor versions, each compared as an integer, so that <code>1.10</code> is later
+than <code>1.9</code>. A client or downstream consumer:
+
+* SHOULD retrieve the interface version of a host through the Get Server
+    Information method before relying on behavior introduced after version
+    <code>1.0</code>.
+* MUST NOT use a method, parameter, or capability introduced in a later minor
+    version than the one the host reports.
+* SHOULD NOT interact with a host that reports a major version it does not
+    implement.
+* MUST ignore members of objects returned in responses that it does not
+    recognize, so that members added by a later minor version do not prevent it
+    from processing the response.
+
+<p class="note" role="note"><span class="marker">Note:</span> A host that
+implements an earlier minor version does not recognize parameters introduced in
+a later one, and may reject or ignore them. For example, a host that implements
+version <code>1.0</code> does not support URL uploads, and rejects a URL upload
+as a request missing its <code>file</code> part.</p>
+
 <h2 id="data-model">Data Model</h2>
 
 The [=federated database=] of a [=host=] is a set of [=records=] organized
