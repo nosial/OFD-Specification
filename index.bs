@@ -736,7 +736,9 @@ The domains and their root paths are:
   </tbody>
 </table>
 
-The root path `/` serves the [=audit log=] collection.
+The root path `/` serves the [=audit log=] collection through the List Audit
+Logs method. The other audit methods are served under `/audit`, such as
+`/audit/{uuid}` and `/audit/search`.
 
 <h4 id="route-patterns">Route Patterns</h4>
 
