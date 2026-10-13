@@ -1379,7 +1379,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the evidence input is invalid or does not contain text content.
 * HTTP 401 if scanning is not public and the request is not authenticated.
-* HTTP 403 if the [=authenticated operator=] does not hold [=client permissions=].
+* HTTP 403 if scanning is not public and the [=authenticated operator=] does not hold [=client permissions=].
 * HTTP 500 if the host fails to resolve the author entity due to an internal error.
 
 <h4 id="scanned-content-object">ScannedContent object</h4>
@@ -1591,11 +1591,12 @@ The value of the <code>type</code> member, and of each value in the
 ::  An [=audit log=] entry.
 :   <code>OPERATOR</code>
 ::  An [=operator=] record.
-
+Authorization: Bearer
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 404 if search is disabled on the host.
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters, or the <code>type</code> parameter contains a value that is not a record type.
 * HTTP 401 if search is not public and the request is not authenticated.
+* HTTP 404 if search is disabled on the host.
 * HTTP 500 if the host fails to perform the search due to an internal error.
 
 <h3 id="audit-methods">Audit</h3>
@@ -1960,6 +1961,7 @@ A host MUST reject a request whose <code>q</code> parameter is absent, empty, or
 shorter than two non-whitespace characters with a client error (HTTP 400). A
 host MUST respond with an [=error response=] for the following conditions:
 
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
 * HTTP 404 if search is disabled on the host or if operator search is disabled.
 * HTTP 500 if the host fails to perform the search.
 
@@ -2838,8 +2840,9 @@ is a JSON array of [=EntityRecord=] objects, with metadata redacted as described
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 404 if search is disabled on the host or if entity search is disabled.
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
 * HTTP 401 if the entity registry is not public and the request is not authenticated.
+* HTTP 404 if search is disabled on the host or if entity search is disabled.
 * HTTP 500 if the host fails to perform the search.
 
 <h4 id="top-threats">Top Threats</h4>
@@ -3908,6 +3911,7 @@ is a JSON array of [=EvidenceRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
 * HTTP 401 if evidence is not public and the request is not authenticated.
 * HTTP 404 if search is disabled on the host or if evidence search is disabled.
 * HTTP 500 if the host fails to perform the search.
@@ -4266,6 +4270,7 @@ is a JSON array of [=BlacklistRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
 * HTTP 401 if the blacklist is not public and the request is not authenticated.
 * HTTP 404 if search is disabled on the host or if blacklist search is disabled.
 * HTTP 500 if the host fails to perform the search.
@@ -4684,6 +4689,7 @@ is a JSON array of [=ReportRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
 * HTTP 401 if reports are not public and the request is not authenticated.
 * HTTP 404 if search is disabled on the host or if report search is disabled.
 * HTTP 500 if the host fails to perform the search.
@@ -5162,6 +5168,7 @@ is a JSON array of [=FileAttachmentRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if search is disabled on the host or if attachment search is disabled.
