@@ -194,7 +194,7 @@ for downstream consumers.
 ::  The chronological record of the operations performed on a [=federated
     database=]. Each entry records the type of operation, a message, the
     timestamp, and references to the affected [=records=]—operator,
-    entity, blacklist, evidence, and file attachment. A [=host=] designates
+    entity, blacklist, evidence, file attachment, and report. A [=host=] designates
     each entry type as public or private.
 
 :   <dfn export id="dfn-authentication">authentication</dfn>

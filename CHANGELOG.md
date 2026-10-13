@@ -4,9 +4,62 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
-## [1.0-R5] - Ongoing 
+## [1.1] - Ongoing 
 
 This is an ongoing update
+
+### Added
+ - Upload Attachment accepts a `url` parameter as an alternative to the `file` part, from which the host retrieves the
+   file itself (a URL upload). The parameter may be carried in a JSON, form-encoded or multipart body, and a request
+   supplying both `file` and `url`, or neither, is rejected with HTTP 400. A host MAY decline to support URL uploads.
+   A host MUST reject URLs that are not HTTP or HTTPS or contain user information, MUST NOT retrieve from addresses
+   that are not publicly routable unless explicitly configured to, MUST apply the same checks to redirect targets, and
+   MUST reject failed, non-2xx, empty or oversized retrievals with HTTP 400. The file name of a URL upload is taken
+   from the `Content-Disposition` header of the response, or the last segment of the URL path.
+ - Remote Retrieval of Attachments security consideration on server-side request forgery through URL uploads.
+ - Added the `allow_url_uploads` member to the ServerInformation object. A host that declines to support URL uploads
+   MUST publish it as false, and a client MUST treat it as false when absent, as it is for hosts implementing 1.0.
+ - Versioning section defining the interface version as `MAJOR.MINOR`. Minor versions are backward compatible with
+   earlier minor versions of the same major version and may only add methods, optional parameters, response members
+   and optional capabilities; changes that break compatibility increment the major version. Clients SHOULD check the
+   `api_version` of a host before relying on behavior introduced after 1.0, MUST NOT use features newer than the
+   version the host reports, and MUST ignore unrecognized members of response objects.
+ - Added the `report` member to the AuditLog object, carrying the UUID of the affected report when applicable.
+ - HTTP 409 is defined among the error status codes, for requests that conflict with the current state of a record,
+   as already used by Create Operator, Update Operator Name and Classify Evidence.
+ - Every method now states its successful response: the record or array of records it reads, or the success envelope
+   for methods that produce no result data, as already implied by the Success Responses section.
+
+### Fixed
+ - A token presented to a method that does not require authentication is ignored like an unaccepted parameter: it
+   is not validated and is not an error, and the request is processed as unauthenticated. A request requires
+   authentication when its method or domain is not public or when it asks for information returned only to an
+   authenticated operator, such as confidential evidence. Entity metadata visibility and the client permission
+   requirement for Scan Content were aligned with this rule.
+ - List Operator Audit Logs restricts an operator without operator permissions to its own entries only when the
+   audit log is not public, so authenticating no longer reduces access.
+ - The List Audit Logs request example uses the root path `/`, where the method is served, and the Path Structure
+   section notes that the other audit methods are served under `/audit`.
+ - Ordering values for the `by` parameter are uppercase strings, as required for values drawn from a fixed set.
+   Hosts SHOULD continue to accept them case-insensitively.
+ - The `PERMANENTLY_BLOCK_ENTITY` and `TEMPORARILY_BLOCK_ENTITY` suggested actions are based on active blacklist
+   records only.
+ - In List Blacklist, the `LIFTED` category selects lifted records regardless of `include_lifted`.
+ - Update Operator Name compares the reserved names case-insensitively and lists reserved names among its HTTP 400
+   conditions, as Create Operator does.
+ - Report category values apply to every method that lists or searches reports, not only the operator report
+   methods.
+ - The ContentInput object permits the members added by a method that extends it, such as Submit Evidence.
+ - The Permission Groups section includes managing the `auto_assign` flag among operator permissions, as the
+   terminology does.
+ - Corrected references to value definitions and method names, entity host and SHA-256 identifier wording, and
+   minor editorial issues; the terminology is listed alphabetically.
+
+### Changed
+ - A host implementing this version of the specification reports `1.1` as the `api_version` member of the
+   ServerInformation object.
+ - The File Uploads section describes both direct uploads and URL uploads, and the `file_name` member of the
+   FileAttachmentRecord object may be derived from the URL a file was retrieved from.
 
 
 
