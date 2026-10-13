@@ -3896,16 +3896,16 @@ is one of the following uppercase strings:
 
 <h5 id="blacklist-order-values">Blacklist ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following strings:
+The value of the <code>by</code> parameter is one of the following uppercase strings:
 
-:   <code>type</code>
+:   <code>TYPE</code>
 ::  Order by the <code>type</code> member.
-:   <code>expires</code>
+:   <code>EXPIRES</code>
 ::  Order by the <code>expires</code> member.
-:   <code>created</code>
+:   <code>CREATED</code>
 ::  Order by the <code>created</code> member.
 
-The value of the <code>order</code> parameter is one of the following strings:
+The value of the <code>order</code> parameter is one of the following uppercase strings:
 
 :   <code>ASC</code>
 ::  Ascending order.
