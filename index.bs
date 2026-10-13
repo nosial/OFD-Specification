@@ -2353,8 +2353,12 @@ A host MUST respond with an [=error response=] for the following conditions:
 The List Operator Audit Logs method returns the [=audit log=] entries associated
 with a specific operator. The method is public when the audit log domain is
 configured as public; otherwise the request MUST present a valid [=access token=].
-When the audit log domain is not public, an authenticated operator without
-[=operator permissions=] MAY view only its own audit log entries.
+An authenticated operator receives every entry of its own audit log, and an
+authenticated operator with [=operator permissions=] every entry of any
+operator. When the audit log domain is public, any other requester receives
+only the publicly visible entry types. When it is not public, an authenticated
+operator without [=operator permissions=] MAY view only its own audit log
+entries.
 
 The request is:
 
