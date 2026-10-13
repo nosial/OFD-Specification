@@ -2970,9 +2970,14 @@ A host MUST respond with an [=error response=] for the following conditions:
 <em>Method name:</em> <code>queryEntity</code>
 
 The Query Entity method returns an [=entity=], the other entities in its
-relationship group, and active blacklist records for the group. A host MAY
-independently make this method public; otherwise the request MUST present a
-valid [=access token=].
+relationship group, and active blacklist records for the group. The
+<dfn>relationship group</dfn> of an entity comprises at least the entity, the
+entity it references through its [=entity relationship=], if any, and the
+entities that reference it. A host MAY extend the group by following further
+relationships; a host that does so MUST include each entity at most once, so
+that a cycle of relationships, including a relationship of an entity to itself,
+terminates. A host MAY independently make this method public; otherwise the
+request MUST present a valid [=access token=].
 
 The request is:
 
