@@ -1491,22 +1491,22 @@ names are non-normative examples only:
   </thead>
   <tbody>
     <tr><td><code>AUTHOR_BLACKLISTED</code></td><td>The author entity has one or more active blacklist records.</td></tr>
-    <tr><td><code>AUTHOR_PERMANENTLY_BLACKLISTED</code></td><td>The author entity has one or more permanent blacklist records.</td></tr>
+    <tr><td><code>AUTHOR_PERMANENTLY_BLACKLISTED</code></td><td>The author entity has one or more active permanent blacklist records.</td></tr>
     <tr><td><code>AUTHOR_WHITELISTED</code></td><td>The author entity is whitelisted.</td></tr>
     <tr><td><code>AUTHOR_GOOD_REPUTATION</code></td><td>The author entity has a good reputation.</td></tr>
     <tr><td><code>AUTHOR_BAD_REPUTATION</code></td><td>The author entity has a bad reputation.</td></tr>
     <tr><td><code>AUTHOR_PARENT_BLACKLISTED</code></td><td>The parent of the author entity has one or more active blacklist records.</td></tr>
-    <tr><td><code>AUTHOR_PARENT_PERMANENTLY_BLACKLISTED</code></td><td>The parent of the author entity has one or more permanent blacklist records.</td></tr>
+    <tr><td><code>AUTHOR_PARENT_PERMANENTLY_BLACKLISTED</code></td><td>The parent of the author entity has one or more active permanent blacklist records.</td></tr>
     <tr><td><code>AUTHOR_PARENT_WHITELISTED</code></td><td>The parent of the author entity is whitelisted.</td></tr>
     <tr><td><code>AUTHOR_PARENT_GOOD_REPUTATION</code></td><td>The parent of the author entity has a good reputation.</td></tr>
     <tr><td><code>AUTHOR_PARENT_BAD_REPUTATION</code></td><td>The parent of the author entity has a bad reputation.</td></tr>
     <tr><td><code>NAMED_ENTITY_BLACKLISTED</code></td><td>A resolved named entity has one or more active blacklist records.</td></tr>
-    <tr><td><code>NAMED_ENTITY_PERMANENTLY_BLACKLISTED</code></td><td>A resolved named entity has one or more permanent blacklist records.</td></tr>
+    <tr><td><code>NAMED_ENTITY_PERMANENTLY_BLACKLISTED</code></td><td>A resolved named entity has one or more active permanent blacklist records.</td></tr>
     <tr><td><code>NAMED_ENTITY_WHITELISTED</code></td><td>A resolved named entity is whitelisted.</td></tr>
     <tr><td><code>NAMED_ENTITY_GOOD_REPUTATION</code></td><td>A resolved named entity has a good reputation.</td></tr>
     <tr><td><code>NAMED_ENTITY_BAD_REPUTATION</code></td><td>A resolved named entity has a bad reputation.</td></tr>
     <tr><td><code>NAMED_ENTITY_PARENT_BLACKLISTED</code></td><td>The parent of a resolved named entity has one or more active blacklist records.</td></tr>
-    <tr><td><code>NAMED_ENTITY_PARENT_PERMANENTLY_BLACKLISTED</code></td><td>The parent of a resolved named entity has one or more permanent blacklist records.</td></tr>
+    <tr><td><code>NAMED_ENTITY_PARENT_PERMANENTLY_BLACKLISTED</code></td><td>The parent of a resolved named entity has one or more active permanent blacklist records.</td></tr>
     <tr><td><code>NAMED_ENTITY_PARENT_WHITELISTED</code></td><td>The parent of a resolved named entity is whitelisted.</td></tr>
     <tr><td><code>NAMED_ENTITY_PARENT_GOOD_REPUTATION</code></td><td>The parent of a resolved named entity has a good reputation.</td></tr>
     <tr><td><code>NAMED_ENTITY_PARENT_BAD_REPUTATION</code></td><td>The parent of a resolved named entity has a bad reputation.</td></tr>
