@@ -1060,23 +1060,23 @@ regardless of the groups it holds.
 
 <h4 id="permission-groups">Permission Groups</h4>
 
-[=client permissions=] authorize an operator to submit information to the
+[=client permissions|Client permissions=] authorize an operator to submit information to the
 [=federated database=]: registering and updating [=entities=], setting and
 clearing [=entity relationships=], submitting [=evidence=] and [=reports=],
 uploading [=file attachments=], and scanning content.
 
-[=management permissions=] authorize an operator to manage the [=records=] of
+[=management permissions|Management permissions=] authorize an operator to manage the [=records=] of
 the [=federated database=]. Management permissions inherit all client
 permissions. In addition, they authorize the deletion of [=records=], the
 management of [=blacklist records=] and of the whitelist, the clearing of
 [=reputation=], access to confidential [=evidence=], and the assignment and
 closure of [=reports=].
 
-[=operator permissions=] authorize an operator to manage the [=operators=] of
+[=operator permissions|Operator permissions=] authorize an operator to manage the [=operators=] of
 the [=host=]: creating, deleting, enabling, and disabling operator accounts,
 modifying their names and [=permission group=]s, generating [=access tokens=],
-and updating evidence tags. Operator permissions do not inherit client
-permissions or management permissions.
+managing the <code>auto_assign</code> flag, and updating evidence tags. Operator
+permissions do not inherit client permissions or management permissions.
 
 <h4 id="public-accessibility">Public Accessibility</h4>
 
