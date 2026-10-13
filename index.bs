@@ -205,6 +205,18 @@ for downstream consumers.
 ::  The URL at which a [=host=] serves the OFD interface. Every path defined
     in this specification is relative to the base URL of the host.
 
+:   <dfn export>blacklist record</dfn>
+::  A decision by an [=operator=] to block an [=entity=]. A blacklist record
+    has an incident type and is either temporary, expiring at a given time,
+    or permanent. It is active until an [=operator=] lifts it or its expiry
+    passes, MAY reference the [=report=] supporting the decision, and an entity
+    MAY have any number of blacklist records.
+
+:   <dfn export>canonical entity address</dfn>
+::  An [=entity address=] after applying the canonicalization rules in
+    [[#entity-address-canonicalization]]. It is the input to the deterministic
+    SHA-256 identifier.
+
 :   <dfn export>client</dfn>
 ::  Software that interacts with a [=host=] as an [=operator=]: a bot,
     monitoring program, or integration that performs the operations of an
