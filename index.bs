@@ -1656,14 +1656,14 @@ corresponding category:
 
 <h5 id="audit-log-order-values">Audit log ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following strings:
+The value of the <code>by</code> parameter is one of the following uppercase strings:
 
-:   <code>type</code>
+:   <code>TYPE</code>
 ::  Order by the <code>type</code> member.
-:   <code>timestamp</code>
+:   <code>TIMESTAMP</code>
 ::  Order by the <code>timestamp</code> member.
 
-The value of the <code>order</code> parameter is one of the following strings:
+The value of the <code>order</code> parameter is one of the following uppercase strings:
 
 :   <code>ASC</code>
 ::  Ascending order.
