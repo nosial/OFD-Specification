@@ -1141,8 +1141,9 @@ authorization required to perform each. The columns denote the requester:
 holding [=client permissions=], [=management permissions=], and [=operator
 permissions=], respectively. A cell marked "Configurable" is public when the
 [=host=] exposes the domain, and requires an authenticated operator when the
-host does not; the permission required of an authenticated operator is
-unaffected. A request that requires authentication and presents no [=access
+host does not. When the host exposes the domain, an authenticated operator is
+never refused access that an unauthenticated request would have, as specified
+in [[#access-tokens]]. A request that requires authentication and presents no [=access
 token=] MUST be rejected as an authentication error (HTTP 401), and a request
 by an operator that lacks the required permission MUST be rejected as a
 permission error (HTTP 403).
