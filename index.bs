@@ -1281,6 +1281,7 @@ members of a [=ServerInformation=] object are:
     <tr><td><code>public_scan_content</code></td><td>boolean</td><td>Whether the Scan Content method is publicly accessible.</td></tr>
     <tr><td><code>public_query_entity</code></td><td>boolean</td><td>Whether the Query Entity method is publicly accessible.</td></tr>
     <tr><td><code>allow_illegal_content</code></td><td>boolean</td><td>Whether the host accepts reports with the <code>ILLEGAL_CONTENT</code> incident type, as specified in [[#submit-report]].</td></tr>
+    <tr><td><code>allow_url_uploads</code></td><td>boolean</td><td>Whether the host accepts URL uploads through the Upload Attachment method, as specified in [[#upload-attachment]]. Introduced in interface version <code>1.1</code>; a client MUST treat the member as false when it is absent.</td></tr>
     <tr><td><code>search_enabled</code></td><td>boolean</td><td>Whether search is enabled on the host. When false, every search method responds with HTTP 404.</td></tr>
     <tr><td><code>public_search</code></td><td>boolean</td><td>Whether the cross-collection Search method is publicly accessible.</td></tr>
     <tr><td><code>search_types</code></td><td>array of strings</td><td>The record types, as defined in [[#record-type-values]], whose dedicated search method is enabled. Empty when search is disabled.</td></tr>
