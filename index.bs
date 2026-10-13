@@ -1216,9 +1216,9 @@ operator without [=management permissions=] is rejected with HTTP 403.
 
 A report is closed by an operator with [=management permissions=] who is also
 the operator to which the report is assigned, and reports that are already
-closed MUST NOT be closed again. An authenticated operator that scans content
-MUST hold [=client permissions=], even when content scanning is public. The
-Search Attachments method requires [=management permissions=].
+closed MUST NOT be closed again. When content scanning is not public, the
+authenticated operator MUST hold [=client permissions=]. The Search Attachments
+method requires [=management permissions=].
 
 <h3 id="request-processing">Request Processing</h3>
 
