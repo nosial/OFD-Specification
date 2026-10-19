@@ -4352,7 +4352,7 @@ A <dfn export lt="BlacklistRecord">BlacklistRecord</dfn> object represents a sin
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the blacklist record.</td></tr>
     <tr><td><code>operator</code></td><td>string</td><td>The UUID of the [=operator=] that created the record.</td></tr>
     <tr><td><code>entity</code></td><td>string</td><td>The UUID of the [=entity=] being blacklisted.</td></tr>
-    <tr><td><code>report</code></td><td>string or null</td><td>The UUID of the [=report=] supporting the decision, when applicable.</td></tr>
+    <tr><td><code>report</code></td><td>string or null</td><td>The UUID of the [=report=] supporting the decision, when applicable. The report MAY concern another entity.</td></tr>
     <tr><td><code>type</code></td><td>string</td><td>The incident type, one of the values defined in [[#incident-type-values]].</td></tr>
     <tr><td><code>lifted</code></td><td>boolean</td><td>Whether the blacklist record has been lifted.</td></tr>
     <tr><td><code>lifted_by</code></td><td>string or null</td><td>The UUID of the operator that lifted the record, when it was lifted manually.</td></tr>
