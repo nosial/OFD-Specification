@@ -617,6 +617,36 @@ from another host. A consumer seeking independent assessments MUST query each
 host directly and MUST NOT infer independent observations from matching records
 returned by different hosts.
 
+<h3 id="client-assertions">Client Assertions</h3>
+
+[=Authentication=] establishes which [=operator=] submitted information; it does
+not establish that the information is accurate. The content and context of a
+[=ContentInput=] object, metadata, [=evidence=], [=reports=], and [=entity
+relationships=] submitted by a [=client=] are assertions made by that operator.
+A host decides how far it relies on each assertion, and MAY weigh it by the
+operator that made it, for example by the operator's [=permission groups=] or
+by the history of its submissions recorded in the [=audit log=].
+
+A host SHOULD determine for itself what it is able to determine for itself.
+Where an assertion concerns a network resource—the addresses to which a DNS
+name resolves, the content served at a URL, or the target of a redirect—a host
+SHOULD resolve or retrieve the resource itself, subject to
+[[#sec-remote-retrieval]], before it relies on the assertion to create or
+modify a [=record=], and MUST rely on its own observation where that
+observation differs from the assertion. A host MAY use an assertion that it has
+not verified to produce the result it returns to the requester, and then
+indicates this as specified in [[#detection-object]].
+
+A host MUST NOT decrease the [=reputation=] of an [=entity=], or create a
+[=blacklist record=] or an automated [=report=] against it, solely because
+clients submitted the entity, or content naming it, for scanning, regardless of
+how often they did so. Submitting content for scanning is not an observation of
+abuse by the entities it names: content of the <code>HOSTNAME</code> [=content
+type=], for example, asserts only that a device looked up the name. A host
+MAY create records from the results of its own analysis of submitted content,
+as permitted by [[#population]], and SHOULD document under [[#host-policy]] the
+sources on which such analysis relies, such as third-party filter lists.
+
 <h2 id="identification">Identification of Entities</h2>
 
 OFD separates universal entity identity from host-local record identity. The
