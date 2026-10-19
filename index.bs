@@ -1031,7 +1031,7 @@ as UTF-8 [[!RFC8259]]. A host resolves a
 parameter deterministically; where the same parameter appears in several
 sources, a form-encoded or multipart body takes precedence over the query
 string, and the query string takes precedence over a JSON body. This order is
-retained from version <code>1.0</code> for compatibility; a client SHOULD
+retained from earlier versions of the interface; a client SHOULD
 supply each parameter in only one source.
 
 A request body that declares the media type `application/json` but is not
