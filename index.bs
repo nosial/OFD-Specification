@@ -5711,6 +5711,13 @@ A host that propagates reputation through entity relationships SHOULD take into
 account who set a relationship and when. The [=audit log=] allows such abuse to
 be detected and traced after the fact.
 
+An attacker with [=client permissions=] can also submit fabricated content,
+context, or evidence, for example claiming that a legitimate domain serves
+advertisements, or submit a legitimate entity for scanning many times. A host
+therefore treats what clients submit as assertions, verifies them where it can,
+and does not degrade an entity merely because it was submitted, as specified in
+[[#client-assertions]].
+
 <h3 id="sec-resource-exhaustion">Resource Exhaustion</h3>
 
 Content scanning, search, and URL uploads make a host perform work that is
