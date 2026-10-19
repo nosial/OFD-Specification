@@ -534,9 +534,9 @@ The following record kinds are defined by this specification.
 ::  Records made against an entity documenting an incident: the type of the
     incident, a message, the [=operator=] that submitted it, the entity
     being reported, an optionally assigned operator, an opened flag, an
-    automated flag, and timestamps. A host MAY create reports automatically
-    under its own policy; such reports have their <code>automated</code> member
-    set to true.
+    automated flag, and timestamps. Reports that a host creates automatically
+    under its own policy, and reports submitted by a [=bot operator=], have their
+    <code>automated</code> member set to true.
 
 :   [=File attachments=]
 ::  Records of files uploaded as part of the evidence of an entity; each
