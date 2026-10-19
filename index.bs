@@ -4379,6 +4379,12 @@ following uppercase strings:
 ::  Maliciously intended to spread harmful software or viruses.
 :   <code>PHISHING</code>
 ::  Phishing attempts to steal personal information.
+:   <code>ADVERTISING</code>
+::  Advertising content, or a domain or resource that serves advertisements.
+    Unsolicited advertising sent as messages is <code>SPAM</code>.
+:   <code>TRACKING</code>
+::  A domain or resource that collects information about users across
+    services, such as a tracking or analytics endpoint.
 :   <code>OTHER</code>
 ::  Other content that does not fit the above categories; should rarely be used.
 
