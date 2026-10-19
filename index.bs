@@ -1607,7 +1607,8 @@ and MAY reuse the results of an earlier resolution or retrieval.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the evidence input is invalid or does not contain text content.
+* HTTP 400 if the evidence input is invalid or does not contain text content, a
+    content type is not supported for scanning, or <code>concerns</code> is invalid.
 * HTTP 401 if scanning is not public and the request is not authenticated.
 * HTTP 403 if scanning is not public and the [=authenticated operator=] does not hold [=client permissions=].
 * HTTP 500 if the host fails to resolve the author entity due to an internal error.
