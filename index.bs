@@ -405,6 +405,12 @@ for downstream consumers.
     it exposes publicly. [=Downstream consumers=] use telemetry to learn what
     is available on a host without authentication.
 
+:   <dfn export lt="telephone entity|telephone entities">telephone entity</dfn>
+::  A named [=entity=] identified by a telephone number, whose [=entity host=]
+    is <code>e164.arpa</code>, as specified in [[#telephone-entities]]. A
+    telephone entity is hidden from unauthenticated requests that do not
+    already know its number.
+
 :   <dfn export>whitelist</dfn>
 ::  A trust mark that a [=host=] applies to an [=entity=] it considers
     non-malicious. A host MUST NOT adjust the [=reputation=] of a whitelisted
