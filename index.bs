@@ -482,6 +482,9 @@ than <code>1.9</code>. A client or downstream consumer:
 * MUST ignore members of objects returned in responses that it does not
     recognize, so that members added by a later minor version do not prevent it
     from processing the response.
+* MUST NOT fail to process a response because a member carries a value, drawn
+    from a set of values, that it does not recognize. It SHOULD treat an
+    unrecognized incident type as <code>OTHER</code>.
 
 <p class="note" role="note"><span class="marker">Note:</span> A host that
 implements an earlier minor version does not recognize parameters introduced in
