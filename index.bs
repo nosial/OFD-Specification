@@ -478,7 +478,7 @@ than <code>1.9</code>. A client or downstream consumer:
 
 * SHOULD retrieve the interface version of a host through the Get Server
     Information method before relying on behavior introduced after version
-    <code>1.0</code>.
+    <code>2.0</code>.
 * MUST NOT use a method, parameter, or capability introduced in a later minor
     version than the one the host reports.
 * SHOULD NOT interact with a host that reports a major version it does not
