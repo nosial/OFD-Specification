@@ -3788,7 +3788,9 @@ members:
     <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>text_content</code></td><td>string</td><td>No</td><td>Text content. When present, it MUST be non-empty and MUST NOT exceed 16,777,215 bytes.</td></tr>
+    <tr><td><code>text_content</code></td><td>string</td><td>No</td><td>Text content. When present, it MUST be non-empty and MUST NOT exceed 16,777,215 bytes. Its form depends on the content type, as specified in [[#content-type-values]].</td></tr>
+    <tr><td><code>content_type</code></td><td>string</td><td>No</td><td>The [=content type=], one of the values defined in [[#content-type-values]]. Defaults to <code>TEXT</code>.</td></tr>
+    <tr><td><code>context</code></td><td>object</td><td>No</td><td>Descriptive context for the content, subject to the constraints in [[#content-context]].</td></tr>
     <tr><td><code>note</code></td><td>string</td><td>No</td><td>An operator note. When present, it MUST be non-empty and MUST NOT exceed 65,535 bytes.</td></tr>
     <tr><td><code>tag</code></td><td>string</td><td>No</td><td>A tag categorizing the content, as defined in [[#evidence-tags]].</td></tr>
     <tr><td><code>confidential</code></td><td>boolean</td><td>No</td><td>Whether the content is confidential. Defaults to false.</td></tr>
