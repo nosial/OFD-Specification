@@ -211,6 +211,11 @@ for downstream consumers.
     passes, MAY reference the [=report=] supporting the decision, and an entity
     MAY have any number of blacklist records.
 
+:   <dfn export lt="bot operator|bot operators">bot operator</dfn>
+::  An [=operator=] whose configuration marks it as an automated program, such as
+    a bot that monitors a chat service. The [=evidence=] and [=reports=] a bot
+    operator submits are automated, as specified in [[#automated-records]].
+
 :   <dfn export>canonical entity address</dfn>
 ::  An [=entity address=] after applying the canonicalization rules in
     [[#entity-address-canonicalization]]. It is the input to the deterministic
