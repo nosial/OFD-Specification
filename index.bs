@@ -513,8 +513,8 @@ The following record kinds are defined by this specification.
 
 :   [=Operators=]
 ::  The accounts that manage the database; an operator record contains a name,
-    a disabled flag, an <code>auto_assign</code> flag, and the [=permission
-    groups=] granted to the operator.
+    a disabled flag, the [=permission groups=] granted to the operator, and its
+    configuration.
 
 :   [=Evidence=]
 ::  Carries the information collected about an entity: text content, a note, a
