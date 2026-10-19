@@ -5779,7 +5779,8 @@ and does not degrade an entity merely because it was submitted, as specified in
 <h3 id="sec-resource-exhaustion">Resource Exhaustion</h3>
 
 Content scanning, search, and URL uploads make a host perform work that is
-expensive relative to the request, and a host can expose the first two to
+expensive relative to the request, particularly when scanning causes the host to
+resolve names or retrieve URLs, and a host can expose the first two to
 unauthenticated requests. An attacker can use them to exhaust the resources of
 a host. A host SHOULD limit the rate of requests it accepts from each requester,
 SHOULD bound the size of request bodies and the work performed for a single
