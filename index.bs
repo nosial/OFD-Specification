@@ -1403,8 +1403,9 @@ permission error (HTTP 403).
 
 <p class="note" role="note"><span class="marker">Note:</span> The
     "Manage operators" row covers creating, deleting, enabling, disabling, and
-    renaming operator accounts, modifying their [=permission group=]s, and
-    managing the <code>auto_assign</code> flag. "Manage entity relationships"
+    renaming operator accounts, and modifying their [=permission group=]s and
+    configuration through the Update Operator Permissions and Update Operator
+    Configuration methods. "Manage entity relationships"
     covers Set Entity Relationship and Clear Entity Relationship, and "Update
     evidence tags" covers Update Evidence Tag. "Read operator accounts" covers List Operators, Get
     Operator, and Search Operators, and "Read one's own operator account"
