@@ -695,6 +695,72 @@ The label MUST NOT be removed when the remainder has no registrable domain, as
 in <code>www.com</code> or <code>www.co.uk</code>. Any other subdomain, such as
 <code>sub.example.com</code>, is a distinct entity.
 
+<h3 id="telephone-entities">Telephone Entities</h3>
+
+A [=telephone entity=] is a named entity whose entity host is
+<code>e164.arpa</code> and whose local part is a telephone number in the
+international format of <a href="https://www.itu.int/rec/T-REC-E.164">ITU-T
+Recommendation E.164</a>. The canonical local part consists of the country code
+followed by the national significant number, written as 1 through 15 ASCII
+digits of which the first is not <code>0</code>, with no leading
+<code>+</code>, international prefix, spaces, or punctuation. For example, the
+number written <code>+1 (555) 012-3456</code> is the entity
+<code>15550123456@e164.arpa</code>. The <code>+</code> is omitted because it
+denotes a space in query strings and form-encoded bodies [[!URL]]. A host MUST
+reject, with a client error (HTTP 400), an entity address with the entity host
+<code>e164.arpa</code> whose local part is not in this form, and MUST reject the
+registration of <code>e164.arpa</code> itself as a host entity, since it denotes
+the numbering namespace rather than an [=actor=].
+
+The entity host <code>e164.arpa</code> serves only as a namespace. A telephone
+entity is not the domain that ENUM [[RFC6116]] derives from the number, and
+identifying it implies no DNS lookup. A sender that has no E.164 number, such as
+an SMS short code or an alphanumeric sender ID, is not a telephone entity.
+
+Telephone numbers identify people, and are few enough that every number can be
+enumerated. A [=host=] therefore hides telephone entities from requests that do
+not already know the number, unless it publishes
+<code>public_telephone_entities</code> as true in its [=ServerInformation=]
+object. A host SHOULD NOT publish it as true. While a host does not, then for a
+request that is not authenticated, the host:
+
+* MUST NOT return the [=EntityRecord=] of a telephone entity, except to a
+    request that identifies that entity by its [=entity address=] or SHA-256
+    identifier, through the Get Entity Record and Query Entity methods, or to a
+    Scan Content request whose content contains the number or whose
+    <code>author</code> is that entity. It therefore omits telephone entities
+    from List Entities, Search Entities, Top Threats, the results of the
+    [[#search|Search]] method, the <code>related_entities</code> of an
+    [=EntityQueryResult=], and the <code>parent_entity</code> of a
+    [=ResolvedEntity=].
+* MUST respond to a request that identifies a telephone entity by its UUID as
+    though the entity did not exist (HTTP 404), since the UUIDs of entities
+    appear in other records.
+* MUST NOT match the query of any search method against the address of a
+    telephone entity, so that a search cannot reveal which numbers the host
+    holds records about.
+* MUST set the <code>metadata</code> member of a telephone entity to null.
+* MUST NOT include the entity address of a telephone entity in the message of
+    an [=audit log=] entry.
+
+A host MAY apply the same restrictions to authenticated operators that do not
+hold [=management permissions=].
+
+Evidence about a telephone entity is likely to contain private messages.
+Evidence that a host creates itself MUST be confidential when it is associated
+with a telephone entity or supports a [=report=] against one, as specified in
+[[#population]]. A client SHOULD submit evidence associated with a telephone
+entity as confidential, and a host MAY mark such evidence confidential whatever
+the client requested.
+
+The number that a call or message presents as its origin can be forged, so that
+the number of an uninvolved subscriber appears as the source of abuse. That
+number is an assertion of the originator, which a client relays without being
+able to verify it. A host SHOULD take this into account before it decreases the
+[=reputation=] of a telephone entity or blacklists it on the basis of the number
+presented, for example by preferring temporary [=blacklist records=], as
+described in [[#client-assertions]].
+
 <h3 id="identifier-hash">Identifier Hash</h3>
 
 The SHA-256 identifier is the SHA-256 digest [[!FIPS-180-4]] [[RFC6234]] of the
