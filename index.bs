@@ -208,8 +208,9 @@ for downstream consumers.
 ::  A decision by an [=operator=] to block an [=entity=]. A blacklist record
     has an incident type and is either temporary, expiring at a given time,
     or permanent. It is active until an [=operator=] lifts it or its expiry
-    passes, MAY reference the [=report=] supporting the decision, and an entity
-    MAY have any number of blacklist records.
+    passes, MAY reference the [=report=] supporting the decision, which MAY
+    concern another entity, and an entity MAY have any number of blacklist
+    records.
 
 :   <dfn export lt="bot operator|bot operators">bot operator</dfn>
 ::  An [=operator=] whose configuration marks it as an automated program, such as
