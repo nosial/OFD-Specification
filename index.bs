@@ -3278,6 +3278,9 @@ object:
   </tbody>
 </table>
 
+The <code>active_blacklists</code> member contains every active blacklist record
+of the relationship group, whatever its incident type.
+
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=].
