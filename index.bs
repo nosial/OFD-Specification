@@ -2376,9 +2376,10 @@ be authenticated as an operator with [=operator permissions=]. The names
 <code>root</code> and <code>system</code> are reserved and MUST NOT be used.
 Whether two names that differ only in case are the same name for the purpose
 of uniqueness is host-defined; a client SHOULD NOT rely on case alone to
-distinguish operator names. The [=permission groups=] and the
-<code>auto_assign</code> flag of a new operator are host-defined; a client can
-read them through the Get Operator method.
+distinguish operator names. The [=permission groups=] and the configuration of
+a new operator are host-defined; a client can read them through the Get
+Operator method, and change them with the Update Operator Permissions and Update
+Operator Configuration methods.
 
 The request is:
 
