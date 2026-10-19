@@ -3563,6 +3563,76 @@ where a method extends it with members of its own, as Submit Evidence does. A ho
 MUST reject a [=ContentInput=] object that violates any of these constraints with a
 client error (HTTP 400).
 
+<h5 id="content-type-values">Content type values</h5>
+
+The value of the <code>content_type</code> member is one of the following
+uppercase strings. A host MUST accept every value for storage as [=evidence=];
+the values that the Scan Content method interprets according to their type are
+published in <code>scan_content_types</code>, as specified in [[#scan-content]].
+
+:   <code>TEXT</code>
+::  Free-form text, such as a chat message. This is the default, and the only
+    interpretation of content in interface version <code>1.0</code>.
+:   <code>EMAIL</code>
+::  An email message. <code>text_content</code> is the body of the message.
+:   <code>SMS</code>
+::  A text message received over a telephone network, such as an SMS or MMS
+    message. <code>text_content</code> is the body of the message. Its sender,
+    when it has an E.164 number, is identified as a [=telephone entity=] in the
+    <code>author</code> member of a Scan Content request.
+:   <code>WEB_PAGE</code>
+::  A web page. <code>text_content</code> is text extracted from the page by the
+    client, and the <code>url</code> key of the context is required.
+:   <code>HOSTNAME</code>
+::  A DNS name [[!RFC1034]] observed by the client, for example in a DNS lookup.
+    <code>text_content</code> is the name, with an internationalized domain name
+    represented by its A-labels [[!RFC5890]]. A host MAY convert the name to
+    lowercase and remove a single trailing dot before analysis, and MUST reject a
+    value that is not a DNS name, including an IP address literal, with a client
+    error (HTTP 400).
+:   <code>URL</code>
+::  A URL observed by the client. <code>text_content</code> is an absolute URL
+    [[!RFC3986]]; a host MUST reject a value that is not an absolute URL with a
+    client error (HTTP 400).
+
+<h5 id="content-context">Content context</h5>
+
+The <code>context</code> member of a [=ContentInput=] object is a flat JSON
+object describing the circumstances of the content as the client observed them.
+It is subject to the constraints on keys, values, and final size defined for
+entity metadata in [[#entity-metadata]], every value MUST be a non-empty JSON
+string, and it MUST NOT contain keys other than those defined below for its
+[=content type=]. Context is an assertion of the client, which a host treats as
+specified in [[#client-assertions]]. The keys defined for each content type are:
+
+<table class="data">
+  <thead>
+    <tr><th>Content type</th><th>Key</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>EMAIL</code></td><td><code>subject</code></td><td>The subject of the message.</td></tr>
+    <tr><td><code>EMAIL</code></td><td><code>sender</code></td><td>The address in the <code>From</code> header field of the message.</td></tr>
+    <tr><td><code>EMAIL</code></td><td><code>reply_to</code></td><td>The address in the <code>Reply-To</code> header field of the message.</td></tr>
+    <tr><td><code>SMS</code></td><td><code>region</code></td><td>The region in which the message was received, as an ISO 3166-1 alpha-2 code such as <code>US</code>, used to interpret numbers written in national format.</td></tr>
+    <tr><td><code>SMS</code></td><td><code>sender_id</code></td><td>The sender as presented to the recipient when it is not an E.164 number, such as a short code or an alphanumeric sender ID.</td></tr>
+    <tr><td><code>WEB_PAGE</code></td><td><code>url</code></td><td>Required. The absolute HTTP or HTTPS URL that the client requested.</td></tr>
+    <tr><td><code>WEB_PAGE</code></td><td><code>final_url</code></td><td>The URL at which the page was served after redirects, when it differs from <code>url</code>.</td></tr>
+    <tr><td><code>WEB_PAGE</code></td><td><code>title</code></td><td>The title of the page.</td></tr>
+    <tr><td><code>WEB_PAGE</code></td><td><code>description</code></td><td>The description the page declares about itself.</td></tr>
+    <tr><td><code>WEB_PAGE</code></td><td><code>language</code></td><td>The language of the page, as a language tag [[!BCP47]].</td></tr>
+    <tr><td><code>HOSTNAME</code></td><td><code>query_type</code></td><td>The DNS resource record type queried, by its mnemonic, such as <code>A</code> or <code>AAAA</code>.</td></tr>
+  </tbody>
+</table>
+
+No keys are defined for the <code>TEXT</code> and <code>URL</code> content types.
+The addresses in the context of an <code>EMAIL</code> are not authenticated by
+the client and can be forged by the sender of the message; a host MUST NOT
+treat them as establishing the identity of the sender.
+
+A host MUST reject a [=ContentInput=] object whose context violates any of the
+constraints in this section, or whose content type is <code>WEB_PAGE</code> and
+whose context lacks the <code>url</code> key, with a client error (HTTP 400).
+
 <h5 id="evidence-tags">Evidence tags</h5>
 
 An evidence tag is a short label chosen by the submitting operator, such as
