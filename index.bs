@@ -1582,6 +1582,7 @@ The request body MUST be a JSON object containing the members below:
     <tr><td><code>evidence</code></td><td>[=ContentInput=] or array of [=ContentInput=]</td><td>Yes</td><td>One non-empty [=ContentInput=] object or a non-empty array of non-empty [=ContentInput=] objects to scan.</td></tr>
     <tr><td><code>top_k</code></td><td>integer</td><td>No</td><td>An advisory maximum number of candidate classifications for a host to consider. Its effect on host analysis is not specified.</td></tr>
     <tr><td><code>threshold</code></td><td>number</td><td>No</td><td>An advisory confidence threshold for host analysis. Its effect on host analysis is not specified.</td></tr>
+    <tr><td><code>concerns</code></td><td>array of strings</td><td>No</td><td>The [=concerns=] to assess, as specified in [[#scan-concerns]]. Defaults to the <code>default_concerns</code> of the host.</td></tr>
   </tbody>
 </table>
 
