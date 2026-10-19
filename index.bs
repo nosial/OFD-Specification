@@ -5700,6 +5700,16 @@ Error responses to a failed retrieval
 SHOULD NOT include the content of the remote response. A file retrieved from a
 URL is an uploaded file and is subject to [[#sec-uploaded-files]].
 
+A host that resolves a DNS name or retrieves a URL while scanning content, as
+permitted by [[#scan-content]] and [[#client-assertions]], is exposed to the
+same risks, since the name or URL is chosen by the requester, and applies the
+same restrictions. Because Scan Content can be public, such a host is also open
+to being used to probe or contact third parties on a requester's behalf; it
+SHOULD limit the resolutions and retrievals a single request can cause, and
+MAY reserve them to authenticated requests. Content retrieved this way is
+hostile in the same way as an uploaded file, and a host MUST NOT execute or
+render it.
+
 <h3 id="sec-abuse-of-the-database">Abuse of the Database</h3>
 
 Because [=downstream consumers=] act on the records of a host, the records
