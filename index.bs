@@ -5745,6 +5745,16 @@ identifier and confirm the guess. A host SHOULD consider this before making the
 public, since each of them can reveal that a particular entity has been
 observed, reported, or blocked.
 
+A [=telephone entity=] identifies a subscriber more directly than most entity
+addresses, and the space of telephone numbers is small enough that the SHA-256
+identifier of every number can be computed in advance. Looking up a telephone
+entity by its SHA-256 identifier is therefore as revealing as looking it up by
+its number. A host hides telephone entities from requests that do not already
+know the number, as specified in [[#telephone-entities]], and SHOULD limit the
+rate at which a requester can look up telephone entities individually, as
+described in [[#sec-resource-exhaustion]], so that the numbers it holds records
+about cannot be discovered by trying them all.
+
 <h3 id="priv-data-minimization">Data Minimization and Retention</h3>
 
 The protocol does not require a host to collect personal information beyond
