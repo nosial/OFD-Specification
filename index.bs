@@ -1698,6 +1698,9 @@ the request. Its members are:
   </tbody>
 </table>
 
+A client SHOULD weigh a detection whose <code>verified</code> member is false as
+no stronger than the context it supplied.
+
 <h5 id="risk-score-calculation">Risk Score</h5>
 
 A host starts the <code>risk_score</code> at 50 before evaluating the submitted
