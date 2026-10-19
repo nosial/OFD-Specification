@@ -4061,7 +4061,6 @@ A host MUST respond with an [=error response=] for the following conditions:
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the evidence does not exist.
-* HTTP 409 if the evidence already has a classification.
 * HTTP 500 if the host fails to classify the evidence.
 
 <h4 id="get-evidence-record">Get Evidence Record</h4>
