@@ -2,17 +2,82 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [1.1] - Ongoing
+## [2.0] - Ongoing
 
-This is an ongoing update
+This is an ongoing update. It is a new major version: hosts report `2.0` as the `api_version`, and it is not
+backward compatible with 1.x.
+
+### Breaking
+- The OperatorRecord object groups its permission groups in a `permissions` member (an OperatorPermissions object
+  with `client`, `management` and `operator`) and its settings in a `configuration` member (an
+  OperatorConfiguration object), replacing the `client_permissions`, `management_permissions`, `operator_permissions`
+  and `auto_assign` members. `permissions.client` is true whenever `permissions.management` is, since management
+  permissions inherit client permissions.
+- The Update Operator Permissions (`PATCH /operators/{uuid}/permissions`) and Update Operator Configuration
+  (`PATCH /operators/{uuid}/configuration`) methods replace Manage Client Permissions, Manage Management Permissions,
+  Manage Operator Permissions and Manage Auto Assign. Each takes a partial object and returns the updated object;
+  leaving an operator with management permissions but without client permissions is rejected with HTTP 409.
+- `auto_assign` is replaced by the `auto_assign_reports` and `auto_assign_automated_reports` configuration settings,
+  opting in to the automatic assignment of ordinary and automated reports separately; a host never assigns a report
+  automatically to an operator that has not opted in to reports of its kind.
+- Members introduced during 1.1 are required, their fallbacks for hosts that do not publish them are removed.
 
 ### Added
+- The report supporting a blacklist record may concern another entity than the one being blacklisted (eg; the domain a
+  reported account advertised), a host no longer rejects it with HTTP 404.
+- The `configuration` member of an OperatorRecord is only disclosed to the operator itself and to operators with operator
+  permissions, and is null for anyone else. An operator may read and change its own configuration with Update Operator
+  Configuration; changing another operator's configuration requires operator permissions.
+- Bot operators: the `is_bot` configuration setting makes the evidence and reports an operator submits automated.
+- The `automated` member of the EvidenceRecord object, and the `AUTOMATED` and `NOT_AUTOMATED` evidence categories.
+  Evidence the host creates itself or a bot operator submits is automated, and automated evidence is created as
+  confidential; an operator with management permissions may make it non-confidential afterwards. Reports submitted by
+  a bot operator are automated like the reports a host creates itself (Automated Records section).
+
+### Added
+- Download Attachment responses carry `X-Content-Type-Options: nosniff`.
+- Hosts answer CORS preflight (`OPTIONS`) requests without authentication, and `Access-Control-Allow-Origin`
+  carries the origin of the base URL rather than the full URL.
+- Parameters of a file upload may be carried in the parts of its `multipart/form-data` body.
+- Deletion of Records section: a host may delete or retain the records that refer to a deleted record, so references
+  can yield HTTP 404; `FileAttachmentRecord.evidence` is null when no evidence record is associated.
+- Resource Exhaustion security consideration, permitting HTTP 429 for requests that exceed a host's limits.
 - URL uploads: Upload Attachment accepts a `url` parameter as an alternative to `file`, and the host retrieves the
   file itself. Support is optional and advertised by the new `allow_url_uploads` member of the ServerInformation
   object (treated as false when absent). Hosts MUST guard retrievals against server-side request forgery, covered
-  by the new Remote Retrieval of Attachments security consideration.
+  by the new Remote Retrieval security consideration.
+- The `collects_public_scan_content` member of the ServerInformation object, stating whether the host may store
+  content submitted to Scan Content by unauthenticated requests, or records derived from it such as automated
+  reports and evidence; clients SHOULD assume it may when the member is absent.
+- Telephone entities: a telephone number is the named entity `<number>@e164.arpa`, whose local part is the E.164
+  international number as 1 through 15 digits without `+` or separators. Unless a host publishes the new
+  `public_telephone_entities` member of the ServerInformation object as true, unauthenticated requests see a
+  telephone entity only when they identify it by its address or SHA-256 identifier, or submit it for scanning: it is
+  omitted from lists, searches and related entities, unresolvable by UUID, stripped of metadata, and kept out of
+  audit log messages. Evidence a host creates itself about a telephone entity, including scanned content supporting
+  an automated report, MUST be confidential. Scan Content may extract numbers (`telephone` entity positions), and
+  hosts are cautioned that presented numbers can be spoofed.
+- Content types: the ContentInput object accepts a `content_type` (`TEXT`, `EMAIL`, `SMS`, `WEB_PAGE`, `HOSTNAME` or `URL`,
+  defaulting to `TEXT`) and a flat `context` object whose keys are defined per content type. EvidenceRecord carries
+  both members. Scan Content interprets the content types published in the new `scan_content_types` member of the
+  ServerInformation object, and MAY resolve the names and retrieve the URLs it is given under the restrictions of
+  URL uploads.
+- Concerns: Scan Content accepts a `concerns` array and Query Entity a `concerns` parameter naming the incident types
+  to assess. Only these concerns affect the classification, risk score, suggested action and detections returned,
+  and the blocking suggested actions consider only blacklist records of these types. Hosts publish `concerns` and
+  `default_concerns` in the ServerInformation object, and SHOULD NOT assess `ADVERTISING` or `TRACKING` by default.
+- The `detections` member of the ScannedContent object and the Detection object, recording the concern, the
+  mechanism, the related entity and content, and whether the detection relies on unverified client assertions.
+- `ADVERTISING` and `TRACKING` incident types.
+- A `type` filter on List Blacklist and Search Blacklist selecting records by incident type.
+- Client Assertions section: what a client submits is an assertion; a host SHOULD verify what it can determine
+  itself, MUST prefer its own observation, and MUST NOT degrade an entity solely because it was submitted for
+  scanning. Abuse of the Database and Content Scanning considerations cover fabricated submissions and the privacy
+  of submitted names, URLs and retrievals.
+- Clients tolerate values they do not recognize in sets of values, which a minor version may extend, and treat an
+  unrecognized incident type as `OTHER`.
 - Versioning section defining the `MAJOR.MINOR` interface version, backward compatibility between minor versions,
   and how clients use `api_version` to detect supported features.
 - The `report` member of the AuditLog object.
@@ -20,8 +85,11 @@ This is an ongoing update
 - The successful response of every method.
 
 ### Fixed
-- A token presented to a method that does not require authentication is ignored rather than validated, and
-  authenticating no longer reduces access (affecting entity metadata, Scan Content and List Operator Audit Logs).
+- A request to a publicly accessible method is no longer rejected because of its token: a valid token still
+  authenticates its operator, so it can receive information returned only to operators such as entity metadata,
+  while a malformed, unknown or disabled token is ignored and the request is processed as unauthenticated.
+  Authenticating no longer reduces access (affecting entity metadata, Scan Content and List Operator Audit Logs),
+  and List Operator Audit Logs states which entries each requester receives.
 - The List Audit Logs example path, and the Path Structure section now notes that other audit methods are served
   under `/audit`.
 - Ordering values for `by` are uppercase; hosts SHOULD still accept them case-insensitively.
@@ -31,11 +99,43 @@ This is an ongoing update
 - Report category values apply to every method that lists or searches reports.
 - The ContentInput object permits members added by methods that extend it.
 - The Permission Groups section includes managing the `auto_assign` flag among operator permissions.
-- Incorrect references, identifier wording and minor editorial issues; terminology is listed alphabetically.
+- An access token is disclosed exactly once, in the response that creates the operator or generates the token, and
+  only a hash of it is persisted, so the requester must retain it; Generate Access Token and Generate Operator Access
+  Token now state this as Create Operator does.
+- The permission matrix and Scan Content no longer deny public content scanning to an authenticated operator
+  without client permissions.
+- A client SHOULD NOT submit a URL upload to a host that does not publish `allow_url_uploads` as true, consistent
+  with the Versioning section.
+- The route conventions describe PUT as an optional alternative to POST for uploads.
+- Every search method lists HTTP 400 among its error conditions.
+- The permission matrix and the management permissions definition include classifying evidence and linking it to
+  reports.
+- The cross-collection Search method matches each record type against the members of its dedicated search method.
+- A host accepts a JSON request body whether or not its media type carries a `charset` parameter.
+- Entity identifiers are resolved in a fixed order (UUID, SHA-256 identifier, entity address), path segments are
+  percent-decoded once before validation, and internationalized domain names are represented by their A-labels.
+- Access tokens, including the root access token, use `b64token` characters; hosts SHOULD give them at least 128 bits
+  of entropy.
+- Query Entity defines the relationship group, and hosts that follow relationships further terminate on cycles.
+- Suggested action values describe the entity they refer to for both Scan Content and Query Entity.
+- Push Entity is idempotent for any repeated registration and lists non-canonical addresses among its HTTP 400
+  conditions.
+- The cross-collection Search method returns file attachments only to operators with management permissions, as
+  Search Attachments does.
+- Create Operator states that default permission groups, the default `auto_assign` flag, and case sensitivity of
+  name uniqueness are host-defined; Delete Operator discourages self-deletion, which a host MAY reject.
+- Set Entity Relationship permits a host to reject a relationship of an entity to itself.
+- Close Report ignores `blacklist_expires` when `blacklist_incident_type` is absent.
+- A note lists the status codes retained from 1.0 that differ from the general definitions of HTTP 400, 403, 404 and
+  409, and the parameter precedence order is noted as retained for compatibility.
+- Incorrect references, identifier wording and minor editorial issues, including request examples
+  of authenticated methods, which now show the `Authorization` header; terminology is listed alphabetically.
 
 ### Changed
-- Hosts implementing this version report `1.1` as the `api_version`.
+- Hosts implementing this version report `2.0` as the `api_version`.
 - The File Uploads section and the `file_name` member of the FileAttachmentRecord object cover URL uploads.
+- Classify Evidence replaces the classification of evidence that is already classified instead of rejecting the
+  request with HTTP 409; a request with the classification the evidence already has succeeds without changing it.
 
 
 
