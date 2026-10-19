@@ -1695,9 +1695,17 @@ active [=blacklist records=] and its optional parent entity. Its members are:
 A ResolvedEntityPosition object contains the members <code>offset</code>
 (integer), <code>length</code> (integer), and <code>type</code> (string). The
 value of <code>type</code> is one of <code>domain</code>, <code>url</code>,
-<code>email</code>, <code>ipv4</code>, or <code>ipv6</code>, depending on how
-the entity was extracted from the content. As an exception to
-[[#data-formats]], these values are lowercase.
+<code>email</code>, <code>ipv4</code>, <code>ipv6</code>, or
+<code>telephone</code>, depending on how the entity was extracted from the
+content. As an exception to [[#data-formats]], these values are lowercase.
+
+A host MAY extract telephone numbers from content as [=telephone entities=]. A
+number written in national format can be interpreted only with the region in
+which it was received, so a host SHOULD extract a number only when it is written
+in international format or the context of the content supplies a region, as the
+<code>SMS</code> [=content type=] does. A host SHOULD NOT extract digit
+sequences that are not presented as telephone numbers, such as one-time codes or
+order numbers.
 
 <h5 id="content-classification-object">ContentClassification object</h5>
 
