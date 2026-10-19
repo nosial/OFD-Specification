@@ -5717,6 +5717,22 @@ to produce the scan result and to maintain reputation, unless it creates a
 [=report=] or [=evidence=] from that content under a documented policy, as
 permitted by [[#population]].
 
+A requester that submits content without authenticating does not thereby
+contribute to the [=federated database=], and cannot otherwise learn whether the
+host keeps what it submits. A host therefore publishes, in the
+<code>collects_public_scan_content</code> member of its [=ServerInformation=]
+object, whether it may store content submitted to the Scan Content method by
+unauthenticated requests, or [=records=] derived from that content, such as the
+[=evidence=] and [=reports=] it creates automatically, in its [=federated
+database=]. A host that does so, or whose configuration or extensions permit it
+to do so, MUST publish the member as true; a host that does not store such
+content beyond what is needed to produce the scan result MUST publish it as
+false. A host that does not make content scanning public publishes it as false.
+Content submitted by an [=authenticated operator=] is submitted to contribute to
+the database, and is not described by this member. A client SHOULD inform the
+users whose content it submits without authenticating when a host publishes the
+member as true.
+
 Content of the <code>HOSTNAME</code>, <code>URL</code>, and
 <code>WEB_PAGE</code> [=content types=] reveals what the user of a device
 visited or looked up, which can be as sensitive as the content of a message. A
