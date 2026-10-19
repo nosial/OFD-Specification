@@ -1706,6 +1706,8 @@ no stronger than the context it supplied.
 
 A host starts the <code>risk_score</code> at 50 before evaluating the submitted
 content. Higher values indicate greater risk; lower values indicate lower risk.
+The score reflects only the effective concerns of the request, as specified in
+[[#scan-concerns]].
 
 A host MAY apply any internal factors while evaluating content. Such factors MAY
 include temporary or permanent blacklist records, classifications, entity
