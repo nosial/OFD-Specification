@@ -1785,6 +1785,11 @@ object, they refer to the queried entity and its [=relationship group=].
 :   <code>CAUTION</code>
 ::  The risk score warrants attention, but not an automatic block.
 
+<code>PERMANENTLY_BLOCK_ENTITY</code> and <code>TEMPORARILY_BLOCK_ENTITY</code>
+consider only the active blacklist records whose incident type is an effective
+concern of the request, as specified in [[#scan-concerns]]; an active blacklist
+record of any other incident type does not cause either value to be suggested.
+
 <h5 id="scanning-rules">Scanning rule names</h5>
 
 The <code>scan_results</code> member MAY contain a host-defined mapping of
