@@ -1289,7 +1289,7 @@ evidence and its linking to [=reports=], and the assignment and closure of
 [=operator permissions|Operator permissions=] authorize an operator to manage the [=operators=] of
 the [=host=]: creating, deleting, enabling, and disabling operator accounts,
 modifying their names and [=permission group=]s, generating [=access tokens=],
-managing the <code>auto_assign</code> flag, and updating evidence tags. Operator
+managing their configuration, and updating evidence tags. Operator
 permissions do not inherit client permissions or management permissions.
 
 <h4 id="public-accessibility">Public Accessibility</h4>
