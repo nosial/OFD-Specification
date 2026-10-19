@@ -4045,9 +4045,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 <em>Method name:</em> <code>classifyEvidence</code>
 
-The Classify Evidence method assigns an immutable classification to an
-unclassified [=evidence=] record. The request MUST be authenticated as an
-operator with [=management permissions=].
+The Classify Evidence method assigns a classification to an [=evidence=]
+record, replacing its existing classification if it has one. The request MUST
+be authenticated as an operator with [=management permissions=].
 
 The request is:
 
