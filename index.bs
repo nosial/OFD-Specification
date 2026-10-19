@@ -3915,6 +3915,10 @@ is one of the following uppercase strings:
 ::  Evidence records that have a classification flag.
 :   <code>UNCLASSIFIED</code>
 ::  Evidence records that do not have a classification flag.
+:   <code>AUTOMATED</code>
+::  Evidence records that are automated.
+:   <code>NOT_AUTOMATED</code>
+::  Evidence records that are not automated.
 
 <h5 id="evidence-order-values">Evidence ordering values</h5>
 
