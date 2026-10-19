@@ -1550,7 +1550,9 @@ members of a [=ServerInformation=] object are:
 The Scan Content method submits one or more [=ContentInput=] objects to a
 [=host=] for analysis. The host extracts named entities from the text content,
 resolves them against the entity registry, and returns a classification, a risk
-score, and a suggested action. When the host is not configured to make scanning
+score, a suggested action, and the detections that contributed to them, each
+with respect to the [=concerns=] of the request. Each [=ContentInput=] object
+is interpreted according to its [=content type=]. When the host is not configured to make scanning
 publicly accessible, the request MUST present a valid [=access token=] and the
 [=authenticated operator=] MUST hold [=client permissions=].
 
