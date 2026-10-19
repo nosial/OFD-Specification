@@ -3273,7 +3273,7 @@ object:
     <tr><td><code>entity_record</code></td><td>[=EntityRecord=]</td><td>The queried entity.</td></tr>
     <tr><td><code>related_entities</code></td><td>array of [=EntityRecord=]</td><td>Other entities in the queried entity's relationship group.</td></tr>
     <tr><td><code>active_blacklists</code></td><td>array of [=BlacklistRecord=]</td><td>The active blacklist records associated with the queried entity and its relationship group.</td></tr>
-    <tr><td><code>suggested_action</code></td><td>string or null</td><td>A host recommendation based on the active blacklist records: <code>PERMANENTLY_BLOCK_ENTITY</code>, <code>TEMPORARILY_BLOCK_ENTITY</code>, or null.</td></tr>
+    <tr><td><code>suggested_action</code></td><td>string or null</td><td>A host recommendation based on the active blacklist records whose incident type is an effective concern of the request: <code>PERMANENTLY_BLOCK_ENTITY</code>, <code>TEMPORARILY_BLOCK_ENTITY</code>, or null.</td></tr>
     <tr><td><code>suggested_lift_timestamp</code></td><td>integer or null</td><td>The Unix timestamp at which the host recommends lifting a temporary action, when applicable.</td></tr>
   </tbody>
 </table>
