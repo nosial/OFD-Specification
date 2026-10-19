@@ -5722,7 +5722,7 @@ Attachment method, and MUST serve them with `Content-Disposition: attachment`,
 specified in [[#upload-attachment]] and [[#download-attachment]]. A consumer
 that downloads an attachment SHOULD treat it as untrusted.
 
-<h3 id="sec-remote-retrieval">Remote Retrieval of Attachments</h3>
+<h3 id="sec-remote-retrieval">Remote Retrieval</h3>
 
 A URL upload makes the [=host=] send a request to an address chosen by the
 client, which an attacker could use to reach services that are only accessible
