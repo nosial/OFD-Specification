@@ -237,6 +237,18 @@ for downstream consumers.
     for example, the [=entity registry=], or the records of [=evidence=] or
     of [=reports=].
 
+:   <dfn export lt="concern|concerns">concern</dfn>
+::  A kind of abuse that a requester asks a [=host=] to assess when scanning
+    content or querying an entity, expressed as one of the incident type values.
+    A host considers only the concerns of a request when deriving the
+    classification, risk score, and suggested action it returns, so that a
+    service can ignore kinds of abuse it does not act on.
+
+:   <dfn export>content type</dfn>
+::  The kind of content carried by a [=ContentInput=] object, such as a
+    message, an email, a web page, a DNS name, or a URL. It tells a [=host=]
+    how to interpret the content and which descriptive context accompanies it.
+
 :   <dfn export lt="downstream consumer|downstream consumers">downstream consumer</dfn>
 ::  A [=service=] that queries the [=records=] and [=telemetry=] of a
     [=host=] before deciding whether to block an [=entity=] or filter its
