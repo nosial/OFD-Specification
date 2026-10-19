@@ -4066,6 +4066,12 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+When the evidence already has a classification, a host MUST replace it with
+<code>classification_flag</code>; a request whose <code>classification_flag</code>
+equals the existing classification succeeds without changing the record. Replacing a classification does
+not change the classification of other evidence, the [=reputation=] of an
+entity, or any [=blacklist record=] created when a [=report=] was closed.
+
 A successful response is a [=success response=] with HTTP 200 OK and the
 success envelope.
 
