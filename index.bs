@@ -4476,6 +4476,13 @@ The request body MUST be a JSON object containing:
 A host MUST reject a request whose <code>expires</code> member is in the past with
 a client error (HTTP 400).
 
+The supporting [=report=] MAY concern an entity other than the one being
+blacklisted, since an incident often implicates several entities: a domain
+advertised in a spam message, or an alternative account of the sender, can be
+blacklisted on the strength of the report against the account that sent it,
+whose [=evidence=] the report links. A host MUST NOT reject a request because
+its report concerns another entity.
+
 A successful response is a [=success response=] with HTTP 201 Created and a body
 that is the UUID of the newly created blacklist record.
 
