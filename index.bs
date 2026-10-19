@@ -4454,6 +4454,7 @@ is a JSON array of [=BlacklistRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
+* HTTP 400 if <code>type</code> names a value that is not an incident type.
 * HTTP 401 if the blacklist is not public and the request is not authenticated.
 * HTTP 500 if the host fails to retrieve the blacklist records.
 
