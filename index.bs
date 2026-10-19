@@ -4003,7 +4003,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Submit Evidence method creates a new [=evidence=] record for a known
 [=entity=]. The request MUST be authenticated as an operator with [=client
-permissions=]. Its body combines a [=ContentInput=] object with the members below:
+permissions=]. Evidence submitted by a [=bot operator=] is automated and is
+created as confidential, as specified in [[#automated-records]]. Its body
+combines a [=ContentInput=] object with the members below:
 
 <table class="data">
   <thead>
