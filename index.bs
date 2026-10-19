@@ -5418,8 +5418,7 @@ carries more than one file, or whose file size is zero or exceeds the host's
 configured maximum upload size, with a client error (HTTP 400).
 
 For a URL upload, the host retrieves the file with an HTTP GET request to the
-supplied URL. URL uploads were introduced in [=interface version=]
-<code>1.1</code>; a client SHOULD NOT submit a URL upload to a host that does not
+supplied URL. A client SHOULD NOT submit a URL upload to a host that does not
 publish <code>allow_url_uploads</code> as true in its [=ServerInformation=]
 object. A host MAY decline to support URL uploads. A host that does so MUST
 publish <code>allow_url_uploads</code> as false and MUST reject every request
