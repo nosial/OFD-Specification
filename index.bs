@@ -4681,10 +4681,14 @@ A host MUST respond with an [=error response=] for the following conditions:
 The reports methods operate on the [=reports=] of the [=federated database=]. A
 report documents an incident against an [=entity=], and may be assigned to an
 operator for review. Reports are created in the opened state and are closed when
-resolved. A host MAY assign reports automatically to operators whose
-<code>auto_assign</code> member is true. Whether a host assigns reports
-automatically, which eligible operator it selects, and when it does so are
-internal to the host.
+resolved. A host MAY assign a report automatically to an operator that opts in
+to it: a report whose <code>automated</code> member is true to an operator whose
+configuration has <code>auto_assign_automated_reports</code> set to true, and
+any other report to an operator whose configuration has
+<code>auto_assign_reports</code> set to true. A host MUST NOT assign a report
+automatically to an operator that has not opted in to reports of its kind.
+Whether a host assigns reports automatically, which eligible operator it
+selects, and when it does so are internal to the host.
 
 <h4 id="report-record-object">ReportRecord object</h4>
 
