@@ -1286,6 +1286,9 @@ member given in parentheses:
 * [=blacklist records=] (<code>public_blacklist</code>);
 * the [=entity registry=] (<code>public_entities</code>);
 * entity metadata (<code>public_entity_metadata</code>);
+* [=telephone entities=] (<code>public_telephone_entities</code>), which are
+    hidden from unauthenticated requests unless exposed, as specified in
+    [[#telephone-entities]];
 * [=reports=] (<code>public_reports</code>);
 * content scanning (<code>public_scan_content</code>);
 * entity relationship queries (<code>public_query_entity</code>);
