@@ -2657,58 +2657,22 @@ operator=] MUST NOT be modified.
 The request is:
 
 <pre class="example">
-PATCH /operators/{uuid}/management-permissions HTTP/1.1
+PATCH /operators/{uuid}/configuration HTTP/1.1
 Authorization: Bearer &lt;token&gt;
 Content-Type: application/json; charset=utf-8
 </pre>
 
-The request body MUST be a JSON object containing:
+The request body MUST be a JSON object containing one or more members of an
+[=OperatorConfiguration=] object:
 
 <table class="data">
   <thead>
     <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>enabled</code></td><td>boolean</td><td>Yes</td><td>Whether management permissions are enabled for the operator.</td></tr>
-  </tbody>
-</table>
-
-A successful response is a [=success response=] with HTTP 200 OK and a body that
-is the success envelope.
-
-A host MUST respond with an [=error response=] for the following conditions:
-
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the <code>enabled</code> member is missing or not a boolean.
-* HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=operator permissions=], or if the target is the root or system operator.
-* HTTP 404 if the target operator does not exist.
-* HTTP 500 if the host fails to update the permissions.
-
-<h4 id="manage-operator-permissions">Manage Operator Permissions</h4>
-
-<em>Method name:</em> <code>manageOperatorPermissions</code>
-
-The Manage Operator Permissions method enables or disables [=operator
-permissions=] for an [=operator=]. The request MUST be authenticated as an
-operator with [=operator permissions=]. The [=root operator=] and [=system
-operator=] MUST NOT be modified.
-
-The request is:
-
-<pre class="example">
-PATCH /operators/{uuid}/operator-permissions HTTP/1.1
-Authorization: Bearer &lt;token&gt;
-Content-Type: application/json; charset=utf-8
-</pre>
-
-The request body MUST be a JSON object containing:
-
-<table class="data">
-  <thead>
-    <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><code>enabled</code></td><td>boolean</td><td>Yes</td><td>Whether operator permissions are enabled for the operator.</td></tr>
+    <tr><td><code>auto_assign_reports</code></td><td>boolean</td><td>No</td><td>Whether the operator opts in to the automatic assignment of reports that are not automated.</td></tr>
+    <tr><td><code>auto_assign_automated_reports</code></td><td>boolean</td><td>No</td><td>Whether the operator opts in to the automatic assignment of automated reports.</td></tr>
+    <tr><td><code>is_bot</code></td><td>boolean</td><td>No</td><td>Whether the operator is a [=bot operator=].</td></tr>
   </tbody>
 </table>
 
@@ -3261,7 +3225,7 @@ request MUST present a valid [=access token=].
 
 The request is:
 
-<pre class="example">GET /entities/{identifier}/query HTTP/1.1</pre>
+<pre class="example">GET /entities/{identifier}/query?concerns={concerns} HTTP/1.1</pre>
 
 The path parameter is:
 
