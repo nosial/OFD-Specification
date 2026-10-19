@@ -4013,7 +4013,7 @@ combines a [=ContentInput=] object with the members below:
   </thead>
   <tbody>
     <tr><td><code>entity_identifier</code></td><td>string</td><td>Yes</td><td>The [=entity identifier=] of the entity the evidence is associated with.</td></tr>
-    <tr><td><code>classification</code></td><td>string</td><td>No</td><td>An immutable classification to assign at creation, one of the values in [[#classification-flag-values]]. Supplying it requires [=management permissions=].</td></tr>
+    <tr><td><code>classification</code></td><td>string</td><td>No</td><td>A classification to assign at creation, one of the values in [[#classification-flag-values]]. Supplying it requires [=management permissions=]. It can be replaced with the Classify Evidence method, as specified in [[#classify-evidence]].</td></tr>
   </tbody>
 </table>
 
