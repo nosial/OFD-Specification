@@ -1375,6 +1375,7 @@ permission error (HTTP 403).
   <tbody>
     <tr><th scope="row">Read one's own operator account</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">Generate one's own access token</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+    <tr><th scope="row">Read and change one's own configuration</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
     <tr><th scope="row">List one's own opened reports</th><td>No</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
   </tbody>
   <tbody>
