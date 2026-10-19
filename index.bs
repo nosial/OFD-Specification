@@ -519,8 +519,8 @@ The following record kinds are defined by this specification.
 :   [=Evidence=]
 ::  Carries the information collected about an entity: text content, a note, a
     tag, an optional reference to a [=report=], an optional classification
-    flag, a confidentiality flag, optional [=file attachments=], and
-    timestamps.
+    flag, a confidentiality flag, an automated flag, optional [=file
+    attachments=], and timestamps.
 
 :   [=Blacklist records=]
 ::  Record a decision to block an entity; each has an incident type and is
