@@ -4714,7 +4714,7 @@ A <dfn export lt="ReportRecord">ReportRecord</dfn> object represents a single
     <tr><td><code>submitting_operator</code></td><td>string</td><td>The UUID of the [=operator=] that submitted the report.</td></tr>
     <tr><td><code>reporting_entity</code></td><td>string or null</td><td>The UUID of the [=entity=] being reported, or null if the report is anonymous.</td></tr>
     <tr><td><code>assigned_operator</code></td><td>string or null</td><td>The UUID of the operator assigned to the report, if any.</td></tr>
-    <tr><td><code>automated</code></td><td>boolean</td><td>Whether the host created the report automatically rather than in response to a Submit Report request.</td></tr>
+    <tr><td><code>automated</code></td><td>boolean</td><td>Whether the report is automated: created by the host itself or submitted by a [=bot operator=], as specified in [[#automated-records]].</td></tr>
     <tr><td><code>incident_type</code></td><td>string</td><td>The incident type, one of the values defined in [[#incident-type-values]].</td></tr>
     <tr><td><code>opened</code></td><td>boolean</td><td>Whether the report is still open.</td></tr>
     <tr><td><code>message</code></td><td>string or null</td><td>The message or description of the report.</td></tr>
