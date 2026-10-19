@@ -593,7 +593,12 @@ A [=host=] MAY create [=reports=] automatically under a policy it defines. An
 automatically created report MUST have its <code>automated</code> member set to
 true and is otherwise an ordinary report. The conditions for automatic report
 creation, the supporting evidence it records, and any subsequent assignment are
-internal to the host.
+internal to the host. Evidence that a host creates itself, including evidence
+recording scanned content in support of an automated report, MUST be confidential
+when it is associated with a [=telephone entity=], when the report it supports
+is against a telephone entity, or when the content was submitted with a
+telephone entity as its author. The message of an automated report against a
+telephone entity MUST NOT include the entity address.
 
 A [=host=] MAY classify content with any internal mechanism it chooses. The
 classification mechanism is not part of the OFD interface: a scan request
