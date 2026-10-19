@@ -2155,6 +2155,47 @@ An <dfn export lt="OperatorRecord">OperatorRecord</dfn> object represents an
   </tbody>
 </table>
 
+<h5 id="operator-permissions-object">OperatorPermissions object</h5>
+
+An <dfn export lt="OperatorPermissions">OperatorPermissions</dfn> object states
+which [=permission groups=] an [=operator=] holds. Its members are:
+
+<table class="data">
+  <thead>
+    <tr><th>Member</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>client</code></td><td>boolean</td><td>Whether the operator holds [=client permissions=].</td></tr>
+    <tr><td><code>management</code></td><td>boolean</td><td>Whether the operator holds [=management permissions=].</td></tr>
+    <tr><td><code>operator</code></td><td>boolean</td><td>Whether the operator holds [=operator permissions=].</td></tr>
+  </tbody>
+</table>
+
+[=Management permissions=] inherit [=client permissions=]. The
+<code>client</code> member therefore states whether the operator holds client
+permissions in effect: it is true whenever <code>management</code> is true. The
+<code>operator</code> member is independent of the other two, since operator
+permissions inherit neither.
+
+<h5 id="operator-configuration-object">OperatorConfiguration object</h5>
+
+An <dfn export lt="OperatorConfiguration">OperatorConfiguration</dfn> object holds
+the settings of an [=operator=] that are not permissions. Its members are:
+
+<table class="data">
+  <thead>
+    <tr><th>Member</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>auto_assign_reports</code></td><td>boolean</td><td>Whether the operator opts in to the automatic assignment of reports that are not automated.</td></tr>
+    <tr><td><code>auto_assign_automated_reports</code></td><td>boolean</td><td>Whether the operator opts in to the automatic assignment of automated reports, as defined in [[#automated-records]].</td></tr>
+    <tr><td><code>is_bot</code></td><td>boolean</td><td>Whether the operator is a [=bot operator=]. The evidence and reports it submits are automated, and its evidence is created as confidential, as specified in [[#automated-records]].</td></tr>
+  </tbody>
+</table>
+
+An opt-in to automatic report assignment does not require the host to assign a
+report, as specified in [[#reports-methods]].
+
 <h5 id="operator-category-values">Operator category values</h5>
 
 The value of the <code>category</code> parameter for the list and search methods
