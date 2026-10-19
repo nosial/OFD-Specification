@@ -2594,43 +2594,55 @@ A host MUST respond with an [=error response=] for the following conditions:
 * HTTP 404 if the target operator does not exist.
 * HTTP 500 if the host fails to generate the token.
 
-<h4 id="manage-client-permissions">Manage Client Permissions</h4>
+<h4 id="update-operator-permissions">Update Operator Permissions</h4>
 
-<em>Method name:</em> <code>manageClientPermissions</code>
+<em>Method name:</em> <code>updateOperatorPermissions</code>
 
-The Manage Client Permissions method enables or disables [=client permissions=]
-for an [=operator=]. The request MUST be authenticated as an operator with
+The Update Operator Permissions method grants or revokes [=permission groups=]
+of an [=operator=]. The request MUST be authenticated as an operator with
 [=operator permissions=]. The [=root operator=] and [=system operator=] MUST
 NOT be modified.
 
 The request is:
 
 <pre class="example">
-PATCH /operators/{uuid}/client-permissions HTTP/1.1
+PATCH /operators/{uuid}/permissions HTTP/1.1
 Authorization: Bearer &lt;token&gt;
 Content-Type: application/json; charset=utf-8
 </pre>
 
-The request body MUST be a JSON object containing:
+The request body MUST be a JSON object containing one or more members of an
+[=OperatorPermissions=] object, each a boolean:
 
 <table class="data">
   <thead>
     <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>enabled</code></td><td>boolean</td><td>Yes</td><td>Whether client permissions are enabled for the operator.</td></tr>
+    <tr><td><code>client</code></td><td>boolean</td><td>No</td><td>Whether the operator holds [=client permissions=].</td></tr>
+    <tr><td><code>management</code></td><td>boolean</td><td>No</td><td>Whether the operator holds [=management permissions=].</td></tr>
+    <tr><td><code>operator</code></td><td>boolean</td><td>No</td><td>Whether the operator holds [=operator permissions=].</td></tr>
   </tbody>
 </table>
 
+A host MUST apply every supplied member and leave the permission groups that
+are not supplied unchanged. Because [=management permissions=] inherit [=client
+permissions=], a request MUST NOT leave an operator with management permissions
+and without client permissions: a host MUST reject a request whose
+<code>client</code> member is false while the operator would still hold
+management permissions after the request, with a conflict error (HTTP 409), and
+MUST NOT apply any of its members.
+
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is the success envelope.
+is the updated [=OperatorPermissions=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the <code>enabled</code> member is missing or not a boolean.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the body contains no member, or a member is unknown or not a boolean.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=operator permissions=], or if the target is the root or system operator.
 * HTTP 404 if the target operator does not exist.
+* HTTP 409 if the operator would hold management permissions without client permissions.
 * HTTP 500 if the host fails to update the permissions.
 
 <h4 id="manage-management-permissions">Manage Management Permissions</h4>
