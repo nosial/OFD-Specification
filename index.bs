@@ -593,11 +593,30 @@ scanned, then take actions depending on the results of the scan.
   <figcaption>A client builds the database and acts on scan results.</figcaption>
 </figure>
 
-A [=host=] MAY create [=reports=] automatically under a policy it defines. An
-automatically created report MUST have its <code>automated</code> member set to
-true and is otherwise an ordinary report. The conditions for automatic report
-creation, the supporting evidence it records, and any subsequent assignment are
-internal to the host. Evidence that a host creates itself, including evidence
+A [=host=] MAY create [=reports=] automatically under a policy it defines. The
+conditions for automatic report creation, the supporting evidence it records,
+and any subsequent assignment are internal to the host.
+
+<h4 id="automated-records">Automated Records</h4>
+
+A [=record=] of [=evidence=] or a [=report=] is automated when no person decided
+to create it: when the [=host=] created it itself, or when a [=bot operator=]
+submitted it. A host MUST set the <code>automated</code> member of an
+[=EvidenceRecord=] or [=ReportRecord=] object to true for evidence and reports
+that it creates itself, and for evidence and reports submitted by an operator
+whose configuration has <code>is_bot</code> set to true at the time of
+submission, whatever the request supplies; it MUST set the member to false for
+every other record. An automated report is otherwise an ordinary report.
+
+Automated evidence has not been reviewed by a person and can contain private
+communications collected by a program. A host MUST create automated evidence as
+confidential, whatever the request supplies. An operator with [=management
+permissions=] MAY afterwards make it non-confidential with the Update Evidence
+Confidentiality method, as specified in [[#update-evidence-confidentiality]],
+for example after reviewing it; the evidence remains automated.
+
+Changing the configuration of an operator does not change the
+<code>automated</code> member of records created before the change. Evidence that a host creates itself, including evidence
 recording scanned content in support of an automated report, MUST be confidential
 when it is associated with a [=telephone entity=], when the report it supports
 is against a telephone entity, or when the content was submitted with a
@@ -676,7 +695,9 @@ The entity host in an entity address identifies the namespace in which the
 local part has meaning. It is not the OFD host that stores or serves the record.
 For example, `123456789@telegram.org` may be stored by
 `https://ofd.example.com`; creating that record grants the OFD host no authority
-over `telegram.org` or the entity.
+over `telegram.org` or the entity. Likewise, `15550123456@e164.arpa` identifies
+a telephone number within the namespace of international telephone numbers, as
+specified in [[#telephone-entities]].
 
 <figure id="fig-identifier-scopes">
   <img src="assets/entity_identification.jpg" width="1058" height="595"
