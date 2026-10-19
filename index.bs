@@ -456,12 +456,13 @@ specified in [[#get-server-information]].
 
 A minor version is backward compatible with every earlier minor version of the
 same major version. A minor version can add [=methods=], optional parameters,
-members of objects returned in responses, and optional capabilities of a host;
-it does not remove or rename existing methods, parameters, or members, change
-their types or meaning, or make an optional parameter required. A [=conforming
-host=] that implements a given interface version therefore also serves
-[=conforming clients=] and [=conforming downstream consumers=] written for any
-earlier minor version of the same major version.
+members of objects returned in responses, values of the sets of values defined
+by this specification, and optional capabilities of a host; it does not remove or
+rename existing methods, parameters, or members, change their types or meaning, or
+make an optional parameter required. A [=conforming host=] that implements a given
+interface version therefore also serves [=conforming clients=] and
+[=conforming downstream consumers=] written for any earlier minor version of the
+same major version.
 
 A change that cannot be made in a backward compatible way increments the major
 version and resets the minor version to zero. Implementations of different major
