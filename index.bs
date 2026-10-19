@@ -3877,7 +3877,10 @@ An <dfn export lt="EvidenceRecord">EvidenceRecord</dfn> object represents a sing
     <tr><td><code>entity</code></td><td>string</td><td>The UUID of the [=entity=] the evidence is associated with.</td></tr>
     <tr><td><code>operator</code></td><td>string</td><td>The UUID of the [=operator=] that submitted the evidence.</td></tr>
     <tr><td><code>confidential</code></td><td>boolean</td><td>Whether the evidence record is confidential.</td></tr>
+    <tr><td><code>automated</code></td><td>boolean</td><td>Whether the evidence is automated: created by the host itself or submitted by a [=bot operator=], as specified in [[#automated-records]]. Automated evidence is created as confidential.</td></tr>
     <tr><td><code>text_content</code></td><td>string or null</td><td>The text content of the evidence.</td></tr>
+    <tr><td><code>content_type</code></td><td>string</td><td>The [=content type=] of the evidence, one of the values defined in [[#content-type-values]]. <code>TEXT</code> for evidence submitted without one.</td></tr>
+    <tr><td><code>context</code></td><td>object or null</td><td>The context submitted with the evidence, as described in [[#content-context]].</td></tr>
     <tr><td><code>tag</code></td><td>string or null</td><td>An optional tag categorizing the evidence.</td></tr>
     <tr><td><code>report</code></td><td>string or null</td><td>The UUID of the [=report=] the evidence is linked to, when applicable.</td></tr>
     <tr><td><code>metadata</code></td><td>object or null</td><td>Additional metadata attached to the evidence, as described in [[#evidence-metadata]].</td></tr>
