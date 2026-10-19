@@ -334,9 +334,9 @@ for downstream consumers.
 
 :   <dfn export>operator</dfn>
 ::  An account on a [=host=] used to manage the [=federated database=] on
-    behalf of a service. An operator has a name, a disabled flag, an
-    <code>auto_assign</code> flag, an [=access token=], and one or more
-    [=permission groups=].
+    behalf of a service. An operator has a name, a disabled flag, an [=access
+    token=], its [=permission groups=], and a configuration of settings such as
+    automatic report assignment and whether it is a [=bot operator=].
 
 :   <dfn export>operator permissions</dfn>
 ::  The [=permission group=] that authorizes an operator to manage the
