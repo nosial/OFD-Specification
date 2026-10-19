@@ -2657,14 +2657,14 @@ A host MUST respond with an [=error response=] for the following conditions:
 * HTTP 409 if the operator would hold management permissions without client permissions.
 * HTTP 500 if the host fails to update the permissions.
 
-<h4 id="manage-management-permissions">Manage Management Permissions</h4>
+<h4 id="update-operator-configuration">Update Operator Configuration</h4>
 
-<em>Method name:</em> <code>manageManagementPermissions</code>
+<em>Method name:</em> <code>updateOperatorConfiguration</code>
 
-The Manage Management Permissions method enables or disables [=management
-permissions=] for an [=operator=]. The request MUST be authenticated as an
-operator with [=operator permissions=]. The [=root operator=] and [=system
-operator=] MUST NOT be modified.
+The Update Operator Configuration method changes the configuration of an
+[=operator=]. The request MUST be authenticated either as the operator whose
+configuration is changed, or as an operator with [=operator permissions=]. The
+[=root operator=] and [=system operator=] MUST NOT be modified.
 
 The request is:
 
