@@ -493,8 +493,9 @@ than <code>1.9</code>. A client or downstream consumer:
 <p class="note" role="note"><span class="marker">Note:</span> A host that
 implements an earlier minor version does not recognize parameters introduced in
 a later one, and may reject or ignore them. For example, a host that implements
-version <code>1.0</code> does not support URL uploads, and rejects a URL upload
-as a request missing its <code>file</code> part.</p>
+version <code>2.0</code> does not recognize a parameter introduced in version
+<code>2.1</code>, and may reject a request that supplies it or process the
+request as though the parameter were absent.</p>
 
 <h2 id="data-model">Data Model</h2>
 
