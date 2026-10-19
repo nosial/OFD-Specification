@@ -2623,55 +2623,20 @@ The request body MUST be a JSON object containing:
   </tbody>
 </table>
 
+A host MUST apply every supplied member and leave the settings that are not
+supplied unchanged. A change of <code>is_bot</code> applies to the evidence and
+reports the operator submits afterwards, as specified in [[#automated-records]].
+
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is the success envelope.
+is the updated [=OperatorConfiguration=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the <code>enabled</code> member is missing or not a boolean.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the body contains no member, or a member is unknown or not a boolean.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=operator permissions=], or if the target is the root or system operator.
 * HTTP 404 if the target operator does not exist.
-* HTTP 500 if the host fails to update the permissions.
-
-<h4 id="manage-auto-assign">Manage Auto Assign</h4>
-
-<em>Method name:</em> <code>manageAutoAssign</code>
-
-The Manage Auto Assign method records whether an [=operator=] opts in to
-automatic report assignment. The request MUST be authenticated as an operator
-with [=operator permissions=]. The [=root operator=] and [=system operator=]
-MUST NOT be modified.
-
-The request is:
-
-<pre class="example">
-PATCH /operators/{uuid}/auto-assign HTTP/1.1
-Authorization: Bearer &lt;token&gt;
-Content-Type: application/json; charset=utf-8
-</pre>
-
-The request body MUST be a JSON object containing:
-
-<table class="data">
-  <thead>
-    <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
-  </thead>
-  <tbody>
-    <tr><td><code>enabled</code></td><td>boolean</td><td>Yes</td><td>Whether the operator opts in to automatic report assignment.</td></tr>
-  </tbody>
-</table>
-
-A successful response is a [=success response=] with HTTP 200 OK and a body that
-is the success envelope.
-
-A host MUST respond with an [=error response=] for the following conditions:
-
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the <code>enabled</code> member is missing or not a boolean.
-* HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=operator permissions=], or if the target is the root or system operator.
-* HTTP 404 if the target operator does not exist.
-* HTTP 500 if the host fails to update the auto-assign flag.
+* HTTP 500 if the host fails to update the configuration.
 
 <h4 id="list-operator-audit-logs">List Operator Audit Logs</h4>
 
