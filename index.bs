@@ -2162,10 +2162,8 @@ An <dfn export lt="OperatorRecord">OperatorRecord</dfn> object represents an
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the operator.</td></tr>
     <tr><td><code>name</code></td><td>string</td><td>The display name of the operator.</td></tr>
     <tr><td><code>disabled</code></td><td>boolean</td><td>Whether the operator account is disabled.</td></tr>
-    <tr><td><code>client_permissions</code></td><td>boolean</td><td>Whether the operator holds [=client permissions=].</td></tr>
-    <tr><td><code>management_permissions</code></td><td>boolean</td><td>Whether the operator holds [=management permissions=].</td></tr>
-    <tr><td><code>operator_permissions</code></td><td>boolean</td><td>Whether the operator holds [=operator permissions=].</td></tr>
-    <tr><td><code>auto_assign</code></td><td>boolean</td><td>Whether the operator opts in to automatic report assignment. A true value does not require the host to assign a report.</td></tr>
+    <tr><td><code>permissions</code></td><td>[=OperatorPermissions=]</td><td>The [=permission groups=] the operator holds.</td></tr>
+    <tr><td><code>configuration</code></td><td>[=OperatorConfiguration=]</td><td>The configuration of the operator.</td></tr>
     <tr><td><code>created</code></td><td>integer</td><td>The Unix timestamp at which the operator was created.</td></tr>
     <tr><td><code>updated</code></td><td>integer</td><td>The Unix timestamp at which the operator was last updated.</td></tr>
   </tbody>
