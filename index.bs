@@ -4676,7 +4676,7 @@ configured as public; otherwise the request MUST present a valid [=access token=
 
 The request is:
 
-<pre class="example">GET /blacklist/search?q={query}&amp;limit={limit}&amp;page={page}&amp;category={category}&amp;by={by}&amp;order={order} HTTP/1.1</pre>
+<pre class="example">GET /blacklist/search?q={query}&amp;limit={limit}&amp;page={page}&amp;category={category}&amp;type={types}&amp;by={by}&amp;order={order} HTTP/1.1</pre>
 
 The query parameters are:
 
