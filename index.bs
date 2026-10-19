@@ -606,7 +606,12 @@ carries content in, and a scan response carries the results out, but how a
 host derives the classification—whether from the past data it has accumulated,
 from the [=reputation=] of the involved [=entities=], or from any other
 analysis—is internal to the host, MAY differ between [=hosts=], and is not
-defined by this specification.
+defined by this specification. The [=content type=] of submitted content tells
+a host how to interpret it, and the [=concerns=] of a request tell it which
+kinds of abuse the requester wants assessed; how a host assesses each content
+type and concern is likewise internal to the host. What a client submits is an
+assertion that a host verifies where it can, as specified in
+[[#client-assertions]].
 
 <h2 id="host-policy">Host Policy</h2>
 
