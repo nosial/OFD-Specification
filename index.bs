@@ -1432,6 +1432,14 @@ A host persists only a hash of the token, so the token cannot be retrieved after
 and the requester MUST retain it from that response. It is not included in operator
 records returned by the host, including the record of the authenticated operator.
 
+The configuration of an [=operator=] is visible only to the operator itself and to
+operators with [=operator permissions=]. A host MUST set the
+<code>configuration</code> member of every [=OperatorRecord=] object to null when
+the request is not authenticated, or is authenticated as another operator that
+does not hold [=operator permissions=], in every method that returns operator
+records, including the [[#search|Search]] method. The other members of an
+operator record remain public, as specified in [[#public-accessibility]].
+
 A host MUST NOT return a confidential [=evidence=] record, or any of its
 members, to a requester without [=management permissions=]. A record returned
 to such a requester MAY contain the UUID of confidential evidence as an opaque
