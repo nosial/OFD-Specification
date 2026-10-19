@@ -4817,6 +4817,10 @@ When the incident type is <code>ILLEGAL_CONTENT</code>, the host MUST mark every
 evidence record it creates for the report as confidential, regardless of the
 <code>confidential</code> member of the submitted [=ContentInput=] objects.
 
+A report submitted by a [=bot operator=], and the evidence created for it, are
+automated, and that evidence is created as confidential, as specified in
+[[#automated-records]].
+
 A host MAY decline to handle illegal content. A host that does so MUST publish
 <code>allow_illegal_content</code> as false in its [=ServerInformation=] object
 and MUST reject every request whose incident type is <code>ILLEGAL_CONTENT</code>
