@@ -291,8 +291,8 @@ for downstream consumers.
 :   <dfn export>evidence</dfn>
 ::  Information submitted about an [=entity=] to support deciding whether the
     entity should be trusted. Evidence contains text content, its [=content
-    type=] and context, a note, a tag, an optional reference to a [=report=],
-    an optional classification flag, an optional set of [=file attachments=],
+    type=] and context, a note, a tag, an automated flag, an optional reference
+    to a [=report=], an optional classification flag, an optional set of [=file attachments=],
     a confidentiality flag, and the timestamps of its creation and last update.
     A confidential evidence record is visible only to an operator with
     [=management permissions=]. Other records MAY expose its UUID as an opaque
