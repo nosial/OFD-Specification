@@ -3811,8 +3811,7 @@ the values that the Scan Content method interprets according to their type are
 published in <code>scan_content_types</code>, as specified in [[#scan-content]].
 
 :   <code>TEXT</code>
-::  Free-form text, such as a chat message. This is the default, and the only
-    interpretation of content in interface version <code>1.0</code>.
+::  Free-form text, such as a chat message. This is the default.
 :   <code>EMAIL</code>
 ::  An email message. <code>text_content</code> is the body of the message.
 :   <code>SMS</code>
