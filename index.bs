@@ -5457,6 +5457,19 @@ to produce the scan result and to maintain reputation, unless it creates a
 [=report=] or [=evidence=] from that content under a documented policy, as
 permitted by [[#population]].
 
+Content of the <code>HOSTNAME</code>, <code>URL</code>, and
+<code>WEB_PAGE</code> [=content types=] reveals what the user of a device
+visited or looked up, which can be as sensitive as the content of a message. A
+client SHOULD submit such content only with the consent of that user, and
+SHOULD NOT submit names or URLs that identify private networks, devices, or
+resources. A URL can carry a token that identifies its recipient, or that
+performs an action such as confirming a subscription when it is requested. A
+host that retrieves a URL while scanning therefore reveals to the remote party
+that the content was received, and can trigger such an action; it SHOULD
+retrieve URLs only with the GET method and without credentials or cookies, and
+SHOULD NOT retrieve URLs found within <code>TEXT</code> or <code>EMAIL</code>
+content.
+
 <h3 id="priv-public-accessibility">Public Accessibility</h3>
 
 [[#public-accessibility|Public accessibility]] is a host decision. A host MAY
