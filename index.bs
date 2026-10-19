@@ -5708,6 +5708,10 @@ content MAY refuse <code>ILLEGAL_CONTENT</code> reports entirely and advertises
 this through the <code>allow_illegal_content</code> member of its
 [=ServerInformation=] object.
 
+Evidence about a [=telephone entity=] typically records private text messages.
+A host MUST mark the evidence it creates itself about a telephone entity as
+confidential, as specified in [[#population]] and [[#telephone-entities]].
+
 <h3 id="sec-uploaded-files">Uploaded Files</h3>
 
 [=File attachments=] contain content submitted as evidence of abuse and are
