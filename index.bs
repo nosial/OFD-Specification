@@ -1631,7 +1631,7 @@ object. The members of a [=ScannedContent=] object are:
     <tr><td><code>suggested_lift_timestamp</code></td><td>integer or null</td><td>The Unix timestamp at which the host recommends lifting a temporary action, when applicable.</td></tr>
     <tr><td><code>scan_results</code></td><td>object</td><td>Host-defined information about the factors contributing to the result. Clients MUST NOT rely on particular member names or values.</td></tr>
     <tr><td><code>risk_score</code></td><td>number</td><td>The content risk score described in [[#risk-score-calculation]].</td></tr>
-    <tr><td><code>detections</code></td><td>array of [=Detection=]</td><td>The detections the host made with respect to the [=concerns=] of the request, as specified in [[#detection-object]]. Empty when the host made none. Introduced in interface version <code>1.1</code>.</td></tr>
+    <tr><td><code>detections</code></td><td>array of [=Detection=]</td><td>The detections the host made with respect to the [=concerns=] of the request, as specified in [[#detection-object]]. Empty when the host made none.</td></tr>
   </tbody>
 </table>
 
