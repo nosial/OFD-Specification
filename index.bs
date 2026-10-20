@@ -578,6 +578,13 @@ a member whose definition permits null, MAY have that member set to null. A
 reference to a record yields a not-found error (HTTP 404). The [=audit log=]
 retains its entries for the deleted record.
 
+A host that deletes a [=file attachment=] record, including one deleted together
+with its [=evidence=], MUST also delete the stored file. A file attachment that
+a host retains after its evidence is deleted, whose <code>evidence</code> member
+is therefore null, has no evidence from which to inherit its confidentiality: a
+host MUST treat it as the attachment of confidential evidence, and it remains
+deletable with the Delete Attachment method.
+
 <h3 id="population">Population of the Database</h3>
 
 [=Clients=] build the data of a [=federated database=]. They monitor activity,
@@ -615,7 +622,8 @@ communications collected by a program. A host MUST create automated evidence as
 confidential, whatever the request supplies. An operator with [=management
 permissions=] MAY afterwards make it non-confidential with the Update Evidence
 Confidentiality method, as specified in [[#update-evidence-confidentiality]],
-for example after reviewing it; the evidence remains automated.
+for example after reviewing it, unless that method requires it to remain
+confidential; the evidence remains automated.
 
 Changing the configuration of an operator does not change the
 <code>automated</code> member of records created before the change. Evidence that a host creates itself, including evidence
@@ -813,6 +821,10 @@ request that is not authenticated, the host:
 * MUST set the <code>metadata</code> member of a telephone entity to null.
 * MUST NOT include the entity address of a telephone entity in the message of
     an [=audit log=] entry.
+* MUST omit from the <code>active_blacklists</code> of an [=EntityQueryResult=]
+    the blacklist records of telephone entities other than the queried entity,
+    since their <code>entity</code> member would reveal that the host holds
+    records about them.
 
 A host MAY apply the same restrictions to authenticated operators that do not
 hold [=management permissions=].
@@ -942,7 +954,15 @@ by its SHA-256 identifier or its UUID.
 A host percent-decodes [[!RFC3986]] each path segment exactly once before
 matching it against a route pattern and validating it. A client MUST
 percent-encode a `%` that occurs in an [=entity address=], and any other
-character that is not permitted unencoded in a path segment.
+character that is not permitted unencoded in a path segment. A path segment
+that contains a `/` after decoding is not a valid [=entity identifier=] or UUID,
+and a host MUST reject it with HTTP 400 rather than match it as a separator.
+
+An [=entity address=] carried in a query string or a form-encoded body is
+decoded as specified for that format [[!URL]], in which an unencoded `+` denotes
+a space. A client MUST therefore percent-encode the `+`, `%`, `&`, `=`, and `#`
+characters of an entity address, such as the `+` of `john+tag@example.com`,
+when it carries the address in a query string or a form-encoded body.
 
 A host determines the form of an entity identifier, whether it is carried in a
 path segment or in a request parameter, as follows: a value that is a UUID in
@@ -1129,7 +1149,9 @@ document of the form:
 Each method definition specifies its successful status code and response body.
 Methods that create an independently addressable record normally use HTTP 201
 Created and include its UUID in the response body, unless their definition
-specifies otherwise. Methods that query or read normally use HTTP 200 OK and
+specifies otherwise: Push Entity, which is idempotent and returns HTTP 200 OK
+whether or not it created the entity, and Submit Report, which returns
+HTTP 200 OK with the created records. Methods that query or read normally use HTTP 200 OK and
 carry the result directly in the response body: a single record is a JSON
 object, and a list of records is a JSON array.
 
@@ -1218,8 +1240,9 @@ corresponds to a disabled operator is rejected as a permission error (HTTP 403).
 A request requires authentication when the method or domain it addresses is not
 publicly accessible. A request to a publicly accessible method does not require
 authentication, but MAY present an access token to receive information that is
-returned only to an [=authenticated operator=], such as entity metadata or
-confidential [=evidence=]. For such a request:
+returned only to an [=authenticated operator=], such as entity metadata, or only
+to an operator holding a [=permission group=], such as confidential [=evidence=].
+For such a request:
 
 * A valid access token authenticates its operator, and the request is processed
     as a request of that operator.
@@ -2527,6 +2550,13 @@ SHOULD NOT delete itself, since doing so can leave the host without an operator
 able to manage operators; a host MAY reject such a request with a client error
 (HTTP 400).
 
+A host that deletes the [=evidence=], [=reports=], or [=blacklist records=]
+created by an operator together with the operator, as permitted by
+[[#record-deletion]], MUST require the authenticated operator to also hold
+[=management permissions=] when the target operator has created any such record,
+since deleting them, and lifting the blocks they impose, is otherwise reserved to
+management permissions. Disabling an operator preserves its records.
+
 The request is:
 
 <pre class="example">
@@ -2541,7 +2571,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed, or the target is the authenticated operator itself and the host rejects self-deletion.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=operator permissions=], or if the target is the root or system operator.
+* HTTP 403 if the authenticated operator does not hold [=operator permissions=], if the target is the root or system operator, or if the host would delete records created by the target operator and the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the target operator does not exist.
 * HTTP 500 if the host fails to delete the operator.
 
@@ -3279,7 +3309,8 @@ object:
 </table>
 
 The <code>active_blacklists</code> member contains every active blacklist record
-of the relationship group, whatever its incident type.
+of the relationship group, whatever its incident type, except those a host
+omits as specified in [[#telephone-entities]].
 
 A host MUST respond with an [=error response=] for the following conditions:
 
@@ -3377,7 +3408,7 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a valid [=entity identifier=], or the request body is missing the <code>metadata</code> member or it is not a JSON object.
+* HTTP 400 if the path does not contain a valid [=entity identifier=], or the request body is missing the <code>metadata</code> member, it is not a JSON object, or it violates the constraints of [[#entity-metadata]].
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=client permissions=].
 * HTTP 404 if the entity does not exist.
@@ -4162,7 +4193,10 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Update Evidence Confidentiality method sets or clears the confidentiality
 flag of an [=evidence=] record. The request MUST be authenticated as an operator
-with [=management permissions=].
+with [=management permissions=]. Evidence linked to a [=report=] whose incident
+type is <code>ILLEGAL_CONTENT</code> MUST remain confidential, as specified in
+[[#sec-confidential-evidence]]: a host MUST reject a request that would make such
+evidence non-confidential with a conflict error (HTTP 409).
 
 The request is:
 
@@ -4203,6 +4237,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the evidence does not exist.
+* HTTP 409 if the request would make evidence linked to an <code>ILLEGAL_CONTENT</code> report non-confidential.
 * HTTP 500 if the host fails to update the confidentiality.
 
 <h4 id="update-evidence-tag">Update Evidence Tag</h4>
@@ -4619,9 +4654,11 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 <em>Method name:</em> <code>extendBlacklist</code>
 
-The Extend Blacklist method extends the expiry time of a temporary
+The Extend Blacklist method extends the expiry time of an active temporary
 [=blacklist record=] by a given number of seconds. The request MUST be authenticated
-as an operator with [=management permissions=].
+as an operator with [=management permissions=]. A record whose expiry has passed is
+no longer active and cannot be extended; an operator blacklists the entity again
+instead.
 
 The request is:
 
@@ -4658,7 +4695,7 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the request body is missing the <code>seconds</code> member, it is not a positive integer, the blacklist record is permanent, or the blacklist record is already lifted.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the request body is missing the <code>seconds</code> member, it is not a positive integer, the blacklist record is permanent, the blacklist record is already lifted, or it has expired.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the blacklist record does not exist.
@@ -4718,7 +4755,10 @@ to it: a report whose <code>automated</code> member is true to an operator whose
 configuration has <code>auto_assign_automated_reports</code> set to true, and
 any other report to an operator whose configuration has
 <code>auto_assign_reports</code> set to true. A host MUST NOT assign a report
-automatically to an operator that has not opted in to reports of its kind.
+automatically to an operator that has not opted in to reports of its kind, and
+MUST assign it only to an operator that is enabled and holds [=management
+permissions=], as required of the target of the Assign Operator to Report
+method, so that the assigned operator can close the report.
 Whether a host assigns reports automatically, which eligible operator it
 selects, and when it does so are internal to the host.
 
@@ -4734,7 +4774,7 @@ A <dfn export lt="ReportRecord">ReportRecord</dfn> object represents a single
   <tbody>
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the report.</td></tr>
     <tr><td><code>submitting_operator</code></td><td>string</td><td>The UUID of the [=operator=] that submitted the report.</td></tr>
-    <tr><td><code>reporting_entity</code></td><td>string or null</td><td>The UUID of the [=entity=] being reported, or null if the report is anonymous.</td></tr>
+    <tr><td><code>reporting_entity</code></td><td>string or null</td><td>The UUID of the [=entity=] being reported. Despite its name, it identifies the reported entity, not the reporter. It is null for a report that concerns no entity, which only a host can create, under its own policy, since Submit Report requires an entity.</td></tr>
     <tr><td><code>assigned_operator</code></td><td>string or null</td><td>The UUID of the operator assigned to the report, if any.</td></tr>
     <tr><td><code>automated</code></td><td>boolean</td><td>Whether the report is automated: created by the host itself or submitted by a [=bot operator=], as specified in [[#automated-records]].</td></tr>
     <tr><td><code>incident_type</code></td><td>string</td><td>The incident type, one of the values defined in [[#incident-type-values]].</td></tr>
@@ -5057,9 +5097,11 @@ The request body MUST be a JSON object containing:
 
 A host MUST reject a request whose <code>blacklist_expires</code> member is in the
 past, whose <code>classification_flag</code> member is not one of the values
-defined in [[#classification-flag-values]], or whose
+defined in [[#classification-flag-values]], whose
 <code>blacklist_incident_type</code> member is not one of the values defined in
-[[#incident-type-values]], with a client error (HTTP 400).
+[[#incident-type-values]], or that supplies <code>blacklist_incident_type</code>
+for a report whose <code>reporting_entity</code> is null, with a client error
+(HTTP 400).
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is the success envelope.
@@ -5159,7 +5201,8 @@ The Assign Operator to Report method assigns an [=operator=] to a [=report=],
 replacing any previous assignment. The request MUST be authenticated as an
 operator with [=management permissions=]. The target operator MUST be enabled
 and MUST hold [=management permissions=]. If no operator is specified in the
-request body, the authenticated operator is assigned.
+request body, the authenticated operator is assigned. A closed report MUST NOT be
+assigned.
 
 The request is:
 
@@ -5196,7 +5239,7 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the target operator is disabled.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the operator UUID is malformed, the target operator is disabled, or the report is closed.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator or the target operator does not hold [=management permissions=].
 * HTTP 404 if the report or target operator does not exist.
@@ -5371,7 +5414,10 @@ The Upload Attachment method stores a file as a [=file attachment=] and associat
 it with an [=evidence=] record. The request MUST be authenticated as an operator
 with [=client permissions=]. The file is either uploaded directly in the request
 body or retrieved by the host from a URL supplied by the client, as described in
-[[#file-uploads]].
+[[#file-uploads]]. An operator MAY attach a file only to evidence that it submitted
+itself, unless it holds [=management permissions=]: other evidence, including
+confidential evidence the operator knows only by its UUID, belongs to another
+operator, whose submission a file would otherwise alter or publish.
 
 A direct upload is:
 
@@ -5464,7 +5510,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the request is missing a required parameter, supplies both a file and a URL, the file is invalid, the evidence UUID is malformed, or the URL is not permitted or the file could not be retrieved from it.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=client permissions=].
+* HTTP 403 if the authenticated operator does not hold [=client permissions=], or the evidence was submitted by another operator and the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the evidence record does not exist.
 * HTTP 500 if the host fails to store the file or create the attachment record.
 
@@ -5475,8 +5521,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 The Download Attachment method returns the contents of a [=file attachment=].
 The method is public when the evidence domain is configured as public; otherwise
 the request MUST present a valid [=access token=]. If the attachment's
-associated evidence is confidential, the request MUST be authenticated as an
-operator with [=management permissions=].
+associated evidence is confidential, or the attachment is no longer associated
+with evidence, as described in [[#record-deletion]], the request MUST be
+authenticated as an operator with [=management permissions=].
 
 The request is:
 
@@ -5509,8 +5556,8 @@ document. The response carries the following headers:
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
-* HTTP 401 if the evidence domain is not public and the request is not authenticated, or if the attachment's evidence is confidential and the request is not authenticated.
-* HTTP 403 if the attachment's evidence is confidential and the authenticated operator does not hold [=management permissions=].
+* HTTP 401 if the evidence domain is not public and the request is not authenticated, or if the attachment's evidence is confidential or absent and the request is not authenticated.
+* HTTP 403 if the attachment's evidence is confidential or absent and the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the attachment or its file does not exist.
 * HTTP 500 if the host fails to retrieve the file.
 
@@ -5521,7 +5568,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 The Get Attachment Info method returns the metadata of a [=file attachment=]
 without returning its contents. The method is public when the evidence domain is
 configured as public; otherwise the request MUST present a valid [=access token=].
-If the attachment's associated evidence is confidential, the request MUST be
+If the attachment's associated evidence is confidential, or the attachment is no longer associated
+with evidence, as described in [[#record-deletion]], the request MUST be
 authenticated as an operator with [=management permissions=].
 
 The request is:
@@ -5545,8 +5593,8 @@ is a JSON [=FileAttachmentRecord=] object.
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
-* HTTP 401 if the evidence domain is not public and the request is not authenticated, or if the attachment's evidence is confidential and the request is not authenticated.
-* HTTP 403 if the attachment's evidence is confidential and the authenticated operator does not hold [=management permissions=].
+* HTTP 401 if the evidence domain is not public and the request is not authenticated, or if the attachment's evidence is confidential or absent and the request is not authenticated.
+* HTTP 403 if the attachment's evidence is confidential or absent and the authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the attachment does not exist.
 * HTTP 500 if the host fails to retrieve the attachment record.
 
@@ -5554,8 +5602,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 <em>Method name:</em> <code>deleteAttachment</code>
 
-The Delete Attachment method permanently deletes a [=file attachment=]. The
-request MUST be authenticated as an operator with [=management permissions=].
+The Delete Attachment method permanently deletes a [=file attachment=] and its
+stored file, including an attachment that is no longer associated with evidence.
+The request MUST be authenticated as an operator with [=management permissions=].
 
 The request is:
 
@@ -5583,7 +5632,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=management permissions=].
-* HTTP 404 if the attachment or its associated evidence does not exist.
+* HTTP 404 if the attachment does not exist.
 * HTTP 500 if the host fails to delete the attachment.
 
 <h4 id="search-attachments">Search Attachments</h4>
@@ -5702,7 +5751,9 @@ Evidence supporting a report of illegal content is itself likely to be illegal
 to distribute. A host therefore MUST mark evidence as confidential when it is
 created with, or linked to, a report whose incident type is
 <code>ILLEGAL_CONTENT</code>, as specified in [[#submit-report]] and
-[[#add-evidence-to-report]]. A host whose operator does not wish to store such
+[[#add-evidence-to-report]], and MUST NOT make such evidence non-confidential
+while it remains linked to that report, as specified in
+[[#update-evidence-confidentiality]]. A host whose operator does not wish to store such
 content MAY refuse <code>ILLEGAL_CONTENT</code> reports entirely and advertises
 this through the <code>allow_illegal_content</code> member of its
 [=ServerInformation=] object.
