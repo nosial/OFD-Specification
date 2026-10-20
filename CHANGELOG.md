@@ -34,8 +34,6 @@ backward compatible with 1.x.
   Evidence the host creates itself or a bot operator submits is automated, and automated evidence is created as
   confidential; an operator with management permissions may make it non-confidential afterwards. Reports submitted by
   a bot operator are automated like the reports a host creates itself (Automated Records section).
-
-### Added
 - Download Attachment responses carry `X-Content-Type-Options: nosniff`.
 - Hosts answer CORS preflight (`OPTIONS`) requests without authentication, and `Access-Control-Allow-Origin`
   carries the origin of the base URL rather than the full URL.
@@ -97,7 +95,7 @@ backward compatible with 1.x.
 - Update Operator Name checks reserved names case-insensitively, as Create Operator does.
 - Report category values apply to every method that lists or searches reports.
 - The ContentInput object permits members added by methods that extend it.
-- The Permission Groups section includes managing the `auto_assign` flag among operator permissions.
+- The Permission Groups section includes managing operator configuration among operator permissions.
 - An access token is disclosed exactly once, in the response that creates the operator or generates the token, and
   only a hash of it is persisted, so the requester must retain it; Generate Access Token and Generate Operator Access
   Token now state this as Create Operator does.
@@ -121,12 +119,34 @@ backward compatible with 1.x.
   conditions.
 - The cross-collection Search method returns file attachments only to operators with management permissions, as
   Search Attachments does.
-- Create Operator states that default permission groups, the default `auto_assign` flag, and case sensitivity of
+- Create Operator states that default permission groups, the default configuration, and case sensitivity of
   name uniqueness are host-defined; Delete Operator discourages self-deletion, which a host MAY reject.
 - Set Entity Relationship permits a host to reject a relationship of an entity to itself.
 - Close Report ignores `blacklist_expires` when `blacklist_incident_type` is absent.
 - A note lists the status codes retained from 1.0 that differ from the general definitions of HTTP 400, 403, 404 and
   409, and the parameter precedence order is noted as retained for compatibility.
+- Deleting a file attachment, including one deleted with its evidence, deletes its stored file. An attachment
+  retained without evidence is treated as the attachment of confidential evidence, and Delete Attachment no longer
+  responds with HTTP 404 because its evidence is missing.
+- Upload Attachment attaches files only to evidence the operator submitted, unless it holds management permissions,
+  and otherwise responds with HTTP 403.
+- Update Evidence Confidentiality rejects making evidence linked to an `ILLEGAL_CONTENT` report non-confidential with
+  HTTP 409.
+- A host assigns reports automatically only to enabled operators with management permissions, which can close them.
+- Assign Operator to Report rejects closed reports with HTTP 400.
+- Close Report rejects `blacklist_incident_type` for a report that concerns no entity with HTTP 400, and the
+  `reporting_entity` member of the ReportRecord object describes when it is null instead of calling such a report
+  anonymous.
+- Extend Blacklist rejects an expired blacklist record with HTTP 400.
+- A host that deletes the records of a deleted operator requires management permissions to delete an operator that
+  created evidence, reports or blacklist records, and otherwise responds with HTTP 403.
+- Clients percent-encode `+`, `%`, `&`, `=` and `#` in an entity address carried in a query string or form body, and
+  hosts reject a path segment that contains `/` after decoding with HTTP 400.
+- Query Entity omits from `active_blacklists` the blacklist records of hidden telephone entities other than the
+  queried entity.
+- Update Entity lists metadata constraint violations among its HTTP 400 conditions, the general success response rule
+  names the methods that create records with HTTP 200, and public methods describe confidential evidence as requiring a
+  permission group rather than only authentication.
 - Incorrect references, identifier wording and minor editorial issues, including request examples
   of authenticated methods, which now show the `Authorization` header; terminology is listed alphabetically.
 
