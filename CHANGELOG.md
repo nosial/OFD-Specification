@@ -45,11 +45,11 @@ backward compatible with 1.x.
 - Resource Exhaustion security consideration, permitting HTTP 429 for requests that exceed a host's limits.
 - URL uploads: Upload Attachment accepts a `url` parameter as an alternative to `file`, and the host retrieves the
   file itself. Support is optional and advertised by the new `allow_url_uploads` member of the ServerInformation
-  object (treated as false when absent). Hosts MUST guard retrievals against server-side request forgery, covered
+  object. Hosts MUST guard retrievals against server-side request forgery, covered
   by the new Remote Retrieval security consideration.
 - The `collects_public_scan_content` member of the ServerInformation object, stating whether the host may store
   content submitted to Scan Content by unauthenticated requests, or records derived from it such as automated
-  reports and evidence; clients SHOULD assume it may when the member is absent.
+  reports and evidence.
 - Telephone entities: a telephone number is the named entity `<number>@e164.arpa`, whose local part is the E.164
   international number as 1 through 15 digits without `+` or separators. Unless a host publishes the new
   `public_telephone_entities` member of the ServerInformation object as true, unauthenticated requests see a
