@@ -22,7 +22,6 @@ backward compatible with 1.x.
 - `auto_assign` is replaced by the `auto_assign_reports` and `auto_assign_automated_reports` configuration settings,
   opting in to the automatic assignment of ordinary and automated reports separately; a host never assigns a report
   automatically to an operator that has not opted in to reports of its kind.
-- Members introduced during 1.1 are required, their fallbacks for hosts that do not publish them are removed.
 
 ### Added
 - The report supporting a blacklist record may concern another entity than the one being blacklisted (eg; the domain a
