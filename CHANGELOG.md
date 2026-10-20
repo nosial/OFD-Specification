@@ -142,6 +142,10 @@ backward compatible with 1.x.
   created evidence, reports or blacklist records, and otherwise responds with HTTP 403.
 - Clients percent-encode `+`, `%`, `&`, `=` and `#` in an entity address carried in a query string or form body, and
   hosts reject a path segment that contains `/` after decoding with HTTP 400.
+- Hosts reject entity addresses whose entity host is a subdomain of `e164.arpa`, such as the ENUM domain of a number,
+  with HTTP 400.
+- Scan Content rejects an `author` that is not a string, or that names the `e164.arpa` namespace without being a
+  canonical telephone entity, with HTTP 400.
 - Query Entity omits from `active_blacklists` the blacklist records of hidden telephone entities other than the
   queried entity.
 - Update Entity lists metadata constraint violations among its HTTP 400 conditions, the general success response rule
