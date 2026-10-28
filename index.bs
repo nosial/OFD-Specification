@@ -1625,7 +1625,9 @@ Content-Type: application/json; charset=utf-8
 Authorization: Bearer &lt;token&gt;
 </pre>
 
-The request body MUST be a JSON object containing the members below:
+The request body MUST be a JSON object containing the members below, or, when
+the request carries files, a `multipart/form-data` body as specified in
+[[#scan-files]]:
 
 <table class="data">
   <thead>
