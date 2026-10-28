@@ -1102,6 +1102,11 @@ A client MUST NOT submit the content of a file attachment through any other
 parameter, and MUST NOT combine both ways in a single request. The rules that
 apply to each are specified in [[#upload-attachment]].
 
+Files submitted to the Scan Content method for analysis are not file
+attachments. They are carried in a `multipart/form-data` body as specified in
+[[#scan-files]], and only become file attachments when the host records them as
+[=evidence=].
+
 <h4 id="pagination-and-ordering">Pagination, Filtering, and Ordering</h4>
 
 Methods that return a list of [=records=] are paginated. Unless a method
