@@ -1868,6 +1868,7 @@ the request. Its members are:
   <tbody>
     <tr><td><code>concern</code></td><td>string</td><td>The [=concern=] the detection relates to, one of the effective concerns of the request.</td></tr>
     <tr><td><code>content_index</code></td><td>integer</td><td>The zero-based position, in the <code>evidence</code> member of the request, of the [=ContentInput=] object the detection relates to; 0 when the request carried a single object.</td></tr>
+    <tr><td><code>file_index</code></td><td>integer or null</td><td>The [=file index=] of the file, within that [=ContentInput=] object, that the detection relates to, as specified in [[#scan-files]]; null when the detection does not relate to a file. Introduced in version <code>2.1</code>.</td></tr>
     <tr><td><code>entity</code></td><td>string or null</td><td>The UUID of the [=entity=] the detection relates to, when it relates to an entity resolved from the content.</td></tr>
     <tr><td><code>source</code></td><td>string</td><td>A host-defined name of the mechanism that made the detection, such as the name of a filter list or a classifier. Clients MUST NOT rely on particular values.</td></tr>
     <tr><td><code>confidence</code></td><td>number or null</td><td>A host-defined confidence of the detection, when the mechanism provides one.</td></tr>
