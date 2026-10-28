@@ -1,4 +1,4 @@
-# Open Federated Database (OFD) Specification
+# <picture><source media="(prefers-color-scheme: dark)" srcset="assets/icon/ofd-specification_light.svg"><img src="assets/icon/ofd-specification_dark.svg" alt="OFD Specification" width="32" height="32"></picture> Open Federated Database (OFD) Specification
 
 This repository houses the official build system and source documentation for the
 Open Federated Database Specification. The specification is authored as a single
