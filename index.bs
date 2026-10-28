@@ -6073,6 +6073,18 @@ retrieve URLs only with the GET method and without credentials or cookies, and
 SHOULD NOT retrieve URLs found within <code>TEXT</code> or <code>EMAIL</code>
 content.
 
+Files submitted for scanning can be more revealing than the text they
+accompany. An image can show the faces, documents, or surroundings of people
+other than its author, and many file formats carry metadata, such as the
+location at which a photograph was taken, the device that took it, or the name
+of the person who edited a document. A host that records scanned files as
+[=evidence=] SHOULD treat such metadata as personal information, and a client
+MAY remove metadata that the host does not need before submitting a file. A
+client SHOULD NOT submit files that the users whose content it scans could not
+expect to be analyzed, and SHOULD inform them when it submits files without
+authenticating to a host that publishes <code>collects_public_scan_content</code>
+as true.
+
 <h3 id="priv-public-accessibility">Public Accessibility</h3>
 
 [[#public-accessibility|Public accessibility]] is a host decision. A host MAY
