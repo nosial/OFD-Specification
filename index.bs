@@ -456,7 +456,7 @@ The OFD interface is identified by an <dfn export>interface version</dfn> of the
 form <code>MAJOR.MINOR</code>, where <code>MAJOR</code> is the major version and
 <code>MINOR</code> is the minor version, each a non-negative decimal integer
 without leading zeros. This specification defines interface version
-<code>2.0</code>. A [=host=] publishes the interface version it implements in
+<code>2.1</code>. A [=host=] publishes the interface version it implements in
 the <code>api_version</code> member of its [=ServerInformation=] object, as
 specified in [[#get-server-information]].
 
