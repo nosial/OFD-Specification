@@ -1560,7 +1560,7 @@ members of a [=ServerInformation=] object are:
   </thead>
   <tbody>
     <tr><td><code>name</code></td><td>string</td><td>The name of the host.</td></tr>
-    <tr><td><code>api_version</code></td><td>string</td><td>The [=interface version=] implemented by the host, as specified in [[#versioning]]. A host implementing this version of the specification reports <code>2.0</code>.</td></tr>
+    <tr><td><code>api_version</code></td><td>string</td><td>The [=interface version=] implemented by the host, as specified in [[#versioning]]. A host implementing this version of the specification reports <code>2.1</code>.</td></tr>
     <tr><td><code>public_audit_logs</code></td><td>boolean</td><td>Whether the audit log domain is publicly accessible.</td></tr>
     <tr><td><code>public_evidence</code></td><td>boolean</td><td>Whether the evidence domain is publicly accessible.</td></tr>
     <tr><td><code>public_blacklist</code></td><td>boolean</td><td>Whether the blacklist domain is publicly accessible.</td></tr>
@@ -1574,6 +1574,8 @@ members of a [=ServerInformation=] object are:
     <tr><td><code>allow_illegal_content</code></td><td>boolean</td><td>Whether the host accepts reports with the <code>ILLEGAL_CONTENT</code> incident type, as specified in [[#submit-report]].</td></tr>
     <tr><td><code>allow_url_uploads</code></td><td>boolean</td><td>Whether the host accepts URL uploads through the Upload Attachment method, as specified in [[#upload-attachment]].</td></tr>
     <tr><td><code>scan_content_types</code></td><td>array of strings</td><td>The [=content types=], as defined in [[#content-type-values]], that the Scan Content method interprets according to their type. Always includes <code>TEXT</code>.</td></tr>
+    <tr><td><code>max_scan_files</code></td><td>integer</td><td>The maximum number of files a single Scan Content request may carry, as specified in [[#scan-files]]; 0 when the host ignores the files of every request. Introduced in version <code>2.1</code>.</td></tr>
+    <tr><td><code>max_scan_file_size</code></td><td>integer</td><td>The maximum size, in bytes, of each file a Scan Content request may carry; 0 when the host ignores the files of every request. Introduced in version <code>2.1</code>.</td></tr>
     <tr><td><code>concerns</code></td><td>array of strings</td><td>The [=concerns=], as defined in [[#concern-values]], that the host can assess.</td></tr>
     <tr><td><code>default_concerns</code></td><td>array of strings</td><td>The [=concerns=] the host assesses when a request does not name any, a subset of <code>concerns</code>.</td></tr>
     <tr><td><code>search_enabled</code></td><td>boolean</td><td>Whether search is enabled on the host. When false, every search method responds with HTTP 404.</td></tr>
