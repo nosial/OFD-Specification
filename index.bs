@@ -1674,6 +1674,119 @@ A host MUST respond with an [=error response=] for the following conditions:
 * HTTP 403 if scanning is not public and the [=authenticated operator=] does not hold [=client permissions=].
 * HTTP 500 if the host fails to resolve the author entity due to an internal error.
 
+<h5 id="scan-files">Scanned files</h5>
+
+A host accepts files with the content it scans, so that a client can submit,
+for example, the images of a message together with its text. A host is not
+required to scan the files it accepts: it MAY ignore the files of every request,
+or of requests that are not authenticated or whose [=authenticated operator=]
+does not hold [=client permissions=]. A host that ignores the files of a request
+still validates the request as specified below, except against
+<code>max_scan_files</code> and <code>max_scan_file_size</code>, and then treats
+each file as one it does not interpret. A client therefore does not need to know
+whether a host scans files before submitting them.
+
+A request that carries files has the media type `multipart/form-data`
+[[!RFC7578]]. Each file is carried in a part of its own, whose name the client
+chooses. Every other parameter of the method is carried in a part named after
+it: the value of the <code>evidence</code> and <code>concerns</code> parameters
+is the JSON text [[!RFC8259]] that the member would hold in a JSON request
+body, and the value of any other parameter is its text. For example, a request
+that scans a text message carrying an image, and a second image sent on its own,
+is:
+
+<pre class="example">
+POST /scan HTTP/1.1
+Authorization: Bearer &lt;token&gt;
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="author"
+
+15550123456@e164.arpa
+--boundary
+Content-Disposition: form-data; name="evidence"
+Content-Type: application/json
+
+[
+  {"content_type": "SMS", "text_content": "Your parcel is on hold", "files": ["image_0"]},
+  {"files": ["image_1"]}
+]
+--boundary
+Content-Disposition: form-data; name="image_0"; filename="parcel.jpg"
+Content-Type: image/jpeg
+
+...
+--boundary
+Content-Disposition: form-data; name="image_1"; filename="qr.png"
+Content-Type: image/png
+
+...
+--boundary--
+</pre>
+
+The files of a [=ContentInput=] object are named in its <code>files</code>
+member:
+
+<table class="data">
+  <thead>
+    <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>files</code></td><td>array of strings</td><td>No</td><td>The names of the parts that carry the files of the content, in order. When present, it MUST be a non-empty array.</td></tr>
+  </tbody>
+</table>
+
+The name of a part that carries a file MUST consist of 1 through 64
+characters, each an ASCII letter, an ASCII digit, `_`, or `-`, and MUST NOT be
+the name of a parameter of the method. The <dfn>file index</dfn> of a file is
+its zero-based position in the <code>files</code> member that names it. A
+[=ContentInput=] object with files MAY omit <code>text_content</code>; its
+[=content type=] still describes the content the files belong to, such as an
+<code>SMS</code> for the images of an MMS message, and defaults to
+<code>TEXT</code>.
+
+A host MUST reject a request with a client error (HTTP 400) when:
+
+* a <code>files</code> member is not a non-empty array of strings, or names a
+    part that the request does not carry, that does not carry a file, or that
+    another <code>files</code> member, or the same one, already names;
+* a part carries a file that no <code>files</code> member names, carries more
+    than one file, or has a name that is not permitted;
+* the host scans the files of the request, and a file is empty or exceeds
+    <code>max_scan_file_size</code>, or the request carries more files than
+    <code>max_scan_files</code>.
+
+The host determines the media type of each file from its content; it MUST NOT
+trust the media type or the file name declared by the client. A host interprets
+the files of the media types it supports, and does not announce which they are:
+a client submits the files of the content regardless. A file of any other media
+type, or one the host cannot interpret, is not an error: the host continues its analysis without it, and the file does not
+affect the <code>classification</code>, <code>risk_score</code>,
+<code>suggested_action</code>, or <code>detections</code> of the result. A host
+that interprets no file therefore returns the result it would return for the
+rest of the content alone, and the <code>risk_score</code> of content that
+consists only of such files remains at its starting value, as specified in
+[[#risk-score-calculation]].
+
+A file is an assertion of the client, as specified in
+[[#client-assertions]]. A host MUST NOT retrieve resources that a file refers
+to, such as the external resources of an image or a document, and an entity
+that a host finds within a file, for example in a QR code, is resolved like any
+other entity of the content, with a null <code>entity_position</code>.
+
+Files submitted for scanning are not [=file attachments=]. A host uses them only
+to produce the scan result and MUST discard them once it has done so, unless it
+creates [=evidence=] from the content under the policy permitted by
+[[#population]]. A host that creates evidence from content that carried files
+SHOULD record each file as a file attachment of that evidence, which is then
+subject to the rules for evidence and file attachments, including those for
+confidential and automated evidence in [[#automated-records]]. The file name it
+records is the one supplied by the client, reduced to a safe form as described
+in [[#upload-attachment]]. Files submitted without authenticating are subject
+to <code>collects_public_scan_content</code>, as specified in
+[[#priv-content-scanning]].
+
 <h4 id="scanned-content-object">ScannedContent object</h4>
 
 A successful response to the Scan Content method is a [=success response=] with
