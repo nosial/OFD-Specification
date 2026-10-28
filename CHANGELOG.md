@@ -4,10 +4,27 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [2.0-R1] - Ongoing
+## [2.1] - 2026-10-28
 
-This is an ongoing update
+This is an ongoing update. It is a minor version: hosts report `2.1` as the `api_version`, and it is backward
+compatible with 2.0.
 
+### Added
+- Scan Content accepts files, such as the images of a message, with the content it scans. A request that carries files
+  is a `multipart/form-data` body: each file is carried in a part of its own, the `evidence` and `concerns` parts carry
+  the JSON text of their values, and a ContentInput object names the parts of its files in a new `files` member. A
+  ContentInput object with files may omit `text_content`. JSON requests are unchanged.
+- Every host of version 2.1 accepts files for scanning, but may ignore the files of every request, or of requests
+  without client permissions, treating them as files it does not interpret. A client does not need to know whether a
+  host scans files before submitting them.
+- The `max_scan_files` and `max_scan_file_size` members of the ServerInformation object announce the limits a host
+  places on the files of a scan request. A host does not announce the media types it interprets.
+- A file of a media type the host does not interpret is not an error: the host scans the rest of the content without
+  it, so content consisting only of such files keeps the starting risk score of 50.
+- Scanned files are not stored: a host discards them after the scan unless it creates evidence from the content, in
+  which case it records them as file attachments of that evidence.
+- The `file_index` member of the Detection object identifies the file of a ContentInput object a detection relates to.
+- Security and privacy considerations for decoding scanned files and for the metadata they carry.
 
 
 ## [2.0] - 2026-10-20
