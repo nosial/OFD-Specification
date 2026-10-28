@@ -495,9 +495,14 @@ than <code>1.9</code>. A client or downstream consumer:
 <p class="note" role="note"><span class="marker">Note:</span> A host that
 implements an earlier minor version does not recognize parameters introduced in
 a later one, and may reject or ignore them. For example, a host that implements
-version <code>2.0</code> does not recognize a parameter introduced in version
-<code>2.1</code>, and may reject a request that supplies it or process the
-request as though the parameter were absent.</p>
+version <code>2.0</code> does not recognize the files introduced in version
+<code>2.1</code> for the Scan Content method, and may reject a request that
+supplies them or process the request as though they were absent.</p>
+
+<p class="note" role="note"><span class="marker">Note:</span> A host that
+does not publish a member of the [=ServerInformation=] object introduced in a
+later minor version, such as <code>max_scan_files</code>, implements an earlier
+minor version.</p>
 
 <h2 id="data-model">Data Model</h2>
 
