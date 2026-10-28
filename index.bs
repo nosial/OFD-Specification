@@ -3972,7 +3972,8 @@ members:
 </table>
 
 The object MUST NOT contain members other than those defined above, except
-where a method extends it with members of its own, as Submit Evidence does. A host
+where a method extends it with members of its own, as Submit Evidence and Scan
+Content do. A host
 MUST reject a [=ContentInput=] object that violates any of these constraints with a
 client error (HTTP 400).
 
