@@ -5457,7 +5457,7 @@ represents a single [=file attachment=]. Its members are:
   <tbody>
     <tr><td><code>uuid</code></td><td>string</td><td>The UUID of the file attachment.</td></tr>
     <tr><td><code>evidence</code></td><td>string or null</td><td>The UUID of the evidence record the file is attached to. It is null when the host no longer associates the attachment with an evidence record, as described in [[#record-deletion]].</td></tr>
-    <tr><td><code>file_name</code></td><td>string</td><td>The file name of the attachment, as supplied by the client or derived from the URL it was retrieved from, and reduced to a safe form as described in [[#upload-attachment]].</td></tr>
+    <tr><td><code>file_name</code></td><td>string</td><td>The file name of the attachment, as supplied by the client or derived from the URL it was retrieved from, or, for a file the host recorded from scanned content, supplied by the client with the scan request, and reduced to a safe form as described in [[#upload-attachment]].</td></tr>
     <tr><td><code>file_size</code></td><td>integer</td><td>The size of the file in bytes.</td></tr>
     <tr><td><code>file_mime</code></td><td>string</td><td>The media type of the file, as determined by the host from the file content.</td></tr>
     <tr><td><code>created</code></td><td>integer</td><td>The Unix timestamp at which the attachment was uploaded.</td></tr>
