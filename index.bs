@@ -497,7 +497,10 @@ implements an earlier minor version does not recognize parameters introduced in
 a later one, and may reject or ignore them. For example, a host that implements
 version <code>2.0</code> does not recognize the files introduced in version
 <code>2.1</code> for the Scan Content method, and may reject a request that
-supplies them or process the request as though they were absent.</p>
+supplies them or process the request as though they were absent. Likewise, a
+host that implements version <code>2.1</code> rejects a [=ContentInput=] object
+carrying the <code>file_urls</code> member introduced in version
+<code>2.2</code>.</p>
 
 <p class="note" role="note"><span class="marker">Note:</span> A host that
 does not publish a member of the [=ServerInformation=] object introduced in a
