@@ -6096,7 +6096,8 @@ expensive relative to the request, particularly when scanning causes the host to
 resolve names, retrieve URLs, or decode files, and a host can expose the first
 two to unauthenticated requests. A host publishes the limits it places on the
 files of a scan request in <code>max_scan_files</code> and
-<code>max_scan_file_size</code>, and SHOULD ignore the files of
+<code>max_scan_file_size</code>, which also bound the files it retrieves from
+the file URLs of a request, and SHOULD ignore the files and file URLs of
 unauthenticated requests unless it can bound the work their analysis causes. An attacker can use them to exhaust the resources of
 a host. A host SHOULD limit the rate of requests it accepts from each requester,
 SHOULD bound the size of request bodies and the work performed for a single
