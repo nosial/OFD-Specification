@@ -6208,6 +6208,16 @@ expect to be analyzed, and SHOULD inform them when it submits files without
 authenticating to a host that publishes <code>collects_public_scan_content</code>
 as true.
 
+A file URL can identify the recipient of the content, or carry a token that
+grants access to the file or performs an action when it is requested, as the
+URL of a tracking image does. A host that retrieves a file URL therefore reveals
+to the remote party that the content was received and scanned, and from which
+network. A client SHOULD name only the URLs at which the files of the content
+are held, SHOULD NOT name URLs that carry the credentials of its users or that
+identify private networks, devices, or resources, and SHOULD carry such files in
+the request instead. A host SHOULD retrieve file URLs only with the GET method
+and without credentials or cookies.
+
 <h3 id="priv-public-accessibility">Public Accessibility</h3>
 
 [[#public-accessibility|Public accessibility]] is a host decision. A host MAY
