@@ -1107,8 +1107,8 @@ apply to each are specified in [[#upload-attachment]].
 
 Files submitted to the Scan Content method for analysis are not file
 attachments. They are carried in a `multipart/form-data` body as specified in
-[[#scan-files]], and only become file attachments when the host records them as
-[=evidence=].
+[[#scan-files]], or named by URL as specified in [[#scan-file-urls]], and only
+become file attachments when the host records them as [=evidence=].
 
 <h4 id="pagination-and-ordering">Pagination, Filtering, and Ordering</h4>
 
