@@ -1563,7 +1563,7 @@ members of a [=ServerInformation=] object are:
   </thead>
   <tbody>
     <tr><td><code>name</code></td><td>string</td><td>The name of the host.</td></tr>
-    <tr><td><code>api_version</code></td><td>string</td><td>The [=interface version=] implemented by the host, as specified in [[#versioning]]. A host implementing this version of the specification reports <code>2.1</code>.</td></tr>
+    <tr><td><code>api_version</code></td><td>string</td><td>The [=interface version=] implemented by the host, as specified in [[#versioning]]. A host implementing this version of the specification reports <code>2.2</code>.</td></tr>
     <tr><td><code>public_audit_logs</code></td><td>boolean</td><td>Whether the audit log domain is publicly accessible.</td></tr>
     <tr><td><code>public_evidence</code></td><td>boolean</td><td>Whether the evidence domain is publicly accessible.</td></tr>
     <tr><td><code>public_blacklist</code></td><td>boolean</td><td>Whether the blacklist domain is publicly accessible.</td></tr>
@@ -1646,12 +1646,13 @@ the request carries files, a `multipart/form-data` body as specified in
 </table>
 
 In this method, a [=ContentInput=] object MAY also contain the
-<code>files</code> member defined in [[#scan-files]].
+<code>files</code> member defined in [[#scan-files]] and the
+<code>file_urls</code> member defined in [[#scan-file-urls]].
 
 A host MUST reject a request whose <code>evidence</code> member is absent,
 empty, not a non-empty [=ContentInput=] object or array of non-empty [=ContentInput=]
 objects, or does not contain at least one non-empty <code>text_content</code>
-member or at least one file with a client error (HTTP 400). A host MUST also reject, with a client
+member, at least one file, or at least one file URL with a client error (HTTP 400). A host MUST also reject, with a client
 error (HTTP 400), a request containing a [=ContentInput=] object whose
 <code>content_type</code> is not among the <code>scan_content_types</code> the
 host publishes, and a request whose <code>concerns</code> member is invalid as
@@ -1669,9 +1670,11 @@ and MAY reuse the results of an earlier resolution or retrieval.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the evidence input is invalid or contains neither text content nor
-    a file, a content type is not supported for scanning, <code>concerns</code> is
-    invalid, the files are invalid as specified in [[#scan-files]], or
+* HTTP 400 if the evidence input is invalid or contains neither text content, a
+    file, nor a file URL, a content type is not supported for scanning,
+    <code>concerns</code> is invalid, the files are invalid as specified in
+    [[#scan-files]], the file URLs are invalid as specified in
+    [[#scan-file-urls]], or
     <code>author</code> is not a string or is an entity address with the entity
     host <code>e164.arpa</code> that is not a canonical [=telephone entity=].
 * HTTP 401 if scanning is not public and the request is not authenticated.
@@ -1744,8 +1747,12 @@ member:
 
 The name of a part that carries a file MUST consist of 1 through 64
 characters, each an ASCII letter, an ASCII digit, `_`, or `-`, and MUST NOT be
-the name of a parameter of the method. The <dfn>file index</dfn> of a file is
-its zero-based position in the <code>files</code> member that names it. A
+the name of a parameter of the method. The files of a [=ContentInput=] object
+are those carried in the parts its <code>files</code> member names, in order,
+followed by those retrieved from the URLs of its <code>file_urls</code> member,
+in order, as specified in [[#scan-file-urls]]. The <dfn>file index</dfn> of a
+file is its zero-based position in that sequence, so that the file index of a
+file carried in a part is its position in the <code>files</code> member. A
 [=ContentInput=] object with files MAY omit <code>text_content</code>; its
 [=content type=] still describes the content the files belong to, such as an
 <code>SMS</code> for the images of an MMS message, and defaults to
@@ -1760,7 +1767,8 @@ A host MUST reject a request with a client error (HTTP 400) when:
     than one file, or has a name that is not permitted;
 * the host scans the files of the request, and a file is empty or exceeds
     <code>max_scan_file_size</code>, or the request carries more files than
-    <code>max_scan_files</code>.
+    <code>max_scan_files</code>, counting the file URLs of the request that the
+    host retrieves, as specified in [[#scan-file-urls]].
 
 The host determines the media type of each file from its content; it MUST NOT
 trust the media type or the file name declared by the client. A host interprets
@@ -1791,6 +1799,86 @@ records is the one supplied by the client, reduced to a safe form as described
 in [[#upload-attachment]]. Files submitted without authenticating are subject
 to <code>collects_public_scan_content</code>, as specified in
 [[#priv-content-scanning]].
+
+<h5 id="scan-file-urls">Scanned file URLs</h5>
+
+A client MAY name the files of a [=ContentInput=] object by URL instead of
+carrying them in the request, for example when a message refers to its images
+by address, such as the media of an MMS message held by the carrier, or when
+the client does not hold the files itself. The host then retrieves each file and
+treats it as a file of the content, as specified in [[#scan-files]]. A file URL
+names a file of the content; it is not the content itself, which is submitted
+with the <code>URL</code> [=content type=]. The file URLs of a [=ContentInput=]
+object are named in its <code>file_urls</code> member:
+
+<table class="data">
+  <thead>
+    <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>file_urls</code></td><td>array of strings</td><td>No</td><td>The absolute HTTP or HTTPS URLs [[!RFC3986]] of the files of the content, in order. When present, it MUST be a non-empty array. Introduced in version <code>2.2</code>.</td></tr>
+  </tbody>
+</table>
+
+A request whose [=ContentInput=] objects name files only by URL MAY be a JSON
+request; a request that also carries files is a `multipart/form-data` body as
+specified in [[#scan-files]], in which the <code>file_urls</code> member is
+part of the JSON text of the <code>evidence</code> part. For example:
+
+<pre class="example">
+POST /scan HTTP/1.1
+Authorization: Bearer &lt;token&gt;
+Content-Type: application/json; charset=utf-8
+
+{
+  "author": "15550123456@e164.arpa",
+  "evidence": {
+    "content_type": "SMS",
+    "text_content": "Your parcel is on hold",
+    "file_urls": ["https://mms.example.net/m/7f3a91/parcel.jpg"]
+  }
+}
+</pre>
+
+A client MUST NOT use the <code>file_urls</code> member with a host that reports
+an [=interface version=] earlier than <code>2.2</code>. A host that implements
+version <code>2.2</code> accepts file URLs with the content it scans, but is not
+required to retrieve them: it MAY ignore the file URLs of every request, of
+requests that are not authenticated or whose [=authenticated operator=] does not
+hold [=client permissions=], and of requests whose files it ignores as specified
+in [[#scan-files]]. A host does not announce whether it retrieves file URLs. A
+host that ignores the file URLs of a request still validates them as specified
+below, does not retrieve them, and treats each as a file it does not interpret.
+A client therefore does not need to know whether a host retrieves file URLs
+before naming them; a client that holds the files themselves SHOULD carry them
+in the request instead.
+
+A host MUST reject a request with a client error (HTTP 400) when a
+<code>file_urls</code> member is not a non-empty array of strings, or contains a
+string that is not an absolute URL with the scheme `http` or `https`, or that
+contains user information. A host MAY enforce a maximum length for each URL.
+
+A host that retrieves the file URLs of a request counts them towards
+<code>max_scan_files</code> together with the files the request carries, and
+retrieves each file as specified for URL uploads in [[#upload-attachment]],
+except that a file that cannot be retrieved is not an error. A file URL that is
+not permitted, such as one whose address is not publicly routable, cannot be
+resolved or connected to, times out, whose final response does not have a 2xx
+status code, or whose file is empty or exceeds <code>max_scan_file_size</code>,
+is treated as a file the host cannot interpret: the host continues its analysis
+without it, and the result does not reveal why the file could not be
+retrieved. A host MUST stop retrieving a file once its size exceeds
+<code>max_scan_file_size</code>.
+
+A file retrieved from a URL is subject to every rule of [[#scan-files]] that
+applies to a file carried in the request: the host determines its media type
+from its content, MUST NOT trust a media type declared by the server from which
+it was retrieved, MUST NOT retrieve resources that the file itself refers to,
+and discards it after the scan unless it records it as a file attachment of
+[=evidence=] created from the content. The file name it records is determined as
+for a URL upload in [[#upload-attachment]]. The URL itself is an assertion of the
+client, as specified in [[#client-assertions]]; the file is what the host
+observed at that URL.
 
 <h4 id="scanned-content-object">ScannedContent object</h4>
 
@@ -2946,6 +3034,8 @@ The parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of reports to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by report category, one of the values defined in [[#report-category-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#report-order-values]].</td></tr>
+    <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#report-order-values]].</td></tr>
   </tbody>
 </table>
 
@@ -3917,6 +4007,8 @@ The parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of reports to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by report category, one of the values defined in [[#report-category-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#report-order-values]].</td></tr>
+    <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#report-order-values]].</td></tr>
   </tbody>
 </table>
 
@@ -5962,6 +6054,16 @@ SHOULD limit the resolutions and retrievals a single request can cause, and
 MAY reserve them to authenticated requests. Content retrieved this way is
 hostile in the same way as an uploaded file, and a host MUST NOT execute or
 render it.
+
+A host that retrieves the files that Scan Content names by URL, as specified in
+[[#scan-file-urls]], is exposed to the same risks, and to them on behalf of every
+requester that can scan content. It applies the restrictions of URL uploads to
+each retrieval, and does not reveal in its result whether, or why, a file could
+not be retrieved, so that the results of a scan cannot be used to learn about
+addresses the host can reach. A host whose operator does not wish to make such
+requests ignores the file URLs of every request, and a host that retrieves file
+URLs SHOULD ignore those of unauthenticated requests. A file
+retrieved this way is a scanned file and is subject to [[#sec-uploaded-files]].
 
 <h3 id="sec-abuse-of-the-database">Abuse of the Database</h3>
 
