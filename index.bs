@@ -32,8 +32,8 @@ Default Ref Status: current
   identifies the current revision. It is not a W3C Recommendation and has not
   been endorsed by the W3C or by any other standards body.</p>
 
-  <p>This revision defines version 2.1 of the OFD interface. Version 2.1 is
-  backward compatible with version 2.0; version 2.0, as a new major version, is
+  <p>This revision defines version 2.2 of the OFD interface. Version 2.2 is
+  backward compatible with versions 2.1 and 2.0; version 2.0, as a new major version, is
   not backward compatible with version 1.x, as described in [[#versioning]]. It
   defines the architecture, identification, data model,
   protocol fundamentals, interface methods, telemetry, and security and
@@ -456,7 +456,7 @@ The OFD interface is identified by an <dfn export>interface version</dfn> of the
 form <code>MAJOR.MINOR</code>, where <code>MAJOR</code> is the major version and
 <code>MINOR</code> is the minor version, each a non-negative decimal integer
 without leading zeros. This specification defines interface version
-<code>2.1</code>. A [=host=] publishes the interface version it implements in
+<code>2.2</code>. A [=host=] publishes the interface version it implements in
 the <code>api_version</code> member of its [=ServerInformation=] object, as
 specified in [[#get-server-information]].
 
