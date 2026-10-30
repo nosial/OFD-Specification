@@ -770,9 +770,10 @@ the one label that precedes it; for example, the registrable domain of both
 <code>example.co.uk</code>. An entity host that is itself a public suffix, and an
 IPv4 or IPv6 entity host, has no registrable domain.
 
-As the one exception to the rejection of addresses not in canonical form, a DNS entity host whose first label is
-<code>www</code> denotes the same entity as the host without that label, provided
-the remainder still has a [=registrable domain=]. A host MUST remove the leading
+As the one exception to the rejection of addresses not in canonical form, a DNS
+entity host whose first label is <code>www</code> denotes the same entity as the
+host without that label, provided the remainder still has a [=registrable
+domain=]. A host MUST remove the leading
 <code>www.</code> label, rather than reject the address, before storing the entity
 address or deriving its SHA-256 identifier, so that <code>www.example.com</code>
 and <code>example.com</code> address the same entity. The removal is repeated
