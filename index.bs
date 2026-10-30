@@ -3353,12 +3353,11 @@ An <dfn export lt="EntityRecord">EntityRecord</dfn> object represents a single
   </tbody>
 </table>
 
-
-A host MUST set the <code>metadata</code> member of an [=EntityRecord=] object to null
-when the requester is not permitted to read entity metadata, as specified in
-[[#visibility-rules]]. A consumer therefore cannot distinguish redacted metadata
-from absent metadata, and MUST NOT infer that an entity has no metadata from a
-null value.
+A host MUST set the <code>metadata</code> member of an [=EntityRecord=] object
+to null when the requester is not permitted to read entity metadata, as
+specified in [[#visibility-rules]]. A consumer therefore cannot distinguish
+redacted metadata from absent metadata, and MUST NOT infer that an entity has no
+metadata from a null value.
 
 <h5 id="entity-category-values">Entity category values</h5>
 
