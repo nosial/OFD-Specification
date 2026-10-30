@@ -3535,12 +3535,13 @@ The query parameter is:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of [=EntityRecord=] objects, with metadata redacted as described in
-[[#entity-record-object]].
+is a JSON array of [=EntityRecord=] objects, with metadata redacted as specified
+in [[#entity-record-object]].
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 401 if the entity registry is not public and the request is not authenticated.
+* HTTP 401 if the entity registry is not public and the request is not
+    authenticated.
 * HTTP 500 if the host fails to retrieve the entities.
 
 <h4 id="get-entity">Get Entity Record</h4>
