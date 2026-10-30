@@ -3584,13 +3584,14 @@ The path parameter is:
 </table>
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON [=EntityRecord=] object, with metadata redacted as described in
+is a JSON [=EntityRecord=] object, with metadata redacted as specified in
 [[#entity-record-object]].
 
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a valid [=entity identifier=].
-* HTTP 401 if the entity registry is not public and the request is not authenticated.
+* HTTP 401 if the entity registry is not public and the request is not
+    authenticated.
 * HTTP 404 if the entity does not exist.
 * HTTP 500 if the host fails to retrieve the entity.
 
