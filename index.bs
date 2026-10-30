@@ -5886,7 +5886,7 @@ that supplies <code>url</code> with a client error (HTTP 400). Otherwise:
     address, unless the host has been explicitly configured to permit such
     addresses. The host MUST apply this check to the address it actually
     connects to, so that a host name resolving to a different address at
-    connection time cannot bypass it, as described in
+    connection time cannot bypass it, as specified in
     [[#sec-remote-retrieval]]. A URL that is not permitted is rejected with a
     client error (HTTP 400).
 * A host MAY follow redirects. A host that follows a redirect MUST apply the
