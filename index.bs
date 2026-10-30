@@ -1973,7 +1973,7 @@ HTTP 200 OK and a body that is a JSON
 The <code>classification</code>, <code>risk_score</code>,
 <code>suggested_action</code>, <code>suggested_lift_timestamp</code>, and
 <code>detections</code> members describe the submitted content only with
-respect to the effective concerns of the request, as specified in
+respect to the [=effective concerns=] of the request, as specified in
 [[#scan-concerns]].
 
 <h5 id="scan-concerns">Concerns</h5>
