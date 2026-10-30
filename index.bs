@@ -1275,11 +1275,11 @@ responds as the method specifies for an unauthenticated request.
 
 <h4 id="authenticated-operator-section">Authenticated Operator</h4>
 
-The <dfn>authenticated operator</dfn> of a request is the operator bound to
-the access token presented by the request. A request that presents no token,
-or whose token is ignored as specified in [[#access-tokens]], has no
-authenticated operator; a method that requires authentication and
-receives such a request responds with an authentication error (HTTP 401).
+The <dfn>authenticated operator</dfn> of a request is the operator bound to the
+access token presented by the request. A request that presents no token, or
+whose token is ignored as specified in [[#access-tokens]], has no authenticated
+operator; a method that requires authentication and receives such a request
+responds with an authentication error (HTTP 401).
 
 Operators whose access token is unset and the [=system operator=] MUST NOT be
 authenticated.
