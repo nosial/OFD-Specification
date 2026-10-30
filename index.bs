@@ -34,7 +34,7 @@ Default Ref Status: current
 
   <p>This revision defines version 2.2 of the OFD interface. Version 2.2 is
   backward compatible with versions 2.1 and 2.0; version 2.0, as a new major
-  version, is not backward compatible with version 1.x, as described in
+  version, is not backward compatible with version 1.x, as specified in
   [[#versioning]]. It defines the architecture, data model, host policy,
   identification, protocol fundamentals, interface methods, telemetry, and
   security and privacy considerations of the Open Federated Database.</p>
