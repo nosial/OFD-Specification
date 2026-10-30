@@ -2910,7 +2910,7 @@ plaintext and MUST persist only a hash of the token.
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the target is the root or system operator.
+* HTTP 403 if the authenticated operator is the root or system operator.
 * HTTP 500 if the host fails to generate the token.
 
 <h4 id="generate-operator-access-token">Generate Operator Access Token</h4>
