@@ -895,10 +895,9 @@ parameters, and, when authentication is required, presents its own [=access
 token=].
 
 Responses are transmitted with the media type `application/json; charset=utf-8`
-unless a method specifies otherwise, as for file downloads. Requests carry
-their parameters in the query string, in a JSON or form-encoded body, or, for
-file uploads, in a `multipart/form-data` body, as defined in
-[[#requests]].
+unless a method specifies otherwise, as for file downloads. Requests carry their
+parameters in the query string, in a JSON or form-encoded body, or, for file
+uploads, in a `multipart/form-data` body, as specified in [[#requests]].
 
 <h3 id="path-structure">Path Structure</h3>
 
