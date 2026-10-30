@@ -6367,8 +6367,8 @@ and Search Operators methods. The configuration of an operator, such as whether
 it is a [=bot operator=], is only disclosed to the operator itself and to
 operators with [=operator permissions=], as specified in [[#visibility-rules]].
 A host SHOULD NOT use an operator name that discloses personal information the
-operator has not agreed to make public. Operator
-records never include an [=access token=] or its hash.
+operator has not agreed to make public. Operator records never include an
+[=access token=] or its hash.
 
 <h3 id="priv-content-scanning">Content Scanning</h3>
 
