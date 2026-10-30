@@ -5929,9 +5929,13 @@ that is a JSON [=UploadResult=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the request is missing a required parameter, supplies both a file and a URL, the file is invalid, the evidence UUID is malformed, or the URL is not permitted or the file could not be retrieved from it.
+* HTTP 400 if the request is missing a required parameter, supplies both a file
+    and a URL, the file is invalid, the evidence UUID is malformed, or the URL
+    is not permitted or the file could not be retrieved from it.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=client permissions=], or the evidence was submitted by another operator and the authenticated operator does not hold [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=client permissions=],
+    or the evidence was submitted by another operator and the authenticated
+    operator does not hold [=management permissions=].
 * HTTP 404 if the evidence record does not exist.
 * HTTP 500 if the host fails to store the file or create the attachment record.
 
