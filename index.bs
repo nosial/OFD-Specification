@@ -1624,8 +1624,8 @@ The request is:
 
 <pre class="example">GET /info HTTP/1.1</pre>
 
-A successful response is a [=success response=] with HTTP 200 OK and a body
-that is a JSON <dfn export lt="ServerInformation">ServerInformation</dfn> object. The
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is a JSON <dfn export lt="ServerInformation">ServerInformation</dfn> object. The
 members of a [=ServerInformation=] object are:
 
 <table class="data">
