@@ -565,8 +565,6 @@ records they affected. Every change to the [=federated database=]—whether by
 an [=operator=] or by automation—is recorded in the [=audit log=], so the
 history of an [=entity=] can be traced after the fact.
 
-
-
 A [=host=] keeps the history of its [=federated database=]: every record
 preserves when it was created and last changed, and the [=audit log=]
 preserves what was done to the database and by whom, even after the affected
