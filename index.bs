@@ -3643,11 +3643,12 @@ omits as specified in [[#telephone-entities]].
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a valid [=entity identifier=], or <code>concerns</code> is invalid.
-* HTTP 401 if entity relationship queries are not public and the request is not authenticated.
+* HTTP 400 if the path does not contain a valid [=entity identifier=], or
+    <code>concerns</code> is invalid.
+* HTTP 401 if entity relationship queries are not public and the request is not
+    authenticated.
 * HTTP 404 if the entity does not exist.
 * HTTP 500 if the host fails to retrieve the relationship group.
-
 
 <h4 id="push-entity">Push Entity</h4>
 
