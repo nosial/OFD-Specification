@@ -1497,30 +1497,28 @@ method requires [=management permissions=].
 
 <h3 id="request-processing">Request Processing</h3>
 
-All requests of the OFD interface, other than CORS preflight requests, which
-are answered as specified in [[#response-headers]], are processed in a fixed
-order. The
-[=host=] first resolves the request to a [=method=] by matching the path and
+All requests of the OFD interface, other than CORS preflight requests, which are
+answered as specified in [[#response-headers]], are processed in a fixed order.
+The [=host=] first resolves the request to a [=method=] by matching the path and
 the HTTP request method against the [=route patterns=] of the interface, and
-responds with a client error (HTTP 400) if no [=route pattern=] matches. It
-then resolves the [=authenticated operator=] of the request as defined in
-[[#authentication]], and applies its rate limits, responding with HTTP 429 to
-a request that exceeds them, as specified in [[#rate-limiting]]. It then
-verifies that the authenticated operator has the
-permissions required by the method and that the requested domain is
-accessible to the requester, as defined in [[#authorization]]. Next it
-resolves and validates the parameters of the request, including [=entity
-identifiers=] and references to records; invalid parameters are a client error
-(HTTP 400). It then resolves the [=records=] referenced by the parameters,
-returning a not-found error (HTTP 404) for a reference to a record that does
-not exist, and a client error (HTTP 400) for a reference that is not
-well-formed. The host performs the operation of the method, and methods that
-modify persistent state record an entry in the [=audit log=] identifying the
-[=operator=], the affected [=records=], and the action performed. Finally,
-the host emits the [=success response=], or an [=error response=] if any
-preceding step failed. A host MUST NOT emit a [=success response=] when any
-step failed, and MUST NOT disclose implementation details in an error
-response.
+responds with a client error (HTTP 400) if no [=route pattern=] matches. It then
+resolves the [=authenticated operator=] of the request as specified in
+[[#authentication]], and applies its rate limits, responding with HTTP 429 to a
+request that exceeds them, as specified in [[#rate-limiting]]. Next it verifies
+that the authenticated operator has the permissions required by the method and
+that the requested domain is accessible to the requester, as specified in
+[[#authorization]]. It then resolves and validates the parameters of the
+request, including [=entity identifiers=] and references to records; invalid
+parameters are a client error (HTTP 400). After that it resolves the [=records=]
+referenced by the parameters, returning a not-found error (HTTP 404) for a
+reference to a record that does not exist, and a client error (HTTP 400) for a
+reference that is not well-formed. The host performs the operation of the
+method, and methods that modify persistent state record an entry in the [=audit
+log=] identifying the [=operator=], the affected [=records=], and the action
+performed. Finally, the host emits the [=success response=], or an [=error
+response=] if any preceding step failed. A host MUST NOT emit a [=success
+response=] when any step failed, and MUST NOT disclose implementation details in
+an error response.
 
 <h3 id="rate-limiting">Rate Limiting</h3>
 
