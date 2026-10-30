@@ -2215,15 +2215,14 @@ The query parameters are:
 </table>
 
 A host MUST reject a request whose <code>q</code> parameter is absent, empty,
-or shorter than two characters with a client error (HTTP 400). A host MUST
-reject a request whose <code>type</code> parameter contains a value that is not
-one of the record type values defined in [[#record-type-values]] with a client
-error (HTTP 400).
+or shorter than two non-whitespace characters with a client error (HTTP 400). A
+host MUST reject a request whose <code>type</code> parameter contains a value
+that is not one of the record type values defined in [[#record-type-values]]
+with a client error (HTTP 400).
 
 A successful response is a [=success response=] with HTTP 200 OK and a body
 that is a JSON array of <dfn export lt="SearchResult">SearchResult</dfn> objects,
-grouped by record type. A
-[=SearchResult=] object has the members:
+grouped by record type. A [=SearchResult=] object has the members:
 
 <table class="data">
   <thead>
