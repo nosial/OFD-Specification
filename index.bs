@@ -645,12 +645,7 @@ for example after reviewing it, unless that method requires it to remain
 confidential; the evidence remains automated.
 
 Changing the configuration of an operator does not change the
-<code>automated</code> member of records created before the change. Evidence that a host creates itself, including evidence
-recording scanned content in support of an automated report, MUST be confidential
-when it is associated with a [=telephone entity=], when the report it supports
-is against a telephone entity, or when the content was submitted with a
-telephone entity as its author. The message of an automated report against a
-telephone entity MUST NOT include the entity address.
+<code>automated</code> member of records created before the change.
 
 Evidence that a host creates itself, including evidence recording scanned
 content in support of an automated report, MUST be confidential when it is
