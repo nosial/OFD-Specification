@@ -1521,8 +1521,8 @@ A [=host=] MAY limit the rate at which it accepts requests, to protect itself
 from the resource exhaustion described in [[#sec-resource-exhaustion]]. Its
 limits are a matter of host policy: a host does not publish them in the
 [=ServerInformation=] object, and MAY change them at any time, for example
-according to its load. A client MUST NOT assume that a host does not limit its
-requests.
+according to its load. A client or downstream consumer MUST NOT assume that a
+host does not limit its requests.
 
 A host MAY base its limits on any circumstance of a request, including:
 
