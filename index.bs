@@ -6043,9 +6043,9 @@ user-chosen secrets, an unsalted cryptographic hash is sufficient. A host MUST
 NOT expose a token in responses other than those defined to return it, nor in
 logs or error messages, and SHOULD compare a presented [=root access token=] in
 constant time. A client MUST store tokens securely and SHOULD transmit them only
-over a confidential channel such as TLS [[RFC9846]]. If a token is compromised, it can be
-replaced through the Generate Access Token or Generate Operator Access Token
-methods, which invalidate the previous token.
+over a confidential channel such as TLS [[RFC9846]]. If a token is compromised,
+it can be replaced through the Generate Access Token or Generate Operator Access
+Token methods, which invalidate the previous token.
 
 <h3 id="sec-least-privilege">Least Privilege</h3>
 
