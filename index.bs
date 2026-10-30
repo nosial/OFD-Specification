@@ -5125,7 +5125,9 @@ is a JSON array of [=BlacklistRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters, or <code>type</code> names a value that is not an incident type.
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two
+    non-whitespace characters, or <code>type</code> names a value that is not an
+    incident type.
 * HTTP 401 if the blacklist is not public and the request is not authenticated.
 * HTTP 404 if search is disabled on the host or if blacklist search is disabled.
 * HTTP 500 if the host fails to perform the search.
