@@ -2030,14 +2030,14 @@ the request. Its members are:
     <tr><td><code>entity</code></td><td>string or null</td><td>The UUID of the [=entity=] the detection relates to, when it relates to an entity resolved from the content.</td></tr>
     <tr><td><code>source</code></td><td>string</td><td>A host-defined name of the mechanism that made the detection, such as the name of a filter list or a classifier. Clients MUST NOT rely on particular values.</td></tr>
     <tr><td><code>confidence</code></td><td>number or null</td><td>A host-defined confidence of the detection, when the mechanism provides one.</td></tr>
-    <tr><td><code>verified</code></td><td>boolean</td><td>False when the detection relies on context or other assertions of the client that the host has not verified, as described in [[#client-assertions]]; true when it relies only on the submitted content, the records of the host, and information the host determined itself.</td></tr>
+    <tr><td><code>verified</code></td><td>boolean</td><td>False when the detection relies on context or other assertions of the client that the host has not verified, as specified in [[#client-assertions]]; true when it relies only on the submitted content, the records of the host, and information the host determined itself.</td></tr>
   </tbody>
 </table>
 
 A client SHOULD weigh a detection whose <code>verified</code> member is false as
 no stronger than the context it supplied.
 
-<h5 id="risk-score-calculation">Risk Score</h5>
+<h5 id="risk-score-calculation">Risk score</h5>
 
 A host starts the <code>risk_score</code> at 50 before evaluating the submitted
 content. Higher values indicate greater risk; lower values indicate lower risk.
