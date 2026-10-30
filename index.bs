@@ -5079,9 +5079,9 @@ any other report to an operator whose configuration has
 automatically to an operator that has not opted in to reports of its kind, and
 MUST assign it only to an operator that is enabled and holds [=management
 permissions=], as required of the target of the Assign Operator to Report
-method, so that the assigned operator can close the report.
-Whether a host assigns reports automatically, which eligible operator it
-selects, and when it does so are internal to the host.
+method, so that the assigned operator can close the report. Whether a host
+assigns reports automatically, which eligible operator it selects, and when it
+does so are internal to the host.
 
 <h4 id="report-record-object">ReportRecord object</h4>
 
