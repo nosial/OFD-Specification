@@ -5573,10 +5573,10 @@ A host MUST respond with an [=error response=] for the following conditions:
 <em>Method name:</em> <code>searchReports</code>
 
 The Search Reports method searches the [=reports=] by the UUID of the report,
-its message, or the UUID of the reported entity. The method
-is available only when the host has search enabled and has report search enabled.
-The method is public when the reports domain is configured as public; otherwise
-the request MUST present a valid [=access token=].
+its message, or the UUID of the reported entity. The method is available only
+when the host has search enabled and has report search enabled. The method is
+public when the reports domain is configured as public; otherwise the request
+MUST present a valid [=access token=].
 
 The request is:
 
