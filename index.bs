@@ -4439,24 +4439,27 @@ The request body MUST be a JSON object containing:
     <tr><th>Member</th><th>Type</th><th>Required</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr><td><code>classification_flag</code></td><td>string</td><td>Yes</td><td>The classification to assign, one of the values in [[#classification-flag-values]].</td></tr>
+    <tr><td><code>classification_flag</code></td><td>string</td><td>Yes</td><td>The classification to assign, one of the values defined in [[#classification-flag-values]].</td></tr>
   </tbody>
 </table>
 
 When the evidence already has a classification, a host MUST replace it with
-<code>classification_flag</code>; a request whose <code>classification_flag</code>
-equals the existing classification succeeds without changing the record. Replacing a classification does
-not change the classification of other evidence, the [=reputation=] of an
-entity, or any [=blacklist record=] created when a [=report=] was closed.
+<code>classification_flag</code>; a request whose
+<code>classification_flag</code> equals the existing classification succeeds
+without changing the record. Replacing a classification does not change the
+classification of other evidence, the [=reputation=] of an entity, or any
+[=blacklist record=] created when a [=report=] was closed.
 
-A successful response is a [=success response=] with HTTP 200 OK and the
-success envelope.
+A successful response is a [=success response=] with HTTP 200 OK and a body that
+is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or <code>classification_flag</code> is absent or invalid.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or
+    <code>classification_flag</code> is absent or invalid.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=management
+    permissions=].
 * HTTP 404 if the evidence does not exist.
 * HTTP 500 if the host fails to classify the evidence.
 
