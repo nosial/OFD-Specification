@@ -4319,7 +4319,8 @@ is one of the following uppercase strings:
 
 <h5 id="evidence-order-values">Evidence ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following uppercase strings:
+The value of the <code>by</code> parameter is one of the following uppercase
+strings:
 
 :   <code>TAG</code>
 ::  Order by the <code>tag</code> member.
