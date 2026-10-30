@@ -1243,13 +1243,13 @@ token in the Authorization header using the Bearer scheme [[!RFC6750]]:
 An access token consists only of characters permitted by the `b64token`
 syntax of [[!RFC6750]], so that it can be carried in the Authorization header.
 
-The validity of a presented access token is established as follows; a request
-to a publicly accessible method is not rejected because of its token, as
-described below. A token
-that is not exactly 32 characters in length is malformed and is rejected as a
-client error (HTTP 400). A well-formed token that does not correspond to any
-operator is rejected as an authentication error (HTTP 401). A token that
-corresponds to a disabled operator is rejected as a permission error (HTTP 403).
+The validity of a presented access token is established as follows; a request to
+a publicly accessible method is not rejected because of its token, as described
+below. A token that is not exactly 32 characters in length is malformed and is
+rejected as a client error (HTTP 400). A well-formed token that does not
+correspond to any operator is rejected as an authentication error (HTTP 401). A
+token that corresponds to a disabled operator is rejected as a permission error
+(HTTP 403).
 
 A request requires authentication when the method or domain it addresses is not
 publicly accessible. A request to a publicly accessible method does not require
