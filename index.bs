@@ -844,9 +844,9 @@ hold [=management permissions=].
 Evidence about a telephone entity is likely to contain private messages.
 Evidence that a host creates itself MUST be confidential when it is associated
 with a telephone entity or supports a [=report=] against one, as specified in
-[[#population]]. A client SHOULD submit evidence associated with a telephone
-entity as confidential, and a host MAY mark such evidence confidential whatever
-the client requested.
+[[#automated-records]]. A client SHOULD submit evidence associated with a
+telephone entity as confidential, and a host MAY mark such evidence confidential
+whatever the client requested.
 
 The number that a call or message presents as its origin can be forged, so that
 the number of an uninvolved subscriber appears as the source of abuse. That
