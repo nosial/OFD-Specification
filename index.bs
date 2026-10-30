@@ -2464,7 +2464,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of entries to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter entries by category, one of the values defined in [[#audit-log-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#audit-log-order-values]].</td></tr>
   </tbody>
 </table>
