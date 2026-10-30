@@ -3259,11 +3259,12 @@ metadata about the user, such as a preferred language, a registration
 timestamp, or service-side attributes. A conforming client or service can choose
 what metadata is relevant to include.
 
-The Push Entity method ([[#push-entity]]) merges the supplied metadata into the
-entity record: it adds any key that is not already present, updates any key
-whose value has changed, and MUST NOT remove keys that are absent from the
-request. The Update Entity method ([[#update-entity]]) replaces the existing
-metadata with the supplied metadata rather than merging it.
+The Push Entity method, as specified in [[#push-entity]], merges the supplied
+metadata into the entity record: it adds any key that is not already present,
+updates any key whose value has changed, and MUST NOT remove keys that are
+absent from the request. The Update Entity method, as specified in
+[[#update-entity]], replaces the existing metadata with the supplied metadata
+rather than merging it.
 
 A metadata value MUST be one of the following scalar types: JSON integer, JSON
 number, JSON string, JSON boolean, or JSON null. A metadata object MUST NOT
