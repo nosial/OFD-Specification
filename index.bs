@@ -1019,31 +1019,30 @@ the following table:
 </table>
 
 <h3 id="data-formats">Data Formats</h3>
-The OFD interface exchanges JSON documents [[!RFC8259]]. Records and JSON request
-bodies are objects whose member names are lowercase and use underscores to
-separate words, such as `text_content` and `file_name`.
-Points in time are transmitted as Unix timestamps: the number of seconds since
-the epoch, in UTC, as a JSON integer. Record identifiers are transmitted as
-36-character lowercase strings in the canonical 8-4-4-4-12 hyphenated form
-of UUIDs [[!RFC9562]], and [=hosts=] generate UUIDs of version 7 so that
-records are ordered by their time of creation. Booleans are transmitted as
-JSON true or false in JSON request bodies, and as the strings `true` or
-`false` in query strings and form bodies. Text is transmitted as JSON strings,
-and scalar quantities are transmitted as JSON numbers. A member whose definition
-requires a whole-number quantity, such as a size or timestamp, is transmitted
-as a JSON integer. Values drawn from a fixed set, such as record types,
-relationship types, category values, ordering values, and classification values,
-are transmitted as uppercase strings. A host SHOULD accept such values
-case-insensitively when received from a client; the canonical form returned in
-responses is uppercase.
-For example, a category value of <code>with_relationship</code> is treated as
-equivalent to <code>WITH_RELATIONSHIP</code>. A request that carries a value
-outside the defined set is a client error (HTTP 400), except for the
-<code>category</code>, <code>by</code>, and <code>order</code> parameters of
-list and search methods, which are treated as specified in
-[[#pagination-and-ordering]]. A member that carries no value is transmitted
-either as JSON null or omitted from the object, and a client MUST treat both
-representations as equivalent.
+
+The OFD interface exchanges JSON documents [[!RFC8259]]. Records and JSON
+request bodies are objects whose member names are lowercase and use underscores
+to separate words, such as `text_content` and `file_name`. Points in time are
+transmitted as Unix timestamps: the number of seconds since the epoch, in UTC,
+as a JSON integer. Record identifiers are transmitted as 36-character lowercase
+strings in the canonical 8-4-4-4-12 hyphenated form of UUIDs [[!RFC9562]], and
+[=hosts=] generate UUIDs of version 7 so that records are ordered by their time
+of creation. Booleans are transmitted as JSON true or false in JSON request
+bodies, and as the strings `true` or `false` in query strings and form bodies.
+Text is transmitted as JSON strings, and scalar quantities are transmitted as
+JSON numbers. A member whose definition requires a whole-number quantity, such
+as a size or timestamp, is transmitted as a JSON integer. Values drawn from a
+fixed set, such as record types, relationship types, category values, ordering
+values, and classification values, are transmitted as uppercase strings. A host
+SHOULD accept such values case-insensitively when received from a client; the
+canonical form returned in responses is uppercase. For example, a category value
+of <code>with_relationship</code> is treated as equivalent to
+<code>WITH_RELATIONSHIP</code>. A request that carries a value outside the
+defined set is a client error (HTTP 400), except for the <code>category</code>,
+<code>by</code>, and <code>order</code> parameters of list and search methods,
+which are treated as specified in [[#pagination-and-ordering]]. A member that
+carries no value is transmitted either as JSON null or omitted from the object,
+and a client MUST treat both representations as equivalent.
 
 <h3 id="requests">Requests</h3>
 
