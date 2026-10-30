@@ -4575,11 +4575,15 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the request body is missing the <code>confidential</code> member or it is not a boolean.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the
+    request body is missing the <code>confidential</code> member or it is not a
+    boolean.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=management
+    permissions=].
 * HTTP 404 if the evidence does not exist.
-* HTTP 409 if the request would make evidence linked to an <code>ILLEGAL_CONTENT</code> report non-confidential.
+* HTTP 409 if the request would make evidence linked to an
+    <code>ILLEGAL_CONTENT</code> report non-confidential.
 * HTTP 500 if the host fails to update the confidentiality.
 
 <h4 id="update-evidence-tag">Update Evidence Tag</h4>
