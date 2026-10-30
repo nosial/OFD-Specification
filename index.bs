@@ -789,19 +789,19 @@ A [=telephone entity=] is a named entity whose entity host is
 international format of <a href="https://www.itu.int/rec/T-REC-E.164">ITU-T
 Recommendation E.164</a>. The canonical local part consists of the country code
 followed by the national significant number, written as 1 through 15 ASCII
-digits of which the first is not <code>0</code>, with no leading
-<code>+</code>, international prefix, spaces, or punctuation. For example, the
-number written <code>+1 (555) 012-3456</code> is the entity
-<code>15550123456@e164.arpa</code>. The <code>+</code> is omitted because it
-denotes a space in query strings and form-encoded bodies [[!URL]]. A host MUST
-reject, with a client error (HTTP 400), an entity address with the entity host
-<code>e164.arpa</code> whose local part is not in this form, and MUST reject the
-registration of <code>e164.arpa</code> itself as a host entity, since it denotes
-the numbering namespace rather than an [=actor=]. A host MUST also reject, with a
-client error (HTTP 400), an entity address whose entity host is a subdomain of
-<code>e164.arpa</code>, such as the ENUM domain <code>6.5.4.3.2.1.5.5.5.1.e164.arpa</code>
-of a number, since it would identify a telephone number outside the canonical form of a
-[=telephone entity=].
+digits of which the first is not <code>0</code>, with no leading <code>+</code>,
+international prefix, spaces, or punctuation. For example, the number written
+<code>+1 (555) 012-3456</code> is the entity <code>15550123456@e164.arpa</code>.
+The <code>+</code> is omitted because it denotes a space in query strings and
+form-encoded bodies [[!URL]]. A host MUST reject, with a client error
+(HTTP 400), an entity address with the entity host <code>e164.arpa</code> whose local
+part is not in this form, and MUST reject the registration of
+<code>e164.arpa</code> itself as a host entity, since it denotes the numbering
+namespace rather than an [=actor=]. A host MUST also reject, with a client error
+(HTTP 400), an entity address whose entity host is a subdomain of
+<code>e164.arpa</code>, such as the ENUM domain
+<code>6.5.4.3.2.1.5.5.5.1.e164.arpa</code> of a number, since it would identify
+a telephone number outside the canonical form of a [=telephone entity=].
 
 The entity host <code>e164.arpa</code> serves only as a namespace. A telephone
 entity is not the domain that ENUM [[RFC6116]] derives from the number, and
