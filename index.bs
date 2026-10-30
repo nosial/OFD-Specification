@@ -6000,10 +6000,13 @@ is a JSON array of [=FileAttachmentRecord=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two
+    non-whitespace characters.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=management permissions=].
-* HTTP 404 if search is disabled on the host or if attachment search is disabled.
+* HTTP 403 if the authenticated operator does not hold [=management
+    permissions=].
+* HTTP 404 if search is disabled on the host or if attachment search is
+    disabled.
 * HTTP 500 if the host fails to perform the search.
 
 <h2 id="telemetry-section">Telemetry</h2>
