@@ -4380,9 +4380,12 @@ that is the UUID of the newly created evidence record.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the request body is missing the <code>entity_identifier</code> member, the identifier is malformed, metadata is invalid, the content type or context is invalid, or classification is invalid.
+* HTTP 400 if the request body is missing the <code>entity_identifier</code>
+    member, the identifier is malformed, metadata is invalid, the content type
+    or context is invalid, or classification is invalid.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=client permissions=], or supplies <code>classification</code> without [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=client permissions=],
+    or supplies <code>classification</code> without [=management permissions=].
 * HTTP 404 if the entity does not exist.
 * HTTP 500 if the host fails to create the evidence.
 
