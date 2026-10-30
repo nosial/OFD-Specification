@@ -1045,19 +1045,18 @@ object.
 
 <h4 id="parameter-sources">Parameter Sources</h4>
 
-Parameters are read from the query string of the request URI [[!RFC3986]], from a
-form-encoded request body for requests with the media type
-`application/x-www-form-urlencoded` [[!URL]], or from a JSON request body for requests
-with the media type `application/json`, or, for file uploads and for the
-scanning of files, from the parts of a `multipart/form-data` body [[!RFC7578]]
-other than the files themselves. A host MUST accept a JSON request body
-whether or not its media type carries a `charset` parameter, and MUST treat it
-as UTF-8 [[!RFC8259]]. A host resolves a
-parameter deterministically; where the same parameter appears in several
-sources, a form-encoded or multipart body takes precedence over the query
-string, and the query string takes precedence over a JSON body. This order is
-retained from earlier versions of the interface; a client SHOULD
-supply each parameter in only one source.
+Parameters are read from the query string of the request URI [[!RFC3986]], from
+a form-encoded request body for requests with the media type
+`application/x-www-form-urlencoded` [[!URL]], from a JSON request body for
+requests with the media type `application/json`, or, for file uploads and for
+the scanning of files, from the parts of a `multipart/form-data` body
+[[!RFC7578]] other than the files themselves. A host MUST accept a JSON request
+body whether or not its media type carries a `charset` parameter, and MUST treat
+it as UTF-8 [[!RFC8259]]. A host resolves a parameter deterministically; where
+the same parameter appears in several sources, a form-encoded or multipart body
+takes precedence over the query string, and the query string takes precedence
+over a JSON body. This order is retained from earlier versions of the interface;
+a client SHOULD supply each parameter in only one source.
 
 A request body that declares the media type `application/json` but is not
 parseable as JSON is a client error (HTTP 400).
