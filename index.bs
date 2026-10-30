@@ -724,7 +724,6 @@ specified in [[#telephone-entities]].
   <figcaption>Universal entity identity and host-local record identity.</figcaption>
 </figure>
 
-
 <h3 id="identifier-forms">Entity Identifier Forms</h3>
 
 The following forms address an entity:
