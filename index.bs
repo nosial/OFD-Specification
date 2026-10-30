@@ -3942,7 +3942,7 @@ A host MUST respond with an [=error response=] for the following conditions:
 The Set Entity Whitelist method sets or removes the whitelist status of an
 entity. The request MUST be authenticated as an operator with [=management
 permissions=]. While an entity is whitelisted, the host MUST NOT adjust its
-[=reputation=], as described in the definition of the [=whitelist=].
+[=reputation=], as specified in the definition of the [=whitelist=].
 
 The request is:
 
