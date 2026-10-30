@@ -1568,7 +1568,7 @@ accept the request again, and MUST NOT include the <code>retry_after</code>
 member in any other error response. A host SHOULD give the shortest delay it
 can determine.
 
-When it receives such an error response, a client:
+When it receives such an error response, a client or downstream consumer:
 
 * MUST NOT repeat the request, or send another request it expects to be counted
     against the same limit, before the delay has elapsed;
