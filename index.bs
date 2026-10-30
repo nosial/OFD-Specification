@@ -4505,8 +4505,10 @@ is a JSON [=EvidenceRecord=] object.
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
-* HTTP 401 if evidence is not public and the request is not authenticated, or if the evidence is confidential and the request is not authenticated.
-* HTTP 403 if the evidence is confidential and the authenticated operator does not hold [=management permissions=].
+* HTTP 401 if evidence is not public and the request is not authenticated, or if
+    the evidence is confidential and the request is not authenticated.
+* HTTP 403 if the evidence is confidential and the authenticated operator does
+    not hold [=management permissions=].
 * HTTP 404 if the evidence does not exist.
 * HTTP 500 if the host fails to retrieve the evidence.
 
