@@ -4714,8 +4714,8 @@ A <dfn export lt="BlacklistRecord">BlacklistRecord</dfn> object represents a sin
 
 <h5 id="incident-type-values">Incident type values</h5>
 
-The value of the <code>type</code> member of a [=BlacklistRecord=] object, and of the
-<code>type</code> parameter of the Blacklist Entity method, is one of the
+The value of the <code>type</code> member of a [=BlacklistRecord=] object, and of
+the <code>type</code> parameter of the Blacklist Entity method, is one of the
 following uppercase strings:
 
 :   <code>SPAM</code>
@@ -4725,11 +4725,11 @@ following uppercase strings:
 :   <code>SERVICE_ABUSE</code>
 ::  Abuse of the service, such as harassment or threats.
 :   <code>ILLEGAL_CONTENT</code>
-::  Illegal content violating laws or regulations.
+::  Content that violates laws or regulations.
 :   <code>MALWARE</code>
-::  Maliciously intended to spread harmful software or viruses.
+::  Content or resources intended to spread harmful software, such as viruses.
 :   <code>PHISHING</code>
-::  Phishing attempts to steal personal information.
+::  Phishing, such as attempts to steal personal information by deception.
 :   <code>ADVERTISING</code>
 ::  Advertising content, or a domain or resource that serves advertisements.
     Unsolicited advertising sent as messages is <code>SPAM</code>.
@@ -4737,7 +4737,8 @@ following uppercase strings:
 ::  A domain or resource that collects information about users across
     services, such as a tracking or analytics endpoint.
 :   <code>OTHER</code>
-::  Other content that does not fit the above categories; should rarely be used.
+::  Other content that does not fit the above categories; intended to be used
+    rarely.
 
 <h5 id="blacklist-category-values">Blacklist category values</h5>
 
