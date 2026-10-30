@@ -2474,19 +2474,19 @@ is a JSON array of [=AuditLog=] objects.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two
+    non-whitespace characters.
 * HTTP 401 if the audit log is not public and the request is not authenticated.
 * HTTP 404 if search is disabled on the host or if audit log search is disabled.
-* HTTP 500 if the host fails to perform the search due to an internal error.
+* HTTP 500 if the host fails to perform the search.
 
 <h3 id="operators-methods">Operators</h3>
 
 The operators methods manage the [=operator=] accounts of a [=host=] and expose
 sub-resources of an operator. [=Operator=] records are public information: the
 List Operators, Get Operator, and Search Operators methods do not require
-authentication. All
-operator management methods require an [=authenticated operator=] with
-[=operator permissions=], except where noted.
+authentication. All operator management methods require an [=authenticated
+operator=] with [=operator permissions=], except where noted.
 
 <h4 id="operator-record-object">OperatorRecord object</h4>
 
