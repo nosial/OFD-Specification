@@ -344,7 +344,7 @@ for downstream consumers.
 :   <dfn export>operator permissions</dfn>
 ::  The [=permission group=] that authorizes an operator to manage the
     [=operators=] of the [=host=]: creating, deleting, enabling, and disabling
-    operator accounts, modifying their names and [=permission group=]s,
+    operator accounts, modifying their names and [=permission groups=],
     generating [=access tokens=], managing their configuration, and updating
     evidence tags. Operator permissions do not inherit client permissions or
     management permissions.
