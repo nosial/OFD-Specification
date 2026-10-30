@@ -2055,7 +2055,7 @@ MUST NOT infer a particular scoring algorithm from <code>risk_score</code> or
 
 <h5 id="resolved-entity-object">ResolvedEntity object</h5>
 
-A <dfn lt="ResolvedEntity">ResolvedEntity</dfn> object represents an
+A <dfn export lt="ResolvedEntity">ResolvedEntity</dfn> object represents an
 [=entity=] that was identified in the scanned content, together with its
 active [=blacklist records=] and its optional parent entity. Its members are:
 
