@@ -1462,16 +1462,17 @@ them can scan content only when content scanning is public.</p>
 
 The following rules restrict the information exposed by the operations above.
 Entity metadata is returned to every request that has an [=authenticated
-operator=]. It is returned to unauthenticated requests, including requests
-whose token is ignored as specified in [[#access-tokens]], only
-when the host publishes <code>public_entity_metadata</code> as true; otherwise
-the <code>metadata</code> member of every [=EntityRecord=] returned to an
+operator=]. It is returned to unauthenticated requests, including requests whose
+token is ignored as specified in [[#access-tokens]], only when the host
+publishes <code>public_entity_metadata</code> as true; otherwise the
+<code>metadata</code> member of every [=EntityRecord=] returned to an
 unauthenticated request is null. [=Telephone entities=] are further restricted,
-as specified in [[#telephone-entities]]. An [=access token=] is disclosed exactly
-once: in the response of the method that creates the operator or generates the token.
-A host persists only a hash of the token, so the token cannot be retrieved afterwards
-and the requester MUST retain it from that response. It is not included in operator
-records returned by the host, including the record of the authenticated operator.
+as specified in [[#telephone-entities]]. An [=access token=] is disclosed
+exactly once: in the response of the method that creates the operator or
+generates the token. A host persists only a hash of the token, so the token
+cannot be retrieved afterwards and the requester MUST retain it from that
+response. It is not included in operator records returned by the host, including
+the record of the authenticated operator.
 
 The configuration of an [=operator=] is visible only to the operator itself and to
 operators with [=operator permissions=]. A host MUST set the
