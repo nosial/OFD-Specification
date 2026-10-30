@@ -1696,8 +1696,8 @@ The request is:
 
 <pre class="example">
 POST /scan HTTP/1.1
-Content-Type: application/json; charset=utf-8
 Authorization: Bearer &lt;token&gt;
+Content-Type: application/json; charset=utf-8
 </pre>
 
 The request body MUST be a JSON object containing the members below, or, when
