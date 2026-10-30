@@ -4409,14 +4409,6 @@ The request body MUST be a JSON object that combines the members of a
   </tbody>
 </table>
 
-The request is:
-
-<pre class="example">
-POST /evidence HTTP/1.1
-Authorization: Bearer &lt;token&gt;
-Content-Type: application/json; charset=utf-8
-</pre>
-
 A host MUST reject a request whose <code>metadata</code> member is not a JSON
 object, whose <code>classification</code> member is not a classification flag,
 or whose <code>entity_identifier</code> is missing or malformed with a client
