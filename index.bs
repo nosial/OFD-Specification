@@ -5116,7 +5116,7 @@ search [=reports=] is one of the following uppercase strings:
 :   <code>CLOSED</code>
 ::  Reports that are closed.
 :   <code>AUTOMATED</code>
-::  Reports that were generated automatically.
+::  Reports that are automated, as specified in [[#automated-records]].
 :   <code>UNASSIGNED</code>
 ::  Reports that have no assigned operator.
 :   <code>ASSIGNED</code>
@@ -5124,7 +5124,8 @@ search [=reports=] is one of the following uppercase strings:
 
 <h5 id="report-order-values">Report ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following uppercase strings:
+The value of the <code>by</code> parameter is one of the following uppercase
+strings:
 
 :   <code>INCIDENT_TYPE</code>
 ::  Order by the <code>incident_type</code> member.
@@ -5133,7 +5134,8 @@ The value of the <code>by</code> parameter is one of the following uppercase str
 :   <code>UPDATED</code>
 ::  Order by the <code>updated</code> member.
 
-The value of the <code>order</code> parameter is one of the following uppercase strings:
+The value of the <code>order</code> parameter is one of the following uppercase
+strings:
 
 :   <code>ASC</code>
 ::  Ascending order.
