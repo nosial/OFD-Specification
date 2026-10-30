@@ -2745,7 +2745,8 @@ that is a JSON [=CreatedOperator=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the <code>name</code> member is missing, empty, longer than 32 characters, or reserved.
+* HTTP 400 if the <code>name</code> member is missing, empty, longer than 32
+    characters, or reserved.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=operator permissions=].
 * HTTP 409 if an operator with the given name already exists.
