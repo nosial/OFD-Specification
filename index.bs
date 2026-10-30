@@ -1839,8 +1839,9 @@ The host determines the media type of each file from its content; it MUST NOT
 trust the media type or the file name declared by the client. A host interprets
 the files of the media types it supports, and does not announce which they are:
 a client submits the files of the content regardless. A file of any other media
-type, or one the host cannot interpret, is not an error: the host continues its analysis without it, and the file does not
-affect the <code>classification</code>, <code>risk_score</code>,
+type, or one the host cannot interpret, is not an error: the host continues its
+analysis without it, and the file does not affect the
+<code>classification</code>, <code>risk_score</code>,
 <code>suggested_action</code>, or <code>detections</code> of the result. A host
 that interprets no file therefore returns the result it would return for the
 rest of the content alone, and the <code>risk_score</code> of content that
