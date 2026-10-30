@@ -3362,7 +3362,8 @@ is one of the following uppercase strings:
 
 <h5 id="entity-order-values">Entity ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following uppercase strings:
+The value of the <code>by</code> parameter is one of the following uppercase
+strings:
 
 :   <code>HOST</code>
 ::  Order by the <code>host</code> member.
