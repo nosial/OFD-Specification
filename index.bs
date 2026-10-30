@@ -5028,10 +5028,10 @@ A host MUST respond with an [=error response=] for the following conditions:
 <em>Method name:</em> <code>extendBlacklist</code>
 
 The Extend Blacklist method extends the expiry time of an active temporary
-[=blacklist record=] by a given number of seconds. The request MUST be authenticated
-as an operator with [=management permissions=]. A record whose expiry has passed is
-no longer active and cannot be extended; an operator blacklists the entity again
-instead.
+[=blacklist record=] by a given number of seconds. The request MUST be
+authenticated as an operator with [=management permissions=]. A record whose
+expiry has passed is no longer active and cannot be extended; an operator
+blacklists the entity again instead.
 
 The request is:
 
