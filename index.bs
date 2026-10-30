@@ -2848,9 +2848,12 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the target is the authenticated operator itself, or the operator is already disabled.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the
+    target is the authenticated operator itself, or the operator is already
+    disabled.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=operator permissions=], or if the target is the root or system operator.
+* HTTP 403 if the authenticated operator does not hold [=operator permissions=],
+    or if the target is the root or system operator.
 * HTTP 404 if the target operator does not exist.
 * HTTP 500 if the host fails to disable the operator.
 
