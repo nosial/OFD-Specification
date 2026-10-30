@@ -5256,8 +5256,8 @@ The request body MUST be a JSON object containing:
 
 A host MUST reject a request whose <code>reporting_entity</code> or
 <code>evidence</code> member is missing or empty, whose evidence input is not a
-non-empty [=ContentInput=] object or array of non-empty [=ContentInput=] objects, or
-whose incident type is invalid with a client error (HTTP 400).
+non-empty [=ContentInput=] object or array of non-empty [=ContentInput=]
+objects, or whose incident type is invalid with a client error (HTTP 400).
 
 When the incident type is <code>ILLEGAL_CONTENT</code>, the host MUST mark every
 evidence record it creates for the report as confidential, regardless of the
