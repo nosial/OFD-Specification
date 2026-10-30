@@ -1067,7 +1067,7 @@ carried as members of a JSON object in the request body. For example, a
 request that registers an entity with metadata is:
 
 <pre class="example">
-POST /entities
+POST /entities HTTP/1.1
 Authorization: Bearer &lt;token&gt;
 Content-Type: application/json; charset=utf-8
 
