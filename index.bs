@@ -1713,11 +1713,12 @@ In this method, a [=ContentInput=] object MAY also contain the
 <code>files</code> member defined in [[#scan-files]] and the
 <code>file_urls</code> member defined in [[#scan-file-urls]].
 
-A host MUST reject a request whose <code>evidence</code> member is absent,
-empty, not a non-empty [=ContentInput=] object or array of non-empty [=ContentInput=]
-objects, or does not contain at least one non-empty <code>text_content</code>
-member, at least one file, or at least one file URL with a client error (HTTP 400). A host MUST also reject, with a client
-error (HTTP 400), a request containing a [=ContentInput=] object whose
+A host MUST reject, with a client error (HTTP 400), a request whose
+<code>evidence</code> member is absent, empty, not a non-empty [=ContentInput=]
+object or array of non-empty [=ContentInput=] objects, or does not contain at
+least one non-empty <code>text_content</code> member, at least one file, or at
+least one file URL. A host MUST also reject, with a client error (HTTP 400), a
+request containing a [=ContentInput=] object whose
 <code>content_type</code> is not among the <code>scan_content_types</code> the
 host publishes, and a request whose <code>concerns</code> member is invalid as
 specified in [[#scan-concerns]].
