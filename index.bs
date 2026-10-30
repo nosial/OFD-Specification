@@ -2707,8 +2707,9 @@ Authorization: Bearer &lt;token&gt;
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is a JSON [=OperatorRecord=] object.
 
-A host MUST respond with an [=error response=] for HTTP 401 if the request is
-not authenticated.
+A host MUST respond with an [=error response=] for the following conditions:
+
+* HTTP 401 if the request is not authenticated.
 
 <h4 id="create-operator">Create Operator</h4>
 
