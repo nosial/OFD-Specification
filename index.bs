@@ -1223,7 +1223,7 @@ A host MUST answer a CORS preflight request [[!FETCH]], an OPTIONS request to
 the path of any [=method=], with a successful status code, such as HTTP 204 No
 Content, and the headers above. A preflight request does not carry an
 [=access token=]; the host MUST NOT require authentication for it and does not
-process it as described in [[#request-processing]].
+process it as specified in [[#request-processing]].
 
 <h3 id="authentication">Authentication</h3>
 
