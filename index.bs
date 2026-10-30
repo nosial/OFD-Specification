@@ -3033,9 +3033,12 @@ is the updated [=OperatorConfiguration=] object.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the body contains no member, or a member is unknown or not a boolean.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the body
+    contains no member, or a member is unknown or not a boolean.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator is not the target operator and does not hold [=operator permissions=], or if the target is the root or system operator.
+* HTTP 403 if the authenticated operator is not the target operator and does not
+    hold [=operator permissions=], or if the target is the root or system
+    operator.
 * HTTP 404 if the target operator does not exist.
 * HTTP 500 if the host fails to update the configuration.
 
