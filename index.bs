@@ -1933,13 +1933,14 @@ contains user information. A host MAY enforce a maximum length for each URL.
 A host that retrieves the file URLs of a request counts them towards
 <code>max_scan_files</code> together with the files the request carries, and
 retrieves each file as specified for URL uploads in [[#upload-attachment]],
-except that a file that cannot be retrieved is not an error. A file URL that is
-not permitted, such as one whose address is not publicly routable, cannot be
-resolved or connected to, times out, whose final response does not have a 2xx
-status code, or whose file is empty or exceeds <code>max_scan_file_size</code>,
-is treated as a file the host cannot interpret: the host continues its analysis
-without it, and the result does not reveal why the file could not be
-retrieved. A host MUST stop retrieving a file once its size exceeds
+except that a file that cannot be retrieved is not an error. A file URL is
+treated as a file the host cannot interpret when it is not permitted, such as
+when its address is not publicly routable; when it cannot be resolved or
+connected to, or its retrieval times out; when its final response does not have
+a 2xx status code; or when its file is empty or exceeds
+<code>max_scan_file_size</code>. The host continues its analysis without such a
+file, and the result does not reveal why the file could not be retrieved. A host
+MUST stop retrieving a file once its size exceeds
 <code>max_scan_file_size</code>.
 
 A file retrieved from a URL is subject to every rule of [[#scan-files]] that
