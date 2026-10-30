@@ -1739,13 +1739,13 @@ A host MUST respond with an [=error response=] for the following conditions:
     file, nor a file URL, a content type is not supported for scanning,
     <code>concerns</code> is invalid, the files are invalid as specified in
     [[#scan-files]], the file URLs are invalid as specified in
-    [[#scan-file-urls]], or
-    <code>author</code> is not a string or is an entity address with the entity
-    host <code>e164.arpa</code> that is not a canonical [=telephone entity=].
+    [[#scan-file-urls]], or <code>author</code> is not a string or is an entity
+    address with the entity host <code>e164.arpa</code> that is not a canonical
+    [=telephone entity=].
 * HTTP 401 if scanning is not public and the request is not authenticated.
 * HTTP 403 if scanning is not public and the [=authenticated operator=] does not
     hold [=client permissions=].
-* HTTP 500 if the host fails to resolve the author entity due to an internal error.
+* HTTP 500 if the host fails to resolve the author entity.
 
 <h5 id="scan-files">Scanned files</h5>
 
