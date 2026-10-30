@@ -908,11 +908,7 @@ The domains and their root paths are:
 
 <table class="data">
   <thead>
-    <tr>
-      <th>Domain</th>
-      <th>Root path</th>
-      <th>Content</th>
-    </tr>
+    <tr><th>Domain</th><th>Root path</th><th>Content</th></tr>
   </thead>
   <tbody>
     <tr><th scope="row">Information</th><td><code>/info</code></td><td>Description of the [=host=] and the state of its [=federated database=].</td></tr>
@@ -1002,11 +998,7 @@ the following table:
 
 <table class="data">
   <thead>
-    <tr>
-      <th>HTTP method</th>
-      <th>Semantics</th>
-      <th>Examples</th>
-    </tr>
+    <tr><th>HTTP method</th><th>Semantics</th><th>Examples</th></tr>
   </thead>
   <tbody>
     <tr><th scope="row">GET</th><td>Query and read records and derived views.</td><td><code>GET /entities</code>, <code>GET /reports/{uuid}</code></td></tr>
