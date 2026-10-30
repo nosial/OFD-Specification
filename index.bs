@@ -6112,20 +6112,20 @@ A URL upload makes the [=host=] send a request to an address chosen by the
 client, which an attacker could use to reach services that are only accessible
 from the host's network, such as cloud metadata endpoints, databases, and
 administrative interfaces, and to learn about them from the errors and timing of
-the responses. A host that supports URL uploads therefore restricts retrieval
-to publicly routable addresses unless it has been explicitly configured
-otherwise, as specified in [[#upload-attachment]]. A host SHOULD resolve the
-host name of a URL once, validate every resolved address, and connect only to a
-validated address, since a host name that is resolved again at connection time
-may yield a different address. A host SHOULD NOT route retrieval through a
-proxy that would resolve the host name itself, and SHOULD normalize the URL it
-validated before using it, so that differences between URL parsers cannot cause
-it to connect to a different host. A host whose operator does not wish to make
-such requests MAY refuse URL uploads entirely and advertises this through the
-<code>allow_url_uploads</code> member of its [=ServerInformation=] object.
-Error responses to a failed retrieval
-SHOULD NOT include the content of the remote response. A file retrieved from a
-URL is an uploaded file and is subject to [[#sec-uploaded-files]].
+the responses. A host that supports URL uploads therefore restricts retrieval to
+publicly routable addresses unless it has been explicitly configured otherwise,
+as specified in [[#upload-attachment]]. A host SHOULD resolve the host name of a
+URL once, validate every resolved address, and connect only to a validated
+address, since a host name that is resolved again at connection time may yield a
+different address. A host SHOULD NOT route retrieval through a proxy that would
+resolve the host name itself, and SHOULD normalize the URL it validated before
+using it, so that differences between URL parsers cannot cause it to connect to
+a different host. A host whose operator does not wish to make such requests MAY
+refuse URL uploads entirely and advertises this through the
+<code>allow_url_uploads</code> member of its [=ServerInformation=] object. Error
+responses to a failed retrieval SHOULD NOT include the content of the remote
+response. A file retrieved from a URL is an uploaded file and is subject to
+[[#sec-uploaded-files]].
 
 A host that resolves a DNS name or retrieves a URL while scanning content, as
 permitted by [[#scan-content]] and [[#client-assertions]], is exposed to the
