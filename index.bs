@@ -2385,7 +2385,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of entries to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter entries by category, one of the values defined in [[#audit-log-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#audit-log-order-values]].</td></tr>
   </tbody>
 </table>
@@ -2651,7 +2651,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of operators to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by category, one of the values defined in [[#operator-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#operator-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#operator-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#operator-order-values]].</td></tr>
   </tbody>
 </table>
@@ -3068,7 +3068,7 @@ The parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of entries to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by audit log category, one of the values defined in [[#audit-log-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#audit-log-order-values]].</td></tr>
   </tbody>
 </table>
@@ -3109,7 +3109,7 @@ The parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of reports to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by report category, one of the values defined in [[#report-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#report-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#report-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#report-order-values]].</td></tr>
   </tbody>
 </table>
@@ -3436,7 +3436,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of entities to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by category, one of the values defined in [[#entity-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#entity-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#entity-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#entity-order-values]].</td></tr>
   </tbody>
 </table>
@@ -3475,7 +3475,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of results to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by category, one of the values defined in [[#entity-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#entity-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#entity-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#entity-order-values]].</td></tr>
   </tbody>
 </table>
@@ -3963,7 +3963,7 @@ The parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of entries to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by audit log category, one of the values defined in [[#audit-log-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#audit-log-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#audit-log-order-values]].</td></tr>
   </tbody>
 </table>
@@ -4084,7 +4084,7 @@ The parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of reports to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by report category, one of the values defined in [[#report-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#report-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#report-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#report-order-values]].</td></tr>
   </tbody>
 </table>
@@ -4328,7 +4328,7 @@ The query parameters are:
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>include_confidential</code></td><td>No</td><td>boolean</td><td>Whether to include confidential evidence records. Defaults to false.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by category, one of the values defined in [[#evidence-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#evidence-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#evidence-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#evidence-order-values]].</td></tr>
   </tbody>
 </table>
@@ -5237,7 +5237,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of reports to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by category, one of the values defined in [[#report-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#report-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#report-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#report-order-values]].</td></tr>
   </tbody>
 </table>
@@ -5273,7 +5273,7 @@ The query parameters are:
   <tbody>
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of reports to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#report-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#report-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#report-order-values]].</td></tr>
   </tbody>
 </table>
@@ -5355,7 +5355,7 @@ The query parameters are:
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>include_confidential</code></td><td>No</td><td>boolean</td><td>Whether to include confidential evidence records. Defaults to false.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by evidence category, one of the values defined in [[#evidence-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#evidence-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#evidence-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#evidence-order-values]].</td></tr>
   </tbody>
 </table>
@@ -5505,7 +5505,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of results to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by category, one of the values defined in [[#report-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#report-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#report-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#report-order-values]].</td></tr>
   </tbody>
 </table>
@@ -5996,7 +5996,7 @@ The query parameters are:
     <tr><td><code>limit</code></td><td>No</td><td>integer</td><td>The maximum number of results to return. A host MAY enforce a maximum and reduce a larger value to that maximum.</td></tr>
     <tr><td><code>page</code></td><td>No</td><td>integer</td><td>The page number for pagination, starting at 1.</td></tr>
     <tr><td><code>category</code></td><td>No</td><td>string</td><td>Filter by category, one of the values defined in [[#attachment-category-values]].</td></tr>
-    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The field to sort by, one of the values defined in [[#attachment-order-values]].</td></tr>
+    <tr><td><code>by</code></td><td>No</td><td>string</td><td>The member to sort by, one of the values defined in [[#attachment-order-values]].</td></tr>
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#attachment-order-values]].</td></tr>
   </tbody>
 </table>
