@@ -1595,15 +1595,13 @@ Retry-After: 30
 {"success": false, "code": 429, "message": "Too Many Requests: Rate limit exceeded", "retry_after": 30}
 </pre>
 
-
 <h2 id="methods">Interface Methods</h2>
 
-A [=method=] is a discrete operation exposed by an OFD [=host=],
-identified by a unique [=method name=] and bound to a route pattern paired
-with an HTTP request method, as defined in [[#path-structure]]. Methods are
-grouped by the domain of the [=resource=] they operate on: server information,
-search and scan, audit, entities, operators, evidence, blacklist, reports, and
-attachments.
+A [=method=] is a discrete operation exposed by an OFD [=host=], identified by a
+unique [=method name=] and bound to a route pattern paired with an HTTP request
+method, as specified in [[#path-structure]]. Methods are grouped by the domain of
+the [=resource=] they operate on: server information, scan and search, audit,
+entities, operators, evidence, blacklist, reports, and attachments.
 
 The following subsections define the methods of the [=information surface=]
 and of the [=analysis surface=] (content scanning and search), followed by the
