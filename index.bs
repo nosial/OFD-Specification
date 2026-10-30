@@ -126,11 +126,11 @@ required of a service that only reads.
 
 This specification is normative for three kinds of products:
 
-* [=conforming host=]s, which operate a [=federated database=] and expose it
+* [=conforming hosts=], which operate a [=federated database=] and expose it
     over HTTP or HTTPS;
-* [=conforming client=]s, which interact with a host as an [=operator=] and
+* [=conforming clients=], which interact with a host as an [=operator=] and
     build the data of the database; and
-* [=conforming downstream consumer=]s, which query the [=records=] and
+* [=conforming downstream consumers=], which query the [=records=] and
     [=telemetry=] of a host before deciding whether to block an [=entity=] or
     filter its content, without contributing records of their own.
 
