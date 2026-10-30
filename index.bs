@@ -1725,7 +1725,7 @@ specified in [[#scan-concerns]].
 
 For content of the <code>HOSTNAME</code>, <code>URL</code>, or
 <code>WEB_PAGE</code> [=content type=], a host MAY resolve the DNS name or
-retrieve the URL itself, as described in [[#client-assertions]]. A host that
+retrieve the URL itself, as specified in [[#client-assertions]]. A host that
 does so MUST apply the restrictions on remote retrieval specified for URL
 uploads in [[#upload-attachment]], except that a name that cannot be resolved
 or a URL that cannot be retrieved is not an error: the host continues its
