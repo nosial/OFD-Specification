@@ -435,16 +435,15 @@ the records before deciding how to treat an [=entity=].
 
 The OFD interface exposed by a host comprises three surfaces. The
 <dfn export>information surface</dfn> describes the host itself—its identity,
-the [=interface version=] it implements, the public-accessibility information
-it publishes, and how many records its [=federated database=] holds—and is
-always public.
-The <dfn export>data surface</dfn> is the [=federated database=] itself: the
-[=collections=] of records and the operations that read and modify them, with
-access governed by [=host=] configuration and the permissions of the
-requester. The <dfn export>analysis surface</dfn> queries and inspects content beyond
-the stored records, including search across the [=federated database=] and
-content scanning; how a host derives the classification of scanned content is
-internal to the host and not part of the interface.
+the [=interface version=] it implements, the public-accessibility information it
+publishes, and how many records its [=federated database=] holds—and is always
+public. The <dfn export>data surface</dfn> is the [=federated database=] itself:
+the [=collections=] of records and the operations that read and modify them,
+with access governed by [=host=] configuration and the permissions of the
+requester. The <dfn export>analysis surface</dfn> queries and inspects content
+beyond the stored records, including search across the [=federated database=]
+and content scanning; how a host derives the classification of scanned content
+is internal to the host and not part of the interface.
 
 The protocol is stateless. A host MUST NOT require a client to maintain a
 session, and MUST treat every request as independent, authenticated on its own
