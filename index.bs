@@ -1515,7 +1515,9 @@ order. The
 the HTTP request method against the [=route patterns=] of the interface, and
 responds with a client error (HTTP 400) if no [=route pattern=] matches. It
 then resolves the [=authenticated operator=] of the request as defined in
-[[#authentication]], and verifies that the authenticated operator has the
+[[#authentication]], and applies its rate limits, responding with HTTP 429 to
+a request that exceeds them, as specified in [[#rate-limiting]]. It then
+verifies that the authenticated operator has the
 permissions required by the method and that the requested domain is
 accessible to the requester, as defined in [[#authorization]]. Next it
 resolves and validates the parameters of the request, including [=entity
