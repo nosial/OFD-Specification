@@ -6184,10 +6184,14 @@ files of a scan request in <code>max_scan_files</code> and
 the file URLs of a request, and SHOULD ignore the files and file URLs of
 unauthenticated requests unless it can bound the work their analysis causes. An attacker can use them to exhaust the resources of
 a host. A host SHOULD limit the rate of requests it accepts from each requester,
-SHOULD bound the size of request bodies and the work performed for a single
-request, and MAY reject a request that exceeds its limits with HTTP 429 Too Many
-Requests [[RFC6585]]. A client determines the class of such an error from its
-status code, as specified in [[#error-responses]].
+as specified in [[#rate-limiting]], and SHOULD bound the size of request bodies
+and the work performed for a single request. Because an unauthenticated
+requester can change its network address, a host SHOULD limit unauthenticated
+requests more strictly than authenticated ones, and SHOULD limit the requests of
+groups of addresses, such as a network prefix, as well as those of each
+address. A client that ignores the delay of a rate-limited response adds to the
+load the limit protects against, and a host MAY lengthen the delay it gives to,
+or stop serving, a requester that repeatedly does so.
 
 <h3 id="sec-cross-origin">Cross-Origin Requests</h3>
 
