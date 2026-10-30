@@ -5775,7 +5775,8 @@ is one of the following uppercase strings:
 
 <h5 id="attachment-order-values">Attachment ordering values</h5>
 
-The value of the <code>by</code> parameter is one of the following uppercase strings:
+The value of the <code>by</code> parameter is one of the following uppercase
+strings:
 
 :   <code>FILE_NAME</code>
 ::  Order by the <code>file_name</code> member.
