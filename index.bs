@@ -2257,10 +2257,12 @@ The value of the <code>type</code> member, and of each value in the
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters, or the <code>type</code> parameter contains a value that is not a record type.
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two
+    non-whitespace characters, or the <code>type</code> parameter contains a
+    value that is not a record type.
 * HTTP 401 if search is not public and the request is not authenticated.
 * HTTP 404 if search is disabled on the host.
-* HTTP 500 if the host fails to perform the search due to an internal error.
+* HTTP 500 if the host fails to perform the search.
 
 <h3 id="audit-methods">Audit</h3>
 
