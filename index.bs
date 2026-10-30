@@ -4682,7 +4682,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=management
+    permissions=].
 * HTTP 404 if the evidence does not exist.
 * HTTP 500 if the host fails to delete the evidence.
 
