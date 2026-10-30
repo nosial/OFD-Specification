@@ -1950,8 +1950,9 @@ observed at that URL.
 <h4 id="scanned-content-object">ScannedContent object</h4>
 
 A successful response to the Scan Content method is a [=success response=] with
-HTTP 200 OK and a body that is a JSON <dfn export lt="ScannedContent">ScannedContent</dfn>
-object. The members of a [=ScannedContent=] object are:
+HTTP 200 OK and a body that is a JSON
+<dfn export lt="ScannedContent">ScannedContent</dfn> object. The members of a
+[=ScannedContent=] object are:
 
 <table class="data">
   <thead>
