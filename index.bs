@@ -5681,9 +5681,12 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the request body is missing the <code>report_uuid</code> member or it is not a valid UUID.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, or the
+    request body is missing the <code>report_uuid</code> member or it is not a
+    valid UUID.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=management
+    permissions=].
 * HTTP 404 if the evidence or report does not exist.
 * HTTP 500 if the host fails to link the evidence to the report.
 
