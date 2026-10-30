@@ -3979,10 +3979,9 @@ The parameters are:
     <tr><td><code>order</code></td><td>No</td><td>string</td><td>The sort direction, one of the values defined in [[#audit-log-order-values]].</td></tr>
   </tbody>
 </table>
-
-When the request is public, a host MUST return only entries whose <code>type</code>
-is included in the host's public audit log visibility list, as published in the
-server information response.
+ When the request is not authenticated, a host MUST return only entries whose
+<code>type</code> is listed in the <code>public_audit_logs_visibility</code>
+member of its [=ServerInformation=] object.
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is a JSON array of [=AuditLog=] objects.
