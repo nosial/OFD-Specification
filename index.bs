@@ -1157,9 +1157,9 @@ Each method definition specifies its successful status code and response body.
 Methods that create an independently addressable record normally use HTTP 201
 Created and include its UUID in the response body, unless their definition
 specifies otherwise: Push Entity, which is idempotent and returns HTTP 200 OK
-whether or not it created the entity, and Submit Report, which returns
-HTTP 200 OK with the created records. Methods that query or read normally use HTTP 200 OK and
-carry the result directly in the response body: a single record is a JSON
+whether or not it created the entity, and Submit Report, which returns HTTP 200
+OK with the created records. Methods that query or read normally use HTTP 200 OK
+and carry the result directly in the response body: a single record is a JSON
 object, and a list of records is a JSON array.
 
 <h4 id="error-responses">Error Responses</h4>
