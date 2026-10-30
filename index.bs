@@ -3766,14 +3766,13 @@ A host MUST respond with an [=error response=] for the following conditions:
 <em>Method name:</em> <code>setEntityRelationship</code>
 
 The Set Entity Relationship method sets a relationship between the entity
-identified by the path and a related entity. The relationship is directional: the source entity (the path `identifier`)
-points to the related entity (`target_identifier`). Multiple sources MAY
-reference the same related entity. An entity has at most one relationship;
-setting a relationship replaces any existing relationship of the source entity.
-A host MAY reject a relationship of an entity to itself with a client error
-(HTTP 400).
-The request MUST be authenticated as an operator with [=client
-permissions=].
+identified by the path and a related entity. The relationship is directional:
+the source entity (the path `identifier`) points to the related entity
+(`target_identifier`). Multiple sources MAY reference the same related entity.
+An entity has at most one relationship; setting a relationship replaces any
+existing relationship of the source entity. A host MAY reject a relationship of
+an entity to itself with a client error (HTTP 400). The request MUST be
+authenticated as an operator with [=client permissions=].
 
 The request is:
 
