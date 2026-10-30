@@ -1286,11 +1286,12 @@ authenticated.
 
 <h4 id="root-operator-section">Root Operator</h4>
 
-A [=host=] MAY configure a [=root access token=]. When the root access
-token is presented, the host authenticates the [=root operator=]: the
-administrator of the [=federated database=]. The root operator:
+A [=host=] MAY configure a [=root access token=]. When the root access token is
+presented, the host authenticates the [=root operator=]: the administrator of
+the [=federated database=]. The root operator:
 
-* is created automatically when it does not exist, so that the host can be administered before any operator has been provisioned;
+* is created automatically when it does not exist, so that the host can be
+    administered before any operator has been provisioned;
 * cannot be disabled;
 * is authoritative over the configuration of the host.
 
