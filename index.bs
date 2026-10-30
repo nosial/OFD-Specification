@@ -2432,8 +2432,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
 * HTTP 401 if the audit log is not public and the request is not authenticated.
-* HTTP 404 if the entry does not exist, or if the entry is not public and the request is unauthenticated.
-* HTTP 500 if the host fails to retrieve the entry due to an internal error.
+* HTTP 404 if the entry does not exist, or if the entry is not public and the
+    request is unauthenticated.
+* HTTP 500 if the host fails to retrieve the entry.
 
 <h4 id="search-audit-logs">Search Audit Logs</h4>
 
