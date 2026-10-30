@@ -812,8 +812,8 @@ Telephone numbers identify people, and are few enough that every number can be
 enumerated. A [=host=] therefore hides telephone entities from requests that do
 not already know the number, unless it publishes
 <code>public_telephone_entities</code> as true in its [=ServerInformation=]
-object. A host SHOULD NOT publish it as true. While a host does not, then for a
-request that is not authenticated, the host:
+object. A host SHOULD NOT publish it as true. Unless it does, for a request that
+is not authenticated, the host:
 
 * MUST NOT return the [=EntityRecord=] of a telephone entity, except to a
     request that identifies that entity by its [=entity address=] or SHA-256
