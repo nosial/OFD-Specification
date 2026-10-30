@@ -2900,9 +2900,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Generate Access Token method generates a new [=access token=] for the
 [=authenticated operator=] and invalidates its previous token. The request MUST
-be authenticated and requires no [=permission group=]. The
-[=root operator=] and [=system operator=] MUST NOT receive a new token through
-this method.
+be authenticated and requires no [=permission group=]. The [=root operator=]
+and [=system operator=] MUST NOT receive a new token through this method.
 
 The request is:
 
