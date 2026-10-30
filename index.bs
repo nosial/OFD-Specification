@@ -1227,7 +1227,9 @@ and responds with the Vary: Origin header, otherwise it responds with the
 origin of its configured base URL, which is the base URL without its path. The
 Access-Control-Allow-Methods header is set to POST, PUT, GET, DELETE, and
 PATCH. The Access-Control-Allow-Headers header is set to Content-Type and
-Authorization.
+Authorization. The Access-Control-Expose-Headers header is set to Retry-After,
+so that a web application can read the Retry-After header of the responses
+specified in [[#rate-limiting]].
 
 A host MUST answer a CORS preflight request [[!FETCH]], an OPTIONS request to
 the path of any [=method=], with a successful status code, such as HTTP 204 No
