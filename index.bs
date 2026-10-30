@@ -4146,9 +4146,8 @@ members:
 
 The object MUST NOT contain members other than those defined above, except
 where a method extends it with members of its own, as Submit Evidence and Scan
-Content do. A host
-MUST reject a [=ContentInput=] object that violates any of these constraints with a
-client error (HTTP 400).
+Content do. A host MUST reject a [=ContentInput=] object that violates any of
+these constraints with a client error (HTTP 400).
 
 <h5 id="content-type-values">Content type values</h5>
 
