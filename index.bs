@@ -5947,7 +5947,7 @@ The Download Attachment method returns the contents of a [=file attachment=].
 The method is public when the evidence domain is configured as public; otherwise
 the request MUST present a valid [=access token=]. If the attachment's
 associated evidence is confidential, or the attachment is no longer associated
-with evidence, as described in [[#record-deletion]], the request MUST be
+with evidence, as specified in [[#record-deletion]], the request MUST be
 authenticated as an operator with [=management permissions=].
 
 The request is:
