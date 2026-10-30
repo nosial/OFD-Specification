@@ -5423,8 +5423,11 @@ is a JSON array of [=EvidenceRecord=] objects.
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
-* HTTP 401 if evidence is not public and the request is not authenticated, or if <code>include_confidential</code> is true and the request is not authenticated.
-* HTTP 403 if <code>include_confidential</code> is true and the authenticated operator does not hold [=management permissions=].
+* HTTP 401 if evidence is not public and the request is not authenticated, or if
+    <code>include_confidential</code> is true and the request is not
+    authenticated.
+* HTTP 403 if <code>include_confidential</code> is true and the authenticated
+    operator does not hold [=management permissions=].
 * HTTP 404 if the report does not exist.
 * HTTP 500 if the host fails to retrieve the evidence records.
 
