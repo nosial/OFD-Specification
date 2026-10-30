@@ -1180,7 +1180,10 @@ An <dfn>error response</dfn> is a JSON document with the members:
 
 * **success**, fixed to false;
 * **code**, the HTTP status code of the error;
-* **message**, a human-readable description of the error.
+* **message**, a human-readable description of the error;
+* **retry_after**, present only when the response tells the client when to
+    retry, as specified in [[#rate-limiting]]: the number of seconds the client
+    waits before repeating the request. Introduced in version <code>2.2</code>.
 
 The <code>message</code> member is intended for people and is not meant to be
 parsed. A host MAY prefix it with the reason phrase of the status code, as in
