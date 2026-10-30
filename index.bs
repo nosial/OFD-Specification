@@ -1361,12 +1361,12 @@ member given in parentheses:
 * entity relationship queries (<code>public_query_entity</code>);
 * the cross-collection [[#search|Search]] method (<code>public_search</code>).
 
-The dedicated search method of each domain, such as Search Entities, follows
-the accessibility of its domain, and Search Operators is always public; the record types for which such a method is
-enabled and public are published as <code>search_types</code> and
-<code>public_search_types</code>. A [=downstream consumer=] can therefore
-determine from the server information alone what is available without
-authentication.
+The dedicated search method of each domain, such as Search Entities, follows the
+accessibility of its domain, and Search Operators is always public; the record
+types for which such a method is enabled and public are published as
+<code>search_types</code> and <code>public_search_types</code>. A [=downstream
+consumer=] can therefore determine from the [=ServerInformation=] object alone
+what is available without authentication.
 
 The Get Server Information method is always public. [=Operator=] records are
 public information: the List Operators, Get Operator, and Search Operators
