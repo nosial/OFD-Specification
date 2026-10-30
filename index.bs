@@ -33,11 +33,11 @@ Default Ref Status: current
   been endorsed by the W3C or by any other standards body.</p>
 
   <p>This revision defines version 2.2 of the OFD interface. Version 2.2 is
-  backward compatible with versions 2.1 and 2.0; version 2.0, as a new major version, is
-  not backward compatible with version 1.x, as described in [[#versioning]]. It
-  defines the architecture, identification, data model,
-  protocol fundamentals, interface methods, telemetry, and security and
-  privacy considerations of the Open Federated Database.</p>
+  backward compatible with versions 2.1 and 2.0; version 2.0, as a new major
+  version, is not backward compatible with version 1.x, as described in
+  [[#versioning]]. It defines the architecture, data model, host policy,
+  identification, protocol fundamentals, interface methods, telemetry, and
+  security and privacy considerations of the Open Federated Database.</p>
 
   <p>Feedback and comments on this specification are welcome and can be filed as
   <a href="https://github.com/nosial/OFD-Specification/issues">GitHub issues</a>.
