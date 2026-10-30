@@ -1551,13 +1551,12 @@ a request, such as a limit on the requests of a network address or on the
 requests that present an access token that is not valid, which hinders the
 guessing of access tokens.
 
-A request that exceeds a limit is rejected with an [=error response=] with HTTP
-429 Too Many Requests [[!RFC6585]]. A host that is temporarily unable to handle
-a request for a reason that does not depend on the requester, such as overload
-or maintenance, MAY instead reject it with HTTP 503 Service Unavailable. In
-either case the host MUST NOT perform the operation of the method: the request
-does not modify persistent state, is not recorded in the [=audit log=], and
-content it submits is not stored.
+A request that exceeds a limit is rejected with an [=error response=] with
+HTTP 429 [[!RFC6585]]. A host that is temporarily unable to handle a request for
+a reason that does not depend on the requester, such as overload or maintenance,
+MAY instead reject it with HTTP 503. In either case the host MUST NOT perform
+the operation of the method: the request does not modify persistent state, is
+not recorded in the [=audit log=], and content it submits is not stored.
 
 A host tells the client when to retry, rather than leaving it to guess, by
 including in the error response both the Retry-After header [[!RFC9110]], in
