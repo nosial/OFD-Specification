@@ -5755,7 +5755,8 @@ The value of the <code>by</code> parameter is one of the following uppercase str
 :   <code>CREATED</code>
 ::  Order by the <code>created</code> member.
 
-The value of the <code>order</code> parameter is one of the following uppercase strings:
+The value of the <code>order</code> parameter is one of the following uppercase
+strings:
 
 :   <code>ASC</code>
 ::  Ascending order.
