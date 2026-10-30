@@ -754,14 +754,14 @@ For a named entity, the canonical entity address is the UTF-8 [[!RFC3629]] strin
 contain only ASCII letters, digits, <code>.</code>, <code>_</code>,
 <code>%</code>, <code>+</code>, or <code>-</code>.
 
-The entity host MUST NOT contain whitespace, a port, a path, a query, a fragment,
-or a trailing dot. A DNS [[!RFC1034]] entity host MUST use lowercase ASCII labels; an
-internationalized domain name is represented by its A-labels [[!RFC5890]]. An IPv4
-entity host MUST use four decimal octets separated by dots, with no leading zero
-except for the value zero. An IPv6 entity host MUST use its lowercase compressed
-textual representation [[!RFC5952]]. A host entity uses the canonical entity host string
-alone. A host MUST reject an entity address that is not already in canonical
-form with HTTP 400.
+The entity host MUST NOT contain whitespace, a port, a path, a query, a
+fragment, or a trailing dot. A DNS [[!RFC1034]] entity host MUST use lowercase
+ASCII labels; an internationalized domain name is represented by its A-labels
+[[!RFC5890]]. An IPv4 entity host MUST use four decimal octets separated by
+dots, with no leading zero except for the value zero. An IPv6 entity host MUST
+use its lowercase compressed textual representation [[!RFC5952]]. A host entity
+uses the canonical entity host string alone. A host MUST reject an entity
+address that is not already in canonical form with HTTP 400.
 
 The <dfn>registrable domain</dfn> of a DNS entity host is its public suffix, as
 determined by the <a href="https://publicsuffix.org/">Public Suffix List</a>, plus
