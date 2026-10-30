@@ -6005,9 +6005,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 The Get Attachment Info method returns the metadata of a [=file attachment=]
 without returning its contents. The method is public when the evidence domain is
 configured as public; otherwise the request MUST present a valid [=access token=].
-If the attachment's associated evidence is confidential, or the attachment is no longer associated
-with evidence, as described in [[#record-deletion]], the request MUST be
-authenticated as an operator with [=management permissions=].
+If the attachment's associated evidence is confidential, or the attachment is no
+longer associated with evidence, as specified in [[#record-deletion]], the
+request MUST be authenticated as an operator with [=management permissions=].
 
 The request is:
 
