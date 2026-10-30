@@ -1681,9 +1681,10 @@ score, a suggested action, and the detections that contributed to them, each
 with respect to the [=concerns=] of the request. Each [=ContentInput=] object
 is interpreted according to its [=content type=], and MAY carry files, such as
 the images of a message, as specified in [[#scan-files]], or name files for the
-host to retrieve by URL, as specified in [[#scan-file-urls]]. When the host is not
-configured to make scanning publicly accessible, the request MUST present a valid
-[=access token=] and the [=authenticated operator=] MUST hold [=client permissions=].
+host to retrieve by URL, as specified in [[#scan-file-urls]]. When the host is
+not configured to make scanning publicly accessible, the request MUST present a
+valid [=access token=] and the [=authenticated operator=] MUST hold [=client
+permissions=].
 
 <figure id="fig-content-scanning">
   <img src="assets/content_scanning.jpg" width="1058" height="595"
