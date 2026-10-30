@@ -5239,6 +5239,7 @@ POST /reports HTTP/1.1
 Authorization: Bearer &lt;token&gt;
 Content-Type: application/json; charset=utf-8
 </pre>
+
 The request body MUST be a JSON object containing:
 
 <table class="data">
