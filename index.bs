@@ -2541,7 +2541,7 @@ the settings of an [=operator=] that are not permissions. Its members are:
   </thead>
   <tbody>
     <tr><td><code>auto_assign_reports</code></td><td>boolean</td><td>Whether the operator opts in to the automatic assignment of reports that are not automated.</td></tr>
-    <tr><td><code>auto_assign_automated_reports</code></td><td>boolean</td><td>Whether the operator opts in to the automatic assignment of automated reports, as defined in [[#automated-records]].</td></tr>
+    <tr><td><code>auto_assign_automated_reports</code></td><td>boolean</td><td>Whether the operator opts in to the automatic assignment of automated reports, as specified in [[#automated-records]].</td></tr>
     <tr><td><code>is_bot</code></td><td>boolean</td><td>Whether the operator is a [=bot operator=]. The evidence and reports it submits are automated, and its evidence is created as confidential, as specified in [[#automated-records]].</td></tr>
   </tbody>
 </table>
