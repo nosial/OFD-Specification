@@ -1659,7 +1659,6 @@ members of a [=ServerInformation=] object are:
   </tbody>
 </table>
 
-
 <h3 id="scan-methods">Scan</h3>
 
 <h4 id="scan-content">Scan Content</h4>
