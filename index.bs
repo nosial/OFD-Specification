@@ -1180,20 +1180,20 @@ parsed. A host MAY prefix it with the reason phrase of the status code, as in
 the error from the status code and the <code>code</code> member, not from the
 message.
 
-The error status codes used by the OFD interface are as follows. HTTP 400
-means the request could not be processed: missing or invalid parameters, an
+The error status codes used by the OFD interface are as follows. HTTP 400 means
+the request could not be processed: missing or invalid parameters, an
 undecodable JSON body, or a path that matches no method. HTTP 401 means
-authentication is required, or the presented [=access token=] is invalid.
-HTTP 403 means the [=authenticated operator=] is not authorized to perform the
+authentication is required, or the presented [=access token=] is invalid. HTTP
+403 means the [=authenticated operator=] is not authorized to perform the
 method: the operator is disabled or lacks the required permissions. HTTP 404
-means a referenced [=record=] does not exist, or the method is not available
-on the host, such as a search method on a host with search disabled. HTTP 409
-means the request conflicts with the current state of a [=record=], such as a
-name that is already in use. HTTP 429 means the request exceeds a rate limit of
-the host, and HTTP 503 means the host is temporarily unable to handle the
-request, as specified in [[#rate-limiting]]. HTTP 500 means an internal error occurred; a host
-MUST NOT disclose internal details in an error response, and uncaught errors are
-reported with the generic message "Internal Server Error".
+means a referenced [=record=] does not exist, or the method is not available on
+the host, such as a search method on a host with search disabled. HTTP 409 means
+the request conflicts with the current state of a [=record=], such as a name
+that is already in use. HTTP 429 means the request exceeds a rate limit of the
+host, and HTTP 503 means the host is temporarily unable to handle the request,
+as specified in [[#rate-limiting]]. HTTP 500 means an internal error occurred; a
+host MUST NOT disclose internal details in an error response, and uncaught
+errors are reported with the generic message "Internal Server Error".
 
 For example, an unauthenticated request to an operation that requires
 authentication is answered with:
