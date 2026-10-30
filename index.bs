@@ -2391,9 +2391,9 @@ The query parameters are:
   </tbody>
 </table>
 
-When the request is public, a host MUST return only entries whose <code>type</code>
-is included in the host's public audit log visibility list, as published in the
-server information response.
+When the request is not authenticated, a host MUST return only entries whose
+<code>type</code> is listed in the <code>public_audit_logs_visibility</code>
+member of its [=ServerInformation=] object.
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is a JSON array of [=AuditLog=] objects.
@@ -2401,7 +2401,7 @@ is a JSON array of [=AuditLog=] objects.
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if the audit log is not public and the request is not authenticated.
-* HTTP 500 if the host fails to retrieve the audit log due to an internal error.
+* HTTP 500 if the host fails to retrieve the audit log.
 
 <h4 id="view-audit-entry">View Audit Entry</h4>
 
@@ -2410,8 +2410,9 @@ A host MUST respond with an [=error response=] for the following conditions:
 The View Audit Entry method returns a single [=audit log=] entry by its UUID.
 The method is public when the audit log domain is configured as public;
 otherwise the request MUST present a valid [=access token=]. A host MUST return
-a public entry only if its <code>type</code> is included in the host's public
-audit log visibility list.
+a public entry only if its <code>type</code> is listed in the
+<code>public_audit_logs_visibility</code> member of its [=ServerInformation=]
+object.
 
 The request is:
 
