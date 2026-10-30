@@ -6095,16 +6095,16 @@ that downloads an attachment SHOULD treat it as untrusted.
 
 Files submitted to the Scan Content method are equally hostile, and are
 submitted precisely so that the host interprets them. A host MAY decode such a
-file, for example to analyze an image, but MUST NOT execute it, MUST NOT retrieve
-resources it refers to, and MUST NOT keep it after the scan other than as
-specified in [[#scan-files]]. File formats are a common vector of attacks against the
-software that decodes them, through malformed structures and through files that
-expand to far more data than they occupy, such as an image whose declared
-dimensions require gigabytes of memory. A host SHOULD therefore decode scanned
-files in an environment isolated from its records and credentials, SHOULD bound
-the memory, time, and, for images, the dimensions it allows for decoding each
-file, and SHOULD treat a file that exceeds these bounds as one it cannot
-interpret.
+file, for example to analyze an image, but MUST NOT execute it, MUST NOT
+retrieve resources it refers to, and MUST NOT keep it after the scan other than
+as specified in [[#scan-files]]. File formats are a common vector of attacks
+against the software that decodes them, through malformed structures and through
+files that expand to far more data than they occupy, such as an image whose
+declared dimensions require gigabytes of memory. A host SHOULD therefore decode
+scanned files in an environment isolated from its records and credentials,
+SHOULD bound the memory, time, and, for images, the dimensions it allows for
+decoding each file, and SHOULD treat a file that exceeds these bounds as one it
+cannot interpret.
 
 <h3 id="sec-remote-retrieval">Remote Retrieval</h3>
 
