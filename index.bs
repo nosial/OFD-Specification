@@ -6197,14 +6197,14 @@ created with, or linked to, a report whose incident type is
 <code>ILLEGAL_CONTENT</code>, as specified in [[#submit-report]] and
 [[#add-evidence-to-report]], and MUST NOT make such evidence non-confidential
 while it remains linked to that report, as specified in
-[[#update-evidence-confidentiality]]. A host whose operator does not wish to store such
-content MAY refuse <code>ILLEGAL_CONTENT</code> reports entirely and advertises
-this through the <code>allow_illegal_content</code> member of its
+[[#update-evidence-confidentiality]]. A host whose operator does not wish to
+store such content MAY refuse <code>ILLEGAL_CONTENT</code> reports entirely and
+advertises this through the <code>allow_illegal_content</code> member of its
 [=ServerInformation=] object.
 
 Evidence about a [=telephone entity=] typically records private text messages.
 A host MUST mark the evidence it creates itself about a telephone entity as
-confidential, as specified in [[#population]] and [[#telephone-entities]].
+confidential, as specified in [[#automated-records]] and [[#telephone-entities]].
 
 <h3 id="sec-uploaded-files">Uploaded Files</h3>
 
