@@ -5015,9 +5015,13 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the request body is missing the <code>seconds</code> member, it is not a positive integer, the blacklist record is permanent, the blacklist record is already lifted, or it has expired.
+* HTTP 400 if the path does not contain a UUID, the UUID is malformed, the
+    request body is missing the <code>seconds</code> member, it is not a
+    positive integer, the blacklist record is permanent, the blacklist record is
+    already lifted, or it has expired.
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=management
+    permissions=].
 * HTTP 404 if the blacklist record does not exist.
 * HTTP 500 if the host fails to extend the blacklist record.
 
@@ -5027,9 +5031,10 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 The Search Blacklist method searches the [=blacklist records=] by the UUID of
 the record, the UUID of the blacklisted entity, or the entity host or local part
-of the blacklisted entity. The method is available only when the host has search enabled and has
-blacklist search enabled. The method is public when the blacklist domain is
-configured as public; otherwise the request MUST present a valid [=access token=].
+of the blacklisted entity. The method is available only when the host has search
+enabled and has blacklist search enabled. The method is public when the
+blacklist domain is configured as public; otherwise the request MUST present a
+valid [=access token=].
 
 The request is:
 
