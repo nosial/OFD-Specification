@@ -3902,8 +3902,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 <em>Method name:</em> <code>clearEntityReputation</code>
 
 The Clear Entity Reputation method resets the [=reputation=] score of an entity
-to zero. The request MUST be authenticated as an operator with
-[=management permissions=].
+to zero. The request MUST be authenticated as an operator with [=management
+permissions=].
 
 The request is:
 
