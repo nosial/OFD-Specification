@@ -5743,21 +5743,23 @@ is a JSON array of [=FileAttachmentRecord=] objects.
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=management permissions=].
+* HTTP 403 if the authenticated operator does not hold [=management
+    permissions=].
 * HTTP 500 if the host fails to retrieve the attachments.
 
 <h4 id="upload-attachment">Upload Attachment</h4>
 
 <em>Method name:</em> <code>uploadAttachment</code>
 
-The Upload Attachment method stores a file as a [=file attachment=] and associates
-it with an [=evidence=] record. The request MUST be authenticated as an operator
-with [=client permissions=]. The file is either uploaded directly in the request
-body or retrieved by the host from a URL supplied by the client, as described in
-[[#file-uploads]]. An operator MAY attach a file only to evidence that it submitted
-itself, unless it holds [=management permissions=]: other evidence, including
-confidential evidence the operator knows only by its UUID, belongs to another
-operator, whose submission a file would otherwise alter or publish.
+The Upload Attachment method stores a file as a [=file attachment=] and
+associates it with an [=evidence=] record. The request MUST be authenticated as
+an operator with [=client permissions=]. The file is either uploaded directly in
+the request body or retrieved by the host from a URL supplied by the client, as
+specified in [[#file-uploads]]. An operator MAY attach a file only to evidence
+that it submitted itself, unless it holds [=management permissions=]: other
+evidence, including confidential evidence the operator knows only by its UUID,
+belongs to another operator, whose submission a file would otherwise alter or
+publish.
 
 A direct upload is:
 
