@@ -4163,8 +4163,8 @@ keys, values, and final size are the same as those defined for entity metadata
 in [[#entity-metadata]].
 
 Evidence metadata is supplied once, when the evidence is submitted using the
-Submit Evidence method ([[#submit-evidence]]). After submission, the metadata
-MUST NOT be updated or merged.
+Submit Evidence method, as specified in [[#submit-evidence]]. After submission,
+the metadata MUST NOT be updated or merged.
 
 A host MUST reject a request whose <code>metadata</code> member violates any of
 the constraints in [[#entity-metadata]] with a client error (HTTP 400).
