@@ -5269,8 +5269,9 @@ automated, and that evidence is created as confidential, as specified in
 
 A host MAY decline to handle illegal content. A host that does so MUST publish
 <code>allow_illegal_content</code> as false in its [=ServerInformation=] object
-and MUST reject every request whose incident type is <code>ILLEGAL_CONTENT</code>
-with HTTP 403 Forbidden, without creating a report or any evidence.
+and MUST reject every request whose incident type is
+<code>ILLEGAL_CONTENT</code> with a permission error (HTTP 403), without
+creating a report or any evidence.
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
 is a JSON <dfn export lt="ReportSubmission">ReportSubmission</dfn> object. The
