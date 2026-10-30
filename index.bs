@@ -5258,9 +5258,13 @@ members of a [=ReportSubmission=] object are:
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the request body is missing a required member, the entity identifier is malformed, the evidence input is invalid, or the incident type is not defined in [[#incident-type-values]].
+* HTTP 400 if the request body is missing a required member, the entity
+    identifier is malformed, the evidence input is invalid, or the incident type
+    is not defined in [[#incident-type-values]].
 * HTTP 401 if the request is not authenticated.
-* HTTP 403 if the authenticated operator does not hold [=client permissions=], or if the incident type is <code>ILLEGAL_CONTENT</code> and the host does not accept illegal content.
+* HTTP 403 if the authenticated operator does not hold [=client permissions=],
+    or if the incident type is <code>ILLEGAL_CONTENT</code> and the host does
+    not accept illegal content.
 * HTTP 404 if the reporting entity does not exist.
 * HTTP 500 if the host fails to create the report or evidence.
 
