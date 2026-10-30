@@ -448,7 +448,7 @@ is internal to the host and not part of the interface.
 
 The protocol is stateless. A host MUST NOT require a client to maintain a
 session, and MUST treat every request as independent, authenticated on its own
-merits as described in [[#authentication]].
+merits as specified in [[#authentication]].
 
 <h3 id="versioning">Versioning</h3>
 
