@@ -1992,13 +1992,12 @@ parameter that names no concern, that is not of the type the method defines for
 it, or that names a value which is not among the <code>concerns</code> the host
 publishes.
 
-A host MUST NOT let its assessment of a concern that is not an effective
-concern of the request affect the <code>classification</code>,
-<code>risk_score</code>, <code>suggested_action</code>,
-<code>suggested_lift_timestamp</code>, or <code>detections</code> it returns. In
-particular, the blocking suggested actions defined in
-[[#suggested-action-type]] consider only active [=blacklist records=] whose
-incident type is an effective concern. Concerns do not filter
+A host MUST NOT let its assessment of a concern that is not an effective concern
+of the request affect the <code>classification</code>, <code>risk_score</code>,
+<code>suggested_action</code>, <code>suggested_lift_timestamp</code>, or
+<code>detections</code> it returns. In particular, the blocking suggested
+actions defined in [[#suggested-action-type]] consider only active [=blacklist
+records=] whose incident type is an effective concern. Concerns do not filter
 [=records=]: the <code>active_blacklists</code> member of a [=ResolvedEntity=]
 object contains every active blacklist record of the entity, so that a client
 can inspect them.
