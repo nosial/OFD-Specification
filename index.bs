@@ -3691,7 +3691,10 @@ is the UUID of the registered or updated entity.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the request body is missing the <code>host</code> member, the entity host or local part is not in canonical form as specified in [[#entity-address-canonicalization]], or the request contains invalid metadata.
+* HTTP 400 if the request body is missing the <code>host</code> member, the
+    entity host or local part is not in canonical form as specified in
+    [[#entity-address-canonicalization]], or the request contains invalid
+    metadata.
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=client permissions=].
 * HTTP 500 if the host fails to register or update the entity.
