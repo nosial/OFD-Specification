@@ -1463,23 +1463,21 @@ permission error (HTTP 403).
   </tbody>
 </table>
 
-<p class="note" role="note"><span class="marker">Note:</span> The
-    "Manage operators" row covers creating, deleting, enabling, disabling, and
-    renaming operator accounts, and modifying their [=permission group=]s and
-    configuration through the Update Operator Permissions and Update Operator
-    Configuration methods. "Manage entity relationships"
-    covers Set Entity Relationship and Clear Entity Relationship, and "Update
-    evidence tags" covers Update Evidence Tag. "Read operator accounts" covers List Operators, Get
-    Operator, and Search Operators, and "Read one's own operator account"
-    covers Get Self Operator. Reading
-    a "Configurable" domain, reading one's own operator account, generating
-    one's own access token, reading and changing one's own configuration, and
-    listing one's own opened reports require only an [=authenticated
-    operator=], whatever [=permission groups=] it holds. The configuration of
-    another operator is read and changed only with [=operator permissions=].
-    Scanning content that the host does not expose requires [=client
-    permissions=], so an operator without them can scan content only when
-    content scanning is public.</p>
+<p class="note" role="note"><span class="marker">Note:</span> The "Manage
+operators" row covers creating, deleting, enabling, disabling, and renaming
+operator accounts, and modifying their [=permission groups=] and configuration
+through the Update Operator Permissions and Update Operator Configuration
+methods. "Manage entity relationships" covers Set Entity Relationship and Clear
+Entity Relationship, and "Update evidence tags" covers Update Evidence Tag.
+"Read operator accounts" covers List Operators, Get Operator, and Search
+Operators, and "Read one's own operator account" covers Get Self Operator.
+Reading a "Configurable" domain, reading one's own operator account, generating
+one's own access token, reading and changing one's own configuration, and
+listing one's own opened reports require only an [=authenticated operator=],
+whatever [=permission groups=] it holds. The configuration of another operator
+is read and changed only with [=operator permissions=]. Scanning content that
+the host does not expose requires [=client permissions=], so an operator without
+them can scan content only when content scanning is public.</p>
 
 <h4 id="visibility-rules">Visibility Rules</h4>
 
