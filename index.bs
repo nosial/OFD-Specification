@@ -193,9 +193,9 @@ for downstream consumers.
 :   <dfn export>audit log</dfn>
 ::  The chronological record of the operations performed on a [=federated
     database=]. Each entry records the type of operation, a message, the
-    timestamp, and references to the affected [=records=]—operator,
-    entity, blacklist, evidence, file attachment, and report. A [=host=] designates
-    each entry type as public or private.
+    timestamp, and references to the affected [=records=]—operator, entity,
+    blacklist, evidence, file attachment, and report. A [=host=] designates each
+    entry type as public or private.
 
 :   <dfn export id="dfn-authentication">authentication</dfn>
 ::  The process by which a [=host=] verifies the identity of an [=operator=]
