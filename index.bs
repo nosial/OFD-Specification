@@ -3734,7 +3734,9 @@ is the success envelope.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the path does not contain a valid [=entity identifier=], or the request body is missing the <code>metadata</code> member, it is not a JSON object, or it violates the constraints of [[#entity-metadata]].
+* HTTP 400 if the path does not contain a valid [=entity identifier=], or the
+    request body is missing the <code>metadata</code> member, it is not a JSON
+    object, or it violates the constraints of [[#entity-metadata]].
 * HTTP 401 if the request is not authenticated.
 * HTTP 403 if the authenticated operator does not hold [=client permissions=].
 * HTTP 404 if the entity does not exist.
