@@ -4762,8 +4762,8 @@ incident type and is either temporary, expiring at a given time, or permanent.
 
 <h4 id="blacklist-record-object">BlacklistRecord object</h4>
 
-A <dfn export lt="BlacklistRecord">BlacklistRecord</dfn> object represents a single
-[=blacklist record=]. Its members are:
+A <dfn export lt="BlacklistRecord">BlacklistRecord</dfn> object represents a
+single [=blacklist record=]. Its members are:
 
 <table class="data">
   <thead>
