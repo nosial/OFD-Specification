@@ -535,10 +535,9 @@ The following record kinds are defined by this specification.
 
 :   [=Blacklist records=]
 ::  Record a decision to block an entity; each has an incident type and is
-    either temporary, expiring at a given time, or permanent. It is active
-    until lifted by an [=operator=] or its expiry passes, MAY reference
-    the [=report=] supporting the decision, and an entity MAY have any number
-    of them.
+    either temporary, expiring at a given time, or permanent. It is active until
+    lifted by an [=operator=] or its expiry passes, MAY reference the [=report=]
+    supporting the decision, and an entity MAY have any number of them.
 
 :   [=Reports=]
 ::  Records made against an entity documenting an incident: the type of the
