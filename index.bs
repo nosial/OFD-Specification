@@ -1182,8 +1182,8 @@ message.
 The error status codes used by the OFD interface are as follows. HTTP 400 means
 the request could not be processed: missing or invalid parameters, an
 undecodable JSON body, or a path that matches no method. HTTP 401 means
-authentication is required, or the presented [=access token=] is invalid. HTTP
-403 means the [=authenticated operator=] is not authorized to perform the
+authentication is required, or the presented [=access token=] is invalid.
+HTTP 403 means the [=authenticated operator=] is not authorized to perform the
 method: the operator is disabled or lacks the required permissions. HTTP 404
 means a referenced [=record=] does not exist, or the method is not available on
 the host, such as a search method on a host with search disabled. HTTP 409 means
