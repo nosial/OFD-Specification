@@ -4,9 +4,44 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [2.1-R1] - Ongoing
+## [2.2] - 2026-10-30
 
-This is an ongoing update
+It is a minor version: hosts report `2.2` as the `api_version`, and it is backward compatible with 2.1 and 2.0.
+This update also includes edits to the writing itself. Every git commit explains these changes.
+
+### Added
+- Scan Content accepts the files of a ContentInput object by URL, in a new `file_urls` member, for the host to
+  retrieve itself, for example the media of an MMS message held by the carrier. A request that names files only by URL
+  may be a JSON request, and a ContentInput object with file URLs may omit `text_content`. A client must not use
+  `file_urls` with a host that reports a version earlier than 2.2, which rejects the member.
+- Every host of version 2.2 accepts file URLs, but may ignore those of every request, or of requests without client
+  permissions, and does not announce whether it retrieves them. A file URL the host ignores is validated and treated as
+  a file it does not interpret, so a client does not need to know whether a host retrieves file URLs.
+- A file URL is retrieved under the restrictions of URL uploads and counts towards `max_scan_files`. A file that cannot
+  be retrieved, is not permitted or exceeds `max_scan_file_size` is not an error: it is treated as a file the host
+  cannot interpret, without revealing why. A retrieved file is otherwise handled like a file carried in the request.
+- The files of a ContentInput object are those carried in the request followed by those retrieved from its file URLs,
+  and the `file_index` of a detection is the position of its file in that sequence.
+- The List Entity Reports, List Operator Reports and List Assigned Operator Reports methods accept the `by` and `order`
+  parameters.
+- Security and privacy considerations for retrieving the files of scanned content by URL.
+- A Rate Limiting section. A host may limit requests according to their authentication state, method, permissions or
+  cost, should allow Scan Content and Query Entity a higher rate than the other methods, and should not limit an
+  authenticated request more strictly than an unauthenticated one. Limits are host policy and are not published in the
+  ServerInformation object.
+- A rate-limited request is rejected with HTTP 429, and a host that is temporarily unavailable may reject a request
+  with HTTP 503. A rejected request is not performed, so a client may repeat it, including a request that is not
+  idempotent.
+- A host tells the client when to retry: an error response with HTTP 429 carries the Retry-After header and a new
+  `retry_after` member of the error response, both in seconds, and an error response with HTTP 503 should carry them.
+  A client must not retry before the delay elapses, and backs off exponentially when a response carries no delay.
+- Responses carry the Access-Control-Expose-Headers header, set to Retry-After, so that web applications can read the
+  delay.
+
+### Changed
+- Request Processing applies the rate limits of a host after resolving the authenticated operator of a request.
+- The Resource Exhaustion security considerations refer to the Rate Limiting section, and recommend limiting
+  unauthenticated requests more strictly and by groups of addresses.
 
 
 ## [2.1] - 2026-10-28
