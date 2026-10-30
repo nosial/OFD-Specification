@@ -5841,7 +5841,8 @@ The parameters are:
 
 A host MUST reject a request that supplies both <code>file</code> and
 <code>url</code>, or neither of them, and a request whose
-<code>evidence_uuid</code> is missing or malformed, with a client error (HTTP 400).
+<code>evidence_uuid</code> is missing or malformed, with a client error
+(HTTP 400).
 
 For a direct upload, a host MUST reject a request whose <code>file</code> part
 carries more than one file, or whose file size is zero or exceeds the host's
