@@ -294,11 +294,12 @@ for downstream consumers.
 ::  Information submitted about an [=entity=] to support deciding whether the
     entity should be trusted. Evidence contains text content, its [=content
     type=] and context, a note, a tag, an automated flag, an optional reference
-    to a [=report=], an optional classification flag, an optional set of [=file attachments=],
-    a confidentiality flag, and the timestamps of its creation and last update.
-    A confidential evidence record is visible only to an operator with
-    [=management permissions=]. Other records MAY expose its UUID as an opaque
-    reference; that reference does not grant access to the evidence record.
+    to a [=report=], an optional classification flag, an optional set of [=file
+    attachments=], a confidentiality flag, and the timestamps of its creation
+    and last update. A confidential evidence record is visible only to an
+    operator with [=management permissions=]. Other records MAY expose its UUID
+    as an opaque reference; that reference does not grant access to the evidence
+    record.
 
 :   <dfn export>federated database</dfn>
 ::  The collection of [=records=] a [=host=] keeps about the [=entities=] it
