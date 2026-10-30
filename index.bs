@@ -3176,8 +3176,8 @@ A host MUST respond with an [=error response=] for the following conditions:
 
 <em>Method name:</em> <code>listOperatorBlacklist</code>
 
-The List Operator Blacklist method returns the [=blacklist records=]
-created by a specific operator. The method is public when the blacklist domain is
+The List Operator Blacklist method returns the [=blacklist records=] created by
+a specific operator. The method is public when the blacklist domain is
 configured as public; otherwise the request MUST be authenticated.
 
 The request is:
