@@ -1368,11 +1368,11 @@ enabled and public are published as <code>search_types</code> and
 determine from the server information alone what is available without
 authentication.
 
-The server information method is always public. [=Operator=] records are
+The Get Server Information method is always public. [=Operator=] records are
 public information: the List Operators, Get Operator, and Search Operators
-methods, and
-[=operator=] records in the results of the [[#search|Search]] method, are
-available to unauthenticated requests, whatever the host configuration.
+methods, and [=operator=] records in the results of the [[#search|Search]]
+method, are available to unauthenticated requests, whatever the host
+configuration.
 
 <h4 id="permission-matrix">Permission Matrix</h4>
 
