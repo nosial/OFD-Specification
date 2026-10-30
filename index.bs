@@ -5965,20 +5965,23 @@ A successful response is HTTP 200 OK whose body is the file itself, not a JSON
 document. The response carries the following headers:
 
 * `Content-Type`, set to the media type the host recorded for the file;
-* `Content-Disposition` [[!RFC6266]], set to `attachment` with a `filename` parameter carrying
-    the recorded file name, so that user agents save the file instead of
-    rendering it;
+* `Content-Disposition` [[!RFC6266]], set to `attachment` with a `filename`
+    parameter carrying the recorded file name, so that user agents save the
+    file instead of rendering it;
 * `Content-Length`, set to the size of the file in bytes;
-* `Cache-Control` [[!RFC9111]], set so that the response is not cached, for example
-    `no-cache, no-store, must-revalidate`;
+* `Cache-Control` [[!RFC9111]], set so that the response is not cached, for
+    example `no-cache, no-store, must-revalidate`;
 * `X-Content-Type-Options` [[!FETCH]], set to `nosniff`, so that user agents do
     not infer a different media type from the content of the file.
 
 A host MUST respond with an [=error response=] for the following conditions:
 
 * HTTP 400 if the path does not contain a UUID or the UUID is malformed.
-* HTTP 401 if the evidence domain is not public and the request is not authenticated, or if the attachment's evidence is confidential or absent and the request is not authenticated.
-* HTTP 403 if the attachment's evidence is confidential or absent and the authenticated operator does not hold [=management permissions=].
+* HTTP 401 if the evidence domain is not public and the request is not
+    authenticated, or if the attachment's evidence is confidential or absent and
+    the request is not authenticated.
+* HTTP 403 if the attachment's evidence is confidential or absent and the
+    authenticated operator does not hold [=management permissions=].
 * HTTP 404 if the attachment or its file does not exist.
 * HTTP 500 if the host fails to retrieve the file.
 
