@@ -6179,20 +6179,20 @@ and does not degrade an entity merely because it was submitted, as specified in
 Content scanning, search, and URL uploads make a host perform work that is
 expensive relative to the request, particularly when scanning causes the host to
 resolve names, retrieve URLs, or decode files, and a host can expose the first
-two to unauthenticated requests. A host publishes the limits it places on the
-files of a scan request in <code>max_scan_files</code> and
-<code>max_scan_file_size</code>, which also bound the files it retrieves from
-the file URLs of a request, and SHOULD ignore the files and file URLs of
-unauthenticated requests unless it can bound the work their analysis causes. An attacker can use them to exhaust the resources of
-a host. A host SHOULD limit the rate of requests it accepts from each requester,
-as specified in [[#rate-limiting]], and SHOULD bound the size of request bodies
-and the work performed for a single request. Because an unauthenticated
-requester can change its network address, a host SHOULD limit unauthenticated
-requests more strictly than authenticated ones, and SHOULD limit the requests of
-groups of addresses, such as a network prefix, as well as those of each
-address. A client that ignores the delay of a rate-limited response adds to the
-load the limit protects against, and a host MAY lengthen the delay it gives to,
-or stop serving, a requester that repeatedly does so.
+two to unauthenticated requests. An attacker can use them to exhaust the
+resources of a host. A host publishes the limits it places on the files of a
+scan request in <code>max_scan_files</code> and <code>max_scan_file_size</code>,
+which also bound the files it retrieves from the file URLs of a request, and
+SHOULD ignore the files and file URLs of unauthenticated requests unless it can
+bound the work their analysis causes. A host SHOULD limit the rate of requests
+it accepts from each requester, as specified in [[#rate-limiting]], and SHOULD
+bound the size of request bodies and the work performed for a single request.
+Because an unauthenticated requester can change its network address, a host
+SHOULD limit unauthenticated requests more strictly than authenticated ones, and
+SHOULD limit the requests of groups of addresses, such as a network prefix, as
+well as those of each address. A client that ignores the delay of a rate-limited
+response adds to the load the limit protects against, and a host MAY lengthen
+the delay it gives to, or stop serving, a requester that repeatedly does so.
 
 <h3 id="sec-cross-origin">Cross-Origin Requests</h3>
 
