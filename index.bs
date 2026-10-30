@@ -1533,6 +1533,81 @@ preceding step failed. A host MUST NOT emit a [=success response=] when any
 step failed, and MUST NOT disclose implementation details in an error
 response.
 
+<h3 id="rate-limiting">Rate Limiting</h3>
+
+A [=host=] MAY limit the rate at which it accepts requests, to protect itself
+from the resource exhaustion described in [[#sec-resource-exhaustion]]. Its
+limits are a matter of host policy: a host does not publish them in the
+[=ServerInformation=] object, and MAY change them at any time, for example
+according to its load. A client MUST NOT assume that a host does not limit its
+requests.
+
+A host MAY base its limits on any circumstance of a request, including:
+
+* its authentication state: a host counts the requests of an [=authenticated
+    operator=] against that operator, and counts unauthenticated requests,
+    including requests whose [=access token=] is ignored as specified in
+    [[#access-tokens]], against a property of the requester such as its network
+    address;
+* the [=method=] it invokes;
+* the [=permission groups=] of the authenticated operator, or whether it is a
+    [=bot operator=];
+* the work it causes, such as the number of [=ContentInput=] objects of a Scan
+    Content request and the files they carry or name.
+
+A host SHOULD apply separate limits to the methods that clients and
+[=downstream consumers=] invoke as part of handling their own traffic, namely
+Scan Content and Query Entity, and SHOULD allow those methods a higher rate than
+the other methods of the interface, which are invoked far less often and which
+it MAY limit more strictly. A host SHOULD allow an authenticated request a rate
+at least as high as it allows an unauthenticated request to the same method,
+since authenticating never reduces access. A host MAY exempt the [=root
+operator=] from its limits.
+
+A host MAY also apply a limit before it resolves the authenticated operator of
+a request, such as a limit on the requests of a network address or on the
+requests that present an access token that is not valid, which hinders the
+guessing of access tokens.
+
+A request that exceeds a limit is rejected with an [=error response=] with HTTP
+429 Too Many Requests [[!RFC6585]]. A host that is temporarily unable to handle
+a request for a reason that does not depend on the requester, such as overload
+or maintenance, MAY instead reject it with HTTP 503 Service Unavailable. In
+either case the host MUST NOT perform the operation of the method: the request
+does not modify persistent state, is not recorded in the [=audit log=], and
+content it submits is not stored.
+
+A host tells the client when to retry, rather than leaving it to guess, by
+including in the error response both the Retry-After header [[!RFC9110]], in
+the delay-seconds form, and the <code>retry_after</code> member, each giving
+the same number of seconds after which the request is expected to be accepted.
+A host MUST include them in an error response with HTTP 429, SHOULD include
+them in an error response with HTTP 503 when it can estimate when it will
+accept the request again, and MUST NOT include the <code>retry_after</code>
+member in any other error response. A host SHOULD give the shortest delay it
+can determine.
+
+When it receives such an error response, a client:
+
+* MUST NOT repeat the request, or send another request it expects to be counted
+    against the same limit, before the delay has elapsed;
+* MAY repeat the request once the delay has elapsed, including a request to a
+    method that is not idempotent, since the rejected request was not performed;
+* SHOULD, when the response carries no delay, as from a host that implements an
+    earlier minor version, wait before repeating the request and increase the
+    wait exponentially with each consecutive rejection.
+
+For example, a host that rejects a Scan Content request because its requester
+has exceeded the rate allowed for scanning responds with:
+
+<pre class="example">
+HTTP/1.1 429 Too Many Requests
+Content-Type: application/json; charset=utf-8
+Retry-After: 30
+
+{"success": false, "code": 429, "message": "Too Many Requests: Rate limit exceeded", "retry_after": 30}
+</pre>
+
 
 <h2 id="methods">Interface Methods</h2>
 
