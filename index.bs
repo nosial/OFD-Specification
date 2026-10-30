@@ -3491,13 +3491,15 @@ A host MUST reject a request whose <code>q</code> parameter is absent, empty,
 or shorter than two non-whitespace characters with a client error (HTTP 400).
 
 A successful response is a [=success response=] with HTTP 200 OK and a body that
-is a JSON array of [=EntityRecord=] objects, with metadata redacted as described in
-[[#entity-record-object]].
+is a JSON array of [=EntityRecord=] objects, with metadata redacted as specified
+in [[#entity-record-object]].
 
 A host MUST respond with an [=error response=] for the following conditions:
 
-* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two non-whitespace characters.
-* HTTP 401 if the entity registry is not public and the request is not authenticated.
+* HTTP 400 if the <code>q</code> parameter is absent, empty, or shorter than two
+    non-whitespace characters.
+* HTTP 401 if the entity registry is not public and the request is not
+    authenticated.
 * HTTP 404 if search is disabled on the host or if entity search is disabled.
 * HTTP 500 if the host fails to perform the search.
 
